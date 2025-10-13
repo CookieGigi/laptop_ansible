@@ -1,0 +1,9 @@
+- name: Install Flatpak app for the user
+  ansible.builtin.command: >
+    flatpak install --user {{ flatpak_app_id }} -y
+- name: Include add_alias role
+  ansible.builtin.include_role:
+    name: add_alias
+  vars:
+    alias_name: "{{ flatpak_app_alias }}"
+    alias_cmd: flatpak --user run {{ flatpak_app_id }}

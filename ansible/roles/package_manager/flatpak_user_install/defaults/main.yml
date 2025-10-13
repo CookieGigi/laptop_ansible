@@ -1,0 +1,3 @@
+---
+flatpak_app_id: ""          # e.g., "io.neovim.nvim"
+flatpak_app_alias: ""       # e.g., "nvim"
