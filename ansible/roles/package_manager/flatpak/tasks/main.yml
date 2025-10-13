@@ -1,0 +1,14 @@
+---
+- name: Install Flatpak
+  become: true
+  apt:
+    name: "flatpak"
+    state: present
+    update_cache: yes
+- name: Add Flathub repository
+  ansible.builtin.command: flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+- name: Include add_to_path role
+  ansible.builtin.include_role:
+    name: add_to_path
+  vars:
+    path_directory: "~/.local/share/flatpak/exports/bin"
