@@ -1,0 +1,4 @@
+---
+# Default variables for the add_alias role
+alias_name: ""
+alias_cmd: ""
