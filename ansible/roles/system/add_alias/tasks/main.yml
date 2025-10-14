@@ -1,11 +1,17 @@
 ---
 # tasks file for add_alias
 
+- name: Check if shell config file exists
+  ansible.builtin.stat:
+    path: "{{ shell_config }}"
+  register: file_stat
+
 - name: Ensure shell config file exists for the user
   ansible.builtin.file:
     path: "{{ shell_config }}"
     state: touch
     mode: "0644"
+  when: not file_stat.stat.exists
 
 - name: Add aliases to the shell config file
   ansible.builtin.blockinfile:
