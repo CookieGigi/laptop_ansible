@@ -1,0 +1,5 @@
+---
+- name: Install Lazygit
+  hosts: localhost
+  roles:
+    - lazygit  
