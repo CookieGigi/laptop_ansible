@@ -1,0 +1,5 @@
+---
+- name: Source {{ path }} environment for this session
+  shell: . "{{ path }}"
+  args:
+    executable: /bin/bash
