@@ -3,3 +3,4 @@
   shell: . "{{ path }}"
   args:
     executable: /bin/bash
+  changed_when: false
