@@ -1,7 +1,7 @@
 ---
 - name: Install neovim
   ansible.builtin.include_role:
-    name: flatpak_user_install
-  vars: 
-    flatpak_app_id: "io.neovim.nvim"
-    flatpak_app_alias: "vi"
+    name: nix_install
+  vars:
+    nix_packages:
+      - neovim
