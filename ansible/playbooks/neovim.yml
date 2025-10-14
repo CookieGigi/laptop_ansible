@@ -2,5 +2,11 @@
 - name: Install Neovim 
   hosts: localhost
   roles:
-    - neovim  # Reference the role using the subfolder path
+    - neovim
+    - role: add_alias
+      vars:
+        alias_name: "vi"
+        alias_cmd: "nvim"
+
+  
 
