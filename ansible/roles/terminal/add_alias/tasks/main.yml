@@ -21,9 +21,5 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK - ALIASES {{ alias_name }}"
     insertafter: EOF
     mode: "0644"
+  notify: Source shell_config
 
-- name: Include source role
-  ansible.builtin.include_role:
-    name: source
-  vars:
-    path: "{{ shell_config }}"
