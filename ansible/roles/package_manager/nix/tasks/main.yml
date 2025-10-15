@@ -27,4 +27,10 @@
   vars:
     path: "{{ nix_profil_path }}"
 
+- name: Include source role
+  ansible.builtin.include_role:
+    name: source
+  vars:
+    path: "{{ nix_profil_path }}"
+
 
