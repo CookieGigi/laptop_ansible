@@ -10,6 +10,7 @@
       changed_when: false     
 
   roles:
+    - add_main_user
     - lazygit
     - neovim
     - role: add_alias

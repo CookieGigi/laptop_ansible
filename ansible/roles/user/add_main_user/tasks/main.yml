@@ -1,0 +1,12 @@
+---
+- name: Create {{ ansible_user }}
+  ansible.builtin.include_role:
+    name: add_user
+  vars:
+    username: "{{ ansible_user }}"
+    usergroups: "sudo"
+- name: Add SSH key
+  ansible.builtin.include_role:
+    name: add_ssh_key
+  vars:
+    username: "{{ ansible_user }}"
