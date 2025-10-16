@@ -1,7 +1,5 @@
 ---
 - name: Install kdeconnect
-  ansible.builtin.include_role:
-    name: nix_install
-  vars:
-    nix_packages:
-      - kdePackages.kdeconnect-kde
+  become: true
+  ansible.builtin.apt:
+    name: kdeconnect
