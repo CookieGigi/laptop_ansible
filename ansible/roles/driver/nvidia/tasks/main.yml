@@ -1,0 +1,41 @@
+---
+- name: Add non-free and contrib to sources.list
+  become: true
+  ansible.builtin.replace:
+    path: /etc/apt/sources.list
+    regexp: 'main'
+    replace: 'main non-free contrib'
+    backup: yes
+
+- name: Update apt package index
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - linux-headers-{{ ansible_kernel }}
+      - build-essential
+      - dkms
+      - nvidia-detect
+    state: present
+
+- name: Run nvidia-detect
+  become: true
+  ansible.builtin.command: nvidia-detect
+  register: nvidia_detect_output
+  changed_when: false
+
+- name: Display nvidia-detect output
+  become: true
+  ansible.builtin.debug:
+    var: nvidia_detect_output.stdout_lines
+
+- name: Install driver
+  become: true
+  apt:
+    name:
+      - nvidia-driver
+      - nvidia-kernel-dkms
