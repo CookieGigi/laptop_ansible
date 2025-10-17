@@ -17,3 +17,4 @@
       vars:
         alias_name: "vi"
         alias_cmd: "nvim"
+    - netstat
