@@ -5,8 +5,18 @@
     name: "flatpak"
     state: present
     update_cache: yes
-- name: Add Flathub repository
-  ansible.builtin.command: flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+- name: Check if Flathub remote exists
+  ansible.builtin.command: flatpak remote-list --columns=name
+  register: remote_list
+  changed_when: false
+  check_mode: no
+
+- name: Add Flathub repository (if not exists)
+  ansible.builtin.command: >
+    flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  when: "'flathub' not in remote_list.stdout"
+  register: add_flathub
+  changed_when: true
 - name: Include add_to_path role
   ansible.builtin.include_role:
     name: add_to_path

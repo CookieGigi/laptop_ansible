@@ -1,6 +1,17 @@
-- name: Install Flatpak app for the user
+---
+- name: Check if Flatpak app is installed
+  ansible.builtin.command: flatpak list --app --columns=application
+  register: flatpak_list
+  changed_when: false
+  check_mode: no
+
+- name: Install Flatpak app for the user (if not installed)
   ansible.builtin.command: >
     flatpak install --user {{ flatpak_app_id }} -y
+  when: "flatpak_app_id not in flatpak_list.stdout"
+  register: install_flatpak_app
+  changed_when: true
+
 - name: Include add_alias role
   ansible.builtin.include_role:
     name: add_alias
