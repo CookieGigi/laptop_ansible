@@ -3,7 +3,7 @@
   when: nix_packages | length > 0
   shell: |
     source "{{ nix_profil_path }}"
-    nix-env -iA nixpkgs.{{ item }}
+    nix profile add {{ item }}
   args:
     executable: /bin/bash
   loop: "{{ nix_packages }}"

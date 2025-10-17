@@ -4,4 +4,4 @@
     name: nix_install
   vars: 
     nix_packages:
-      - lazygit
+      - nixpkgs#lazygit
