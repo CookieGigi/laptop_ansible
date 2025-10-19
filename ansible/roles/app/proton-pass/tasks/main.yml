@@ -1,0 +1,7 @@
+---
+- name: Install Heroic Launcher
+  include_role:
+    name: flatpak_user_install
+  vars:
+    flatpak_app_id: me.proton.Pass
+    flatpak_app_alias: proton-pass
