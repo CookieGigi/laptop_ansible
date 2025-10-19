@@ -1,0 +1,2 @@
+librewolf_package: io.gitlab.librewolf-community
+librewolf_var_path: "{{ ansible_env.HOME }}/.var/app/io.gitlab.librewolf-community/.librewolf" 

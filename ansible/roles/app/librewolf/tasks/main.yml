@@ -3,5 +3,18 @@
   include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_id: io.gitlab.librewolf-community
+    flatpak_app_id: "{{ librewolf_package }}"
     flatpak_app_alias: librewolf
+
+- name: Ensure {{ librewolf_var_path }} exists
+  ansible.builtin.file:
+    path: "{{ librewolf_var_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy librewolf.overrides.cfg
+  copy:
+    src: librewolf.overrides.cfg
+    dest: "{{ librewolf_var_path }}/librewolf.overrides.cfg"
+    owner: "{{ ansible_user }}"
+    mode: '0644'
