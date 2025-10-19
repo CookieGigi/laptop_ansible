@@ -6,7 +6,7 @@
     state: present
     update_cache: yes
 - name: Check if Flathub remote exists
-  ansible.builtin.command: flatpak remote-list --columns=name
+  ansible.builtin.command: flatpak --user remote-list --columns=name
   register: remote_list
   changed_when: false
   check_mode: no
