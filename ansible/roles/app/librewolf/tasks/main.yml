@@ -1,5 +1,5 @@
 ---
-- name: Install Heroic Launcher
+- name: Install librewolf
   include_role:
     name: flatpak_user_install
   vars:
