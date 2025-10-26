@@ -1,0 +1,5 @@
+- name: Install alacritty
+  include_role:
+    nix_install
+  vars:
+    nix_packages: alacritty
