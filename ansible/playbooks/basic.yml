@@ -19,3 +19,4 @@
         alias_cmd: "nvim"
     - netstat
     - alacritty
+    - role: tmux

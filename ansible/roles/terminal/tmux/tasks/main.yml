@@ -1,0 +1,7 @@
+---
+- name: Include nix_install role
+  ansible.builtin.include_role:
+    name: package_manager/nix_install
+  vars:
+    nix_packages:
+      - nixpkgs#tmux
