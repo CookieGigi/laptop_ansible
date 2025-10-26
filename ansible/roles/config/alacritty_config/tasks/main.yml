@@ -1,0 +1,8 @@
+- name: Add alacritty config
+  include_role:
+    name : add_dotfiles_from_repo
+  vars:
+    dotfile_repo: https://github.com/CookieGigi/alacritty_config.git
+    dotfile_name: alacritty
+    dotfile_repo_dir: dotfiles
+

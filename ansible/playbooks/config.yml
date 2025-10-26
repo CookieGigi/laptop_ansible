@@ -4,4 +4,5 @@
 
   roles:
     - kde_config
+    - alacritty_config
 

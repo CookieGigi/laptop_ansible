@@ -1,5 +1,7 @@
 - name: Install alacritty
+  become: true
+  apt:
+    name: alacritty
+- name: Config alacritty
   include_role:
-    nix_install
-  vars:
-    nix_packages: alacritty
+    name: alacritty_config
