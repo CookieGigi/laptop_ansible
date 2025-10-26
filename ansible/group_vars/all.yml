@@ -1,3 +1,3 @@
-shell_config: "{{ ansible_env.HOME }}/.bashrc"
+shell_config: "{{ ansible_env.HOME }}/.zshrc"
 nix_profil_path: "{{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh"
 dotfiles_path: "{{ ansible_env.HOME }}/dotfiles"
