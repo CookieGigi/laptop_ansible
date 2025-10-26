@@ -1,0 +1,2 @@
+nvm_version: "0.40.3"  # Update to the latest NVM version if needed
+node_version: "22"     # Specify your desired Node.js version
