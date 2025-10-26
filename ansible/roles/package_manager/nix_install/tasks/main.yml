@@ -1,5 +1,5 @@
 ---
-- name: Install user packages via Nix
+- name: Install user packages {{ nix_packages }} via Nix
   when: nix_packages | length > 0
   shell: |
     source "{{ nix_profil_path }}"
