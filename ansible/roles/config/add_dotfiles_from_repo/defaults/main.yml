@@ -1,0 +1,4 @@
+dotfile_path: ~/.dotfiles
+dotfile_repo: https://github.com/yourusername/bashrc.git
+dotfile_name: .bashrc
+dotfile_repo_dir: dotfiles

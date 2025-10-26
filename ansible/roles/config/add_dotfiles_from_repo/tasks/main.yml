@@ -1,0 +1,25 @@
+- name: Ensure ~/.dotfiles directory exists
+  file:
+    path: "{{ dotfile_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Clone or update dotfile repos
+  git:
+    repo: "{{ dotfile_repo }}"
+    dest: "{{ dotfile_path }}/{{ dotfile_name }}"
+    update: yes
+    version: main
+    force: yes
+
+- name: Stow each dotfile
+  command: "stow -d {{ dotfile_path }}/{{ dotfile_name }} -t ~ {{ dotfile_repo_dir }} --adopt"
+  args:
+    chdir: "{{ dotfile_path }}/{{ dotfile_name }}"
+
+- name: Restore git
+  git:
+    repo: "{{ dotfile_repo }}"
+    dest: "{{ dotfile_path }}/{{ dotfile_name }}"
+    version: main
+    force: yes

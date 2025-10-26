@@ -1,0 +1,7 @@
+- name: Import kde config from https://github.com/CookieGigi/kdeconfig.git
+  include_role:
+    name : add_dotfiles_from_repo
+  vars:
+    dotfile_repo: https://github.com/CookieGigi/kdeconfig.git
+    dotfile_name: kdeconfig
+    dotfile_repo_dir: dotfiles

@@ -1,0 +1,7 @@
+---
+- name: Install all config
+  hosts: localhost
+
+  roles:
+    - kde_config
+
