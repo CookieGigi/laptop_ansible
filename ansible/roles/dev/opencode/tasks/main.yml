@@ -1,0 +1,5 @@
+- name: Install opencode
+  include_role:
+    name: npm_install
+  vars:
+    package: opencode-ai

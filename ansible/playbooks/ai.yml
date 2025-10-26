@@ -1,0 +1,14 @@
+---
+- name: Install ai
+  hosts: localhost
+
+  handlers:
+    - name: Source shell_config
+      shell: . "{{ shell_config }}"
+      args:
+        executable: /bin/bash
+      changed_when: false     
+
+
+  roles:
+    - opencode
