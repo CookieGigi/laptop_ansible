@@ -1,7 +1,37 @@
 ---
+- name: Ensure .zshrc exists or create it empty
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: touch
+    mode: '0644'
 - name: Install zsh using nix_install role
   include_role:
     name: nix_install
   vars:
     nix_packages:
       - nixpkgs#zsh
+
+- name: Install ohMyZsh without modifying .zshrc
+  ansible.builtin.shell: |
+    if [ -d "{{ ansible_env.HOME }}/.oh-my-zsh" ]; then
+      echo "ohMyZsh already installed"
+    else
+      git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    fi
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ ansible_user }}"
+
+- name: Add ohMyZshConfig
+  ansible.builtin.blockinfile:
+    path: "{{ shell_config }}"
+    block: |
+      export ZSH="$HOME/.oh-my-zsh"
+      ZSH_THEME="gnzh"
+      plugins=(git)
+      source $ZSH/oh-my-zsh.sh
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - OHMYZSH"
+    insertafter: EOF
+    mode: "0644"
+  notify: Source shell_config

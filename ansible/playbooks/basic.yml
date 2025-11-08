@@ -4,13 +4,14 @@
 
   handlers:
     - name: Source shell_config
-      shell: . "{{ shell_config }}"
+      shell: source "{{ shell_config }}"
       args:
-        executable: /bin/bash
+        executable: /bin/zsh
       changed_when: false     
 
   roles:
     - add_main_user
+    - zsh
     - lazygit
     - neovim
     - role: add_alias
@@ -20,4 +21,3 @@
     - netstat
     - alacritty
     - role: tmux
-    - zsh
