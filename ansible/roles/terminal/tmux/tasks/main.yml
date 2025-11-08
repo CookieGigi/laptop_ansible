@@ -5,3 +5,23 @@
   vars:
     nix_packages:
       - nixpkgs#tmux
+
+- name: Configure zsh to auto-start tmux
+  ansible.builtin.blockinfile:
+    path: "{{ shell_config }}"
+    block: |
+      # Auto-start tmux
+      if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+        # Check if any tmux sessions exist
+        if tmux has-session 2>/dev/null; then
+          # Attach to existing session
+          exec tmux attach-session
+        else
+          # Create new session
+          exec tmux new-session
+        fi
+      fi
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - TMUX AUTOSTART"
+    insertbefore: "# BEGIN ANSIBLE MANAGED BLOCK - OHMYZSH"
+    mode: "0644"
+  notify: Source shell_config
