@@ -1,9 +1,15 @@
 ---
-- name: Ensure .zshrc exists or create it empty
+- name: Check if .zshrc exists
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc_stat
+
+- name: Create .zshrc if it doesn't exist
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.zshrc"
     state: touch
     mode: '0644'
+  when: not zshrc_stat.stat.exists
 - name: Install zsh using nix_install role
   include_role:
     name: nix_install
@@ -22,6 +28,8 @@
     executable: /bin/bash
   become: yes
   become_user: "{{ ansible_user }}"
+  register: ohmyzsh_install
+  changed_when: "'already installed' not in ohmyzsh_install.stdout"
 
 - name: Add ohMyZshConfig
   ansible.builtin.blockinfile:
