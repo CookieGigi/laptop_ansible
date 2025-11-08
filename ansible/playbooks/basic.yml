@@ -6,7 +6,7 @@
     - name: Source shell_config
       shell: source "{{ shell_config }}"
       args:
-        executable: /bin/zsh
+        executable: /bin/bash
       changed_when: false     
 
   roles:
