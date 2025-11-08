@@ -13,9 +13,11 @@
     force: yes
 
 - name: Stow each dotfile
-  command: "stow -d {{ dotfile_path }}/{{ dotfile_name }} -t ~ {{ dotfile_repo_dir }} --adopt"
+  command: "stow -d {{ dotfile_path }}/{{ dotfile_name }} -t ~ {{ dotfile_repo_dir }} --adopt"
   args:
-    chdir: "{{ dotfile_path }}/{{ dotfile_name }}"
+    chdir: "{{ dotfile_path }}/{{ dotfile_name }}"
+  register: stow_result
+  changed_when: stow_result.rc != 0 or stow_result.stderr != ""
 
 - name: Restore git
   git:
