@@ -2,7 +2,8 @@
 
 ## Overview
 
-Flatpak is a utility for software deployment, package management, and application virtualization for Linux. This role installs Flatpak and adds the Flathub repository.
+Flatpak is a utility for software deployment, package management, and application virtualization for Linux. This role
+installs Flatpak and adds the Flathub repository.
 
 ## Installation
 

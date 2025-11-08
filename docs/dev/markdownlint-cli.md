@@ -2,7 +2,8 @@
 
 ## Overview
 
-markdownlint-cli is a command-line interface for markdownlint, a linter for Markdown files. It helps maintain consistent formatting and catches common mistakes in Markdown documentation.
+markdownlint-cli is a command-line interface for markdownlint, a linter for Markdown files. It helps maintain consistent
+formatting and catches common mistakes in Markdown documentation.
 
 ## Installation
 
@@ -11,11 +12,13 @@ markdownlint-cli is a command-line interface for markdownlint, a linter for Mark
 
 ## Configuration
 
-Configure via `.markdownlint.json` or `.markdownlintrc` in project root. Customize rules, enable/disable checks, and set formatting preferences.
+Configure via `.markdownlint.json` or `.markdownlintrc` in project root. Customize rules, enable/disable checks, and set
+formatting preferences.
 
 ## Usage
 
 markdownlint-cli is used for linting Markdown files. Common commands:
+
 - `markdownlint '**/*.md'` - Lint all Markdown files
 - `markdownlint docs/` - Lint specific directory
 - `markdownlint --fix '**/*.md'` - Auto-fix issues

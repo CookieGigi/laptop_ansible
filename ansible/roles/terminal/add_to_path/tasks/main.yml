@@ -1,16 +1,16 @@
 ---
 - name: Ensure the directory exists
   ansible.builtin.file:
-    path: "{{ path_directory }}"
+    path: "{{ add_to_path_path_directory }}"
     state: directory
     mode: '0755'
 
-- name: Add directory to PATH in {{ shell_config }}
+- name: Add directory to PATH in shell config
   ansible.builtin.blockinfile:
     path: "{{ shell_config }}"
     block: |
-     export PATH="$PATH:{{ path_directory }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - CUSTOM PATH {{ path_directory }}"
+     export PATH="$PATH:{{ add_to_path_path_directory }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - CUSTOM PATH {{ add_to_path_path_directory }}"
     insertafter: 'EOF'
     state: present
 
@@ -18,4 +18,4 @@
   ansible.builtin.include_role:
     name: source
   vars:
-    path: "{{ shell_config }}"
+    source_path: "{{ shell_config }}"

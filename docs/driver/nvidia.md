@@ -2,7 +2,8 @@
 
 ## Overview
 
-The NVIDIA driver role installs the proprietary NVIDIA drivers for GPU support on Linux systems. It ensures that the correct drivers are installed based on the detected hardware.
+The NVIDIA driver role installs the proprietary NVIDIA drivers for GPU support on Linux systems. It ensures that the
+correct drivers are installed based on the detected hardware.
 
 ## Installation
 

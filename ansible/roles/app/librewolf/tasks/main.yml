@@ -1,19 +1,19 @@
 ---
 - name: Install librewolf
-  include_role:
+  ansible.builtin.include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_id: "{{ librewolf_package }}"
-    flatpak_app_alias: librewolf
+    flatpak_user_install_flatpak_app_id: "{{ librewolf_package }}"
+    flatpak_user_install_flatpak_app_alias: librewolf
 
-- name: Ensure {{ librewolf_var_path }} exists
+- name: Ensure librewolf var path exists
   ansible.builtin.file:
-    path: "{{ librewolf_var_path }}"
+    path: "{{ librewolf_var_path }}"
     state: directory
     mode: '0755'
 
-- name: Copy librewolf.overrides.cfg
-  copy:
+- name: Copy librewolf.overrides.cfg to {{ librewolf_var_path }}
+  ansible.builtin.copy:
     src: librewolf.overrides.cfg
     dest: "{{ librewolf_var_path }}/librewolf.overrides.cfg"
     owner: "{{ ansible_user }}"

@@ -1,9 +1,9 @@
 ---
 - name: Include nix_install role
   ansible.builtin.include_role:
-    name: package_manager/nix_install
+    name: nix_install
   vars:
-    nix_packages:
+    nix_install_nix_packages:
       - nixpkgs#tmux
 
 - name: Configure zsh to auto-start tmux

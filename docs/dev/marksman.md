@@ -2,7 +2,8 @@
 
 ## Overview
 
-marksman is a language server for Markdown that provides LSP features like go-to-definition for links, completions, references, and diagnostics. Perfect for managing documentation in this project.
+marksman is a language server for Markdown that provides LSP features like go-to-definition for links, completions,
+references, and diagnostics. Perfect for managing documentation in this project.
 
 ## Installation
 
@@ -11,11 +12,13 @@ marksman is a language server for Markdown that provides LSP features like go-to
 
 ## Configuration
 
-Configuration is done through your editor's LSP client. marksman automatically discovers Markdown files and builds a workspace index.
+Configuration is done through your editor's LSP client. marksman automatically discovers Markdown files and builds a
+workspace index.
 
 ## Usage
 
 marksman runs automatically when editing Markdown files. Provides:
+
 - Link completion and validation
 - Go-to-definition for links
 - Find references

@@ -2,7 +2,9 @@
 
 ## Overview
 
-Netstat is a command-line network utility tool that displays network connections for Transmission Control Protocol (both incoming and outgoing), routing tables, and a number of network interface and network protocol statistics. This role installs Netstat using Nix.
+Netstat is a command-line network utility tool that displays network connections for Transmission Control Protocol (both
+incoming and outgoing), routing tables, and a number of network interface and network protocol statistics. This role
+installs Netstat using Nix.
 
 ## Installation
 

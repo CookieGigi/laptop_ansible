@@ -2,7 +2,8 @@
 
 ## Overview
 
-yq is a lightweight and portable command-line YAML processor. It's particularly useful for this Ansible project where YAML files are prevalent. Works similarly to jq but for YAML/XML/TOML formats.
+yq is a lightweight and portable command-line YAML processor. It's particularly useful for this Ansible project where
+YAML files are prevalent. Works similarly to jq but for YAML/XML/TOML formats.
 
 ## Installation
 
@@ -16,6 +17,7 @@ yq is primarily used via command-line with no persistent configuration needed.
 ## Usage
 
 yq is used for parsing and manipulating YAML data. Common commands:
+
 - `yq eval '.' file.yml` - Pretty-print YAML
 - `yq eval '.roles[0]' playbook.yml` - Extract specific value
 - `yq eval '.roles[] | select(.name == "foo")' file.yml` - Filter arrays

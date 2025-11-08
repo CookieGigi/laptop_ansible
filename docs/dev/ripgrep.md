@@ -2,7 +2,8 @@
 
 ## Overview
 
-ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. It's extremely fast and respects .gitignore files by default. Essential for OpenCode and Neovim workflows.
+ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. It's
+extremely fast and respects .gitignore files by default. Essential for OpenCode and Neovim workflows.
 
 ## Installation
 
@@ -16,6 +17,7 @@ ripgrep can be configured via `~/.ripgreprc` or through command-line flags.
 ## Usage
 
 ripgrep is used for fast text searching across files and directories. Common commands:
+
 - `rg "pattern"` - Search for pattern
 - `rg "pattern" -t py` - Search only Python files
 - `rg "pattern" --hidden` - Include hidden files

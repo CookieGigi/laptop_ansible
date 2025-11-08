@@ -2,7 +2,8 @@
 
 ## Overview
 
-Firefox is a free and open-source web browser developed by Mozilla. It is used as the default browser in this system for general web browsing.
+Firefox is a free and open-source web browser developed by Mozilla. It is used as the default browser in this system for
+general web browsing.
 
 ## Installation
 

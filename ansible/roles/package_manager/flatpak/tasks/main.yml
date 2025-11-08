@@ -1,15 +1,16 @@
 ---
 - name: Install Flatpak
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "flatpak"
     state: present
-    update_cache: yes
+    update_cache: true
+
 - name: Check if Flathub remote exists
   ansible.builtin.command: flatpak --user remote-list --columns=name
   register: remote_list
   changed_when: false
-  check_mode: no
+  check_mode: false
 
 - name: Add Flathub repository (if not exists)
   ansible.builtin.command: >
@@ -17,8 +18,9 @@
   when: "'flathub' not in remote_list.stdout"
   register: add_flathub
   changed_when: true
+
 - name: Include add_to_path role
   ansible.builtin.include_role:
     name: add_to_path
   vars:
-    path_directory: "~/.local/share/flatpak/exports/bin"
+    add_to_path_path_directory: "~/.local/share/flatpak/exports/bin"

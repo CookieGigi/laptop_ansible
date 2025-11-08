@@ -11,10 +11,10 @@
     mode: '0644'
   when: not zshrc_stat.stat.exists
 - name: Install zsh using nix_install role
-  include_role:
+  ansible.builtin.include_role:
     name: nix_install
   vars:
-    nix_packages:
+    nix_install_nix_packages:
       - nixpkgs#zsh
 
 - name: Install ohMyZsh without modifying .zshrc
@@ -26,7 +26,7 @@
     fi
   args:
     executable: /bin/bash
-  become: yes
+  become: true
   become_user: "{{ ansible_user }}"
   register: ohmyzsh_install
   changed_when: "'already installed' not in ohmyzsh_install.stdout"

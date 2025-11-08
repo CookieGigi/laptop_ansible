@@ -2,7 +2,8 @@
 
 ## Overview
 
-yaml-language-server provides language server protocol (LSP) features for YAML files including auto-completion, validation, and schema support. Critical for working with Ansible playbooks and the 69+ YAML files in this project.
+yaml-language-server provides language server protocol (LSP) features for YAML files including auto-completion,
+validation, and schema support. Critical for working with Ansible playbooks and the 69+ YAML files in this project.
 
 ## Installation
 
@@ -11,11 +12,13 @@ yaml-language-server provides language server protocol (LSP) features for YAML f
 
 ## Configuration
 
-Configuration is done through your editor's LSP client (Neovim, OpenCode). Supports JSON Schema validation and custom schema associations.
+Configuration is done through your editor's LSP client (Neovim, OpenCode). Supports JSON Schema validation and custom
+schema associations.
 
 ## Usage
 
 yaml-language-server runs automatically in the background when editing YAML files. Provides:
+
 - Auto-completion for keys and values
 - Schema validation
 - Hover documentation

@@ -2,6 +2,6 @@
 - name: Install lazygit
   ansible.builtin.include_role:
     name: nix_install
-  vars: 
-    nix_packages:
+  vars:
+    nix_install_nix_packages:
       - nixpkgs#lazygit

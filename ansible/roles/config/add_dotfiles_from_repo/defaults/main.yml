@@ -1,4 +1,4 @@
-dotfile_path: ~/.dotfiles
-dotfile_repo: https://github.com/yourusername/bashrc.git
-dotfile_name: .bashrc
-dotfile_repo_dir: dotfiles
+add_dotfiles_from_repo_dotfile_path: ~/.dotfiles
+add_dotfiles_from_repo_dotfile_repo: https://github.com/yourusername/bashrc.git
+add_dotfiles_from_repo_dotfile_name: .bashrc
+add_dotfiles_from_repo_dotfile_repo_dir: dotfiles

@@ -2,7 +2,8 @@
 
 ## Overview
 
-prettier is an opinionated code formatter supporting multiple languages including YAML, Markdown, JSON, JavaScript, and more. Ensures consistent formatting across all your configuration and documentation files.
+prettier is an opinionated code formatter supporting multiple languages including YAML, Markdown, JSON, JavaScript, and
+more. Ensures consistent formatting across all your configuration and documentation files.
 
 ## Installation
 
@@ -11,11 +12,13 @@ prettier is an opinionated code formatter supporting multiple languages includin
 
 ## Configuration
 
-Configure via `.prettierrc`, `.prettierrc.json`, or `prettier.config.js`. Set formatting preferences like line width, indentation, and language-specific options.
+Configure via `.prettierrc`, `.prettierrc.json`, or `prettier.config.js`. Set formatting preferences like line width,
+indentation, and language-specific options.
 
 ## Usage
 
 prettier is used for formatting code and configuration files. Common commands:
+
 - `prettier --write '**/*.md'` - Format all Markdown files
 - `prettier --write '**/*.yml'` - Format all YAML files
 - `prettier --check .` - Check formatting without changing files

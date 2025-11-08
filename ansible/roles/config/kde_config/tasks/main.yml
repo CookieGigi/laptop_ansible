@@ -1,7 +1,7 @@
-- name: Import kde config from https://github.com/CookieGigi/kdeconfig.git
-  include_role:
-    name : add_dotfiles_from_repo
+- name: Import kde config
+  ansible.builtin.include_role:
+    name: add_dotfiles_from_repo
   vars:
-    dotfile_repo: https://github.com/CookieGigi/kdeconfig.git
-    dotfile_name: kdeconfig
-    dotfile_repo_dir: dotfiles
+    add_dotfiles_from_repo_dotfile_repo: https://github.com/CookieGigi/kdeconfig.git
+    add_dotfiles_from_repo_dotfile_name: kdeconfig
+    add_dotfiles_from_repo_dotfile_repo_dir: dotfiles

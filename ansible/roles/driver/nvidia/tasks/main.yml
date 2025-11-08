@@ -5,12 +5,12 @@
     path: /etc/apt/sources.list
     regexp: 'main'
     replace: 'main non-free contrib'
-    backup: yes
+    backup: true
 
 - name: Update apt package index
   become: true
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Install required packages
   become: true
@@ -35,7 +35,7 @@
 
 - name: Install driver
   become: true
-  apt:
+  ansible.builtin.apt:
     name:
       - nvidia-driver
       - nvidia-kernel-dkms

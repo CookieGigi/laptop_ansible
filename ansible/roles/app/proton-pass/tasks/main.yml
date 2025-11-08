@@ -1,7 +1,7 @@
 ---
-- name: Install Heroic Launcher
-  include_role:
+- name: Install Proton Pass
+  ansible.builtin.include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_id: me.proton.Pass
-    flatpak_app_alias: proton-pass
+    flatpak_user_install_flatpak_app_id: me.proton.Pass
+    flatpak_user_install_flatpak_app_alias: proton-pass

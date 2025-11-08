@@ -2,7 +2,8 @@
 
 ## Overview
 
-Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. This role installs Nix packages for the user.
+Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and
+reproducible. This role installs Nix packages for the user.
 
 ## Installation
 

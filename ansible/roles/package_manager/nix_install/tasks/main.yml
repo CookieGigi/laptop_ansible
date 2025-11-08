@@ -1,11 +1,11 @@
 ---
-- name: Install user packages {{ nix_packages }} via Nix
-  when: nix_packages | length > 0
-  shell: |
+- name: Install user packages via Nix
+  when: nix_install_nix_packages | length > 0
+  ansible.builtin.shell: |
     source "{{ nix_profil_path }}"
     nix profile add {{ item }}
   args:
     executable: /bin/bash
-  loop: "{{ nix_packages }}"
-  register: nix_install
-  changed_when: "'already added' not in nix_install.stderr"
+  loop: "{{ nix_install_nix_packages }}"
+  register: nix_install_result
+  changed_when: "'already added' not in nix_install_result.stderr"

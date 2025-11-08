@@ -2,7 +2,8 @@
 
 ## Overview
 
-hadolint is a Dockerfile linter that helps you build best practice Docker images. It validates Dockerfiles against a set of rules and provides suggestions for improvements.
+hadolint is a Dockerfile linter that helps you build best practice Docker images. It validates Dockerfiles against a set
+of rules and provides suggestions for improvements.
 
 ## Installation
 
@@ -11,11 +12,13 @@ hadolint is a Dockerfile linter that helps you build best practice Docker images
 
 ## Configuration
 
-Configure via `.hadolint.yaml` or inline ignore comments in Dockerfiles. Customize rules, trusted registries, and ignore patterns.
+Configure via `.hadolint.yaml` or inline ignore comments in Dockerfiles. Customize rules, trusted registries, and ignore
+patterns.
 
 ## Usage
 
 hadolint is used for linting Dockerfiles. Common commands:
+
 - `hadolint Dockerfile` - Lint a Dockerfile
 - `hadolint --ignore DL3006 Dockerfile` - Ignore specific rules
 - `hadolint --format json Dockerfile` - Output as JSON

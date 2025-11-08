@@ -2,7 +2,9 @@
 
 ## Overview
 
-fzf is a general-purpose command-line fuzzy finder. It's an interactive Unix filter for command-line that can be used with any list: files, command history, processes, hostnames, bookmarks, git commits, etc. Integrates seamlessly with Neovim.
+fzf is a general-purpose command-line fuzzy finder. It's an interactive Unix filter for command-line that can be used
+with any list: files, command history, processes, hostnames, bookmarks, git commits, etc. Integrates seamlessly with
+Neovim.
 
 ## Installation
 
@@ -16,6 +18,7 @@ fzf can be configured through environment variables like `FZF_DEFAULT_OPTS` and 
 ## Usage
 
 fzf is used for interactive fuzzy searching. Common usage:
+
 - `CTRL-R` - Search command history
 - `CTRL-T` - Fuzzy find files
 - `ALT-C` - Fuzzy find directories

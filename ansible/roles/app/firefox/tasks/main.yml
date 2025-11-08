@@ -1,7 +1,7 @@
 ---
 - name: Install firefox
-  include_role:
+  ansible.builtin.include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_id: org.mozilla.firefox
-    flatpak_app_alias: firefox
+    flatpak_user_install_flatpak_app_id: org.mozilla.firefox
+    flatpak_user_install_flatpak_app_alias: firefox

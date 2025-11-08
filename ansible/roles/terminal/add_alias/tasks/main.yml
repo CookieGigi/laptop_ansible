@@ -17,9 +17,8 @@
   ansible.builtin.blockinfile:
     path: "{{ shell_config }}"
     block: |
-      alias {{ alias_name }}="{{ alias_cmd }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - ALIASES {{ alias_name }}"
+      alias {{ add_alias_alias_name }}="{{ add_alias_alias_cmd }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - ALIASES {{ add_alias_alias_name }}"
     insertafter: EOF
     mode: "0644"
   notify: Source shell_config
-

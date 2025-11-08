@@ -1,7 +1,6 @@
 ---
 # Default directory to add to PATH
-path_directory: "/bin"
+add_to_path_path_directory: "/bin"
 
 # Target shell configuration file
-shell_config: "~/.bashrc"
-
+add_to_path_shell_config: "~/.bashrc"

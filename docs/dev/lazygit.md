@@ -2,7 +2,8 @@
 
 ## Overview
 
-LazyGit is a simple terminal UI for Git commands, written in Go with the gocui library. It allows users to perform Git operations in a more user-friendly and efficient way.
+LazyGit is a simple terminal UI for Git commands, written in Go with the gocui library. It allows users to perform Git
+operations in a more user-friendly and efficient way.
 
 ## Installation
 
@@ -11,7 +12,8 @@ LazyGit is a simple terminal UI for Git commands, written in Go with the gocui l
 
 ## Configuration
 
-LazyGit is configured through its own configuration file, typically located at `~/.config/jesseduffield/lazygit/config.yml`.
+LazyGit is configured through its own configuration file, typically located at
+`~/.config/jesseduffield/lazygit/config.yml`.
 
 ## Usage
 

@@ -2,7 +2,8 @@
 
 ## Overview
 
-Heroic Launcher is an open-source game launcher for Linux, designed to manage and launch games from various platforms, including Epic Games, GOG, and Amazon.
+Heroic Launcher is an open-source game launcher for Linux, designed to manage and launch games from various platforms,
+including Epic Games, GOG, and Amazon.
 
 ## Installation
 

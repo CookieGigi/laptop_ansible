@@ -2,7 +2,8 @@
 
 ## Overview
 
-ansible-lint is a command-line tool for linting Ansible playbooks, roles, and collections. It checks for practices and behavior that could potentially be improved. Essential for maintaining quality in this Ansible-based project.
+ansible-lint is a command-line tool for linting Ansible playbooks, roles, and collections. It checks for practices and
+behavior that could potentially be improved. Essential for maintaining quality in this Ansible-based project.
 
 ## Installation
 
@@ -11,11 +12,13 @@ ansible-lint is a command-line tool for linting Ansible playbooks, roles, and co
 
 ## Configuration
 
-ansible-lint can be configured via `.ansible-lint` file in the project root. Configuration includes rule selection, exclusions, and custom settings.
+ansible-lint can be configured via `.ansible-lint` file in the project root. Configuration includes rule selection,
+exclusions, and custom settings.
 
 ## Usage
 
 ansible-lint is used for checking Ansible code quality. Common commands:
+
 - `ansible-lint` - Lint all playbooks in current directory
 - `ansible-lint playbooks/dev.yml` - Lint specific playbook
 - `ansible-lint --fix` - Auto-fix issues where possible

@@ -2,7 +2,8 @@
 
 ## Overview
 
-KDE Connect is a tool that allows devices to communicate and share content, such as notifications, files, and clipboard data, between a computer and a phone.
+KDE Connect is a tool that allows devices to communicate and share content, such as notifications, files, and clipboard
+data, between a computer and a phone.
 
 ## Installation
 

@@ -2,7 +2,8 @@
 
 ## Overview
 
-OpenCode is an interactive CLI tool that helps users with software engineering tasks. It is designed to assist with coding, debugging, and automating development workflows.
+OpenCode is an interactive CLI tool that helps users with software engineering tasks. It is designed to assist with
+coding, debugging, and automating development workflows.
 
 ## Installation
 
@@ -15,7 +16,8 @@ OpenCode is configured through its own configuration files, typically located in
 
 ## Usage
 
-OpenCode is used for automating software engineering tasks, such as writing code, debugging, and managing development workflows.
+OpenCode is used for automating software engineering tasks, such as writing code, debugging, and managing development
+workflows.
 
 ## Variables
 

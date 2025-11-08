@@ -1,6 +1,5 @@
-- name: Install {{ package }}
-  npm:
-    name: "{{ package }}"
-    executable: "{{ansible_env.HOME}}/.nvm/versions/node/v22.21.0/bin/npm" 
+- name: Install npm package
+  community.general.npm:
+    name: "{{ npm_install_package }}"
+    executable: "{{ ansible_env.HOME }}/.nvm/versions/node/v22.21.0/bin/npm"
     global: true
-

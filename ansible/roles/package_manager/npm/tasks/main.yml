@@ -1,34 +1,35 @@
 - name: Install dependencies for NVM
   become: true
-  apt:
+  ansible.builtin.apt:
     name: ["curl", "git"]
     state: present
   when: ansible_os_family == 'Debian'
 
-
 - name: Download and install NVM
-  shell: |
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
-  args:
-    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"  # Prevents re-installation
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ npm_nvm_version }}/install.sh | bash
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    executable: /bin/bash
 
 - name: Source NVM and install Node.js (if needed)
-  shell: |
+  ansible.builtin.shell: |
     export NVM_DIR="{{ ansible_env.HOME }}/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     if ! command -v nvm &> /dev/null; then
       echo "NVM is not installed. Please install NVM first."
       exit 1
     fi
-    if ! nvm ls {{ node_version }} &> /dev/null; then
-      nvm install {{ node_version }}
+    if ! nvm ls {{ npm_node_version }} &> /dev/null; then
+      nvm install {{ npm_node_version }}
     fi
-    nvm use {{ node_version }}
+    nvm use {{ npm_node_version }}
   args:
     executable: /bin/bash
   register: nvm_result
   changed_when: "'is not installed' in nvm_result.stdout or 'Downloading and installing Node.js' in nvm_result.stdout"
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Check if shell config file exists
   ansible.builtin.stat:
@@ -42,7 +43,7 @@
     mode: "0644"
   when: not file_stat.stat.exists
 
-- name: Add nvm source nvm in {{ shell_config }}
+- name: Add nvm source to shell config
   ansible.builtin.blockinfile:
     path: "{{ shell_config }}"
     block: |

@@ -2,7 +2,8 @@
 
 ## Overview
 
-GitHub CLI brings GitHub to your terminal. It allows you to manage pull requests, issues, repositories, and more from the command line. OpenCode uses this tool for creating pull requests and managing GitHub workflows.
+GitHub CLI brings GitHub to your terminal. It allows you to manage pull requests, issues, repositories, and more from
+the command line. OpenCode uses this tool for creating pull requests and managing GitHub workflows.
 
 ## Installation
 
@@ -16,6 +17,7 @@ After installation, authenticate with `gh auth login`. Configuration is stored i
 ## Usage
 
 gh is used for GitHub operations from the terminal. Common commands:
+
 - `gh pr create` - Create a pull request
 - `gh pr list` - List pull requests
 - `gh issue create` - Create an issue

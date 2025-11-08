@@ -1,14 +1,14 @@
 ---
 - name: Ensure curl is installed (for installer)
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: curl
     state: present
   when: ansible_os_family == "Debian"
 
 - name: Ensure /nix directory exists
-  become: yes
-  file:
+  become: true
+  ansible.builtin.file:
     path: /nix
     state: directory
     mode: '0755'
@@ -16,7 +16,7 @@
     group: "{{ ansible_user_id }}"
 
 - name: Install Nix (user-space, no daemon)
-  shell: "sh <(curl -L {{ nix_install_url }}) --no-daemon"
+  ansible.builtin.shell: "sh <(curl -L {{ nix_install_url }}) --no-daemon"
   args:
     creates: "{{ nix_profil_path }}"
     executable: /bin/bash
@@ -25,12 +25,10 @@
   ansible.builtin.include_role:
     name: add_source_to_config
   vars:
-    path: "{{ nix_profil_path }}"
+    add_source_to_config_path: "{{ nix_profil_path }}"
 
 - name: Include source role
   ansible.builtin.include_role:
     name: source
   vars:
-    path: "{{ nix_profil_path }}"
-
-
+    source_path: "{{ nix_profil_path }}"

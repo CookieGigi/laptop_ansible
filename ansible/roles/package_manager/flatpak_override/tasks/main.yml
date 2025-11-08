@@ -1,5 +1,5 @@
 ---
-- name: Flatpak override 
+- name: Flatpak override
   ansible.builtin.command: >
-    flatpak override --user {{ flatpak_option }} {{ flatpak_app_id }}
-
+    flatpak override --user {{ flatpak_override_flatpak_option }} {{ flatpak_override_flatpak_app_id }}
+  changed_when: true

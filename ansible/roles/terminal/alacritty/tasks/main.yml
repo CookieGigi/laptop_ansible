@@ -1,7 +1,9 @@
+---
 - name: Install alacritty
   become: true
-  apt:
+  ansible.builtin.apt:
     name: alacritty
+
 - name: Config alacritty
-  include_role:
+  ansible.builtin.include_role:
     name: alacritty_config

@@ -4,10 +4,10 @@
 
   handlers:
     - name: Source shell_config
-      shell: source "{{ shell_config }}"
+      ansible.builtin.shell: source "{{ shell_config }}"
       args:
         executable: /bin/bash
-      changed_when: false     
+      changed_when: false
 
   roles:
     - add_main_user
@@ -16,8 +16,8 @@
     - neovim
     - role: add_alias
       vars:
-        alias_name: "vi"
-        alias_cmd: "nvim"
+        add_alias_alias_name: "vi"
+        add_alias_alias_cmd: "nvim"
     - netstat
     - alacritty
     - role: tmux

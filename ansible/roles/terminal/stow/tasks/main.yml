@@ -1,7 +1,7 @@
 ---
 - name: Install stow
-  include_role:
-    name : nix_install
+  ansible.builtin.include_role:
+    name: nix_install
   vars:
-    nix_packages:
+    nix_install_nix_packages:
       - nixpkgs#stow

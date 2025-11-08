@@ -2,7 +2,8 @@
 
 ## Overview
 
-lua-language-server is a language server for Lua providing code completion, diagnostics, and other LSP features. Essential for configuring Neovim with Lua and working with Lua scripts.
+lua-language-server is a language server for Lua providing code completion, diagnostics, and other LSP features.
+Essential for configuring Neovim with Lua and working with Lua scripts.
 
 ## Installation
 
@@ -11,11 +12,13 @@ lua-language-server is a language server for Lua providing code completion, diag
 
 ## Configuration
 
-Configure through your editor's LSP client. Can be customized with workspace settings for Neovim-specific Lua development.
+Configure through your editor's LSP client. Can be customized with workspace settings for Neovim-specific Lua
+development.
 
 ## Usage
 
 lua-language-server runs automatically when editing Lua files. Provides:
+
 - Code completion
 - Function signatures
 - Hover documentation

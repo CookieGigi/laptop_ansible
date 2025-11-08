@@ -2,7 +2,8 @@
 
 ## Overview
 
-bash-language-server is a language server for Bash that provides LSP features for shell scripts. Works alongside shellcheck to provide comprehensive shell scripting support.
+bash-language-server is a language server for Bash that provides LSP features for shell scripts. Works alongside
+shellcheck to provide comprehensive shell scripting support.
 
 ## Installation
 
@@ -16,6 +17,7 @@ Configure through your editor's LSP client. Integrates with shellcheck for enhan
 ## Usage
 
 bash-language-server runs automatically when editing shell scripts. Provides:
+
 - Code completion for commands and variables
 - Hover documentation
 - Go-to-definition for functions

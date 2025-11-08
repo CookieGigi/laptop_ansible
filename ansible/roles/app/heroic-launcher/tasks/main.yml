@@ -1,7 +1,7 @@
 ---
 - name: Install Heroic Launcher
-  include_role:
+  ansible.builtin.include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_id: com.heroicgameslauncher.hgl
-    flatpak_app_alias: heroic
+    flatpak_user_install_flatpak_app_id: com.heroicgameslauncher.hgl
+    flatpak_user_install_flatpak_app_alias: heroic

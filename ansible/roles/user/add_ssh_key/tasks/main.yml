@@ -1,17 +1,17 @@
 ---
 - name: Ensure .ssh directory exists
   ansible.builtin.file:
-    path: /home/{{ username }}/.ssh
+    path: /home/{{ add_ssh_key_username }}/.ssh
     state: directory
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    owner: "{{ add_ssh_key_username }}"
+    group: "{{ add_ssh_key_username }}"
     mode: '0700'
 
 - name: Generate SSH key for user
-  ansible.builtin.openssh_keypair:
-    path: /home/{{ username }}/.ssh/id_rsa
-    owner: "{{ username }}"
-    group: "{{ username }}"
+  community.crypto.openssh_keypair:
+    path: /home/{{ add_ssh_key_username }}/.ssh/id_rsa
+    owner: "{{ add_ssh_key_username }}"
+    group: "{{ add_ssh_key_username }}"
     mode: '0600'
     type: rsa
     size: 4096

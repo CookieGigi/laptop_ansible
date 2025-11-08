@@ -2,7 +2,8 @@
 
 ## Overview
 
-LibreWolf is a privacy-focused fork of Firefox, designed to enhance security and privacy by removing telemetry and proprietary components.
+LibreWolf is a privacy-focused fork of Firefox, designed to enhance security and privacy by removing telemetry and
+proprietary components.
 
 ## Installation
 

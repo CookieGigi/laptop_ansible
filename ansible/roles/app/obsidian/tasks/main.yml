@@ -1,7 +1,6 @@
 ---
 - name: Install obsidian
-  include_role:
+  ansible.builtin.include_role:
     name: flatpak_user_install
   vars:
-    flatpak_app_alias: obsidian
-
+    flatpak_user_install_flatpak_app_alias: obsidian

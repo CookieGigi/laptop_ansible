@@ -1,6 +1,6 @@
 ---
-- name: Source {{ path }} environment for this session
-  shell: . "{{ path }}"
+- name: Source environment for this session
+  ansible.builtin.shell: . "{{ source_path }}"
   args:
     executable: /bin/bash
   changed_when: false

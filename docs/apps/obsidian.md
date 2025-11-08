@@ -2,7 +2,8 @@
 
 ## Overview
 
-Obsidian is a powerful knowledge base and note-taking application that allows users to create and manage a personal wiki using Markdown files.
+Obsidian is a powerful knowledge base and note-taking application that allows users to create and manage a personal wiki
+using Markdown files.
 
 ## Installation
 

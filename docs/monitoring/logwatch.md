@@ -2,7 +2,8 @@
 
 ## Overview
 
-Logwatch is a customizable log analysis system that parses through your system's logs and creates a report analyzing areas that you specify. This role automates the installation and configuration of Logwatch.
+Logwatch is a customizable log analysis system that parses through your system's logs and creates a report analyzing
+areas that you specify. This role automates the installation and configuration of Logwatch.
 
 ## Installation
 

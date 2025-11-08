@@ -2,7 +2,8 @@
 
 ## Overview
 
-bat is a cat clone with syntax highlighting and Git integration. It supports automatic paging and shows file modifications. Perfect for previewing files with fzf and in terminal workflows.
+bat is a cat clone with syntax highlighting and Git integration. It supports automatic paging and shows file
+modifications. Perfect for previewing files with fzf and in terminal workflows.
 
 ## Installation
 
@@ -16,6 +17,7 @@ bat can be configured through `~/.config/bat/config`. Themes and syntax definiti
 ## Usage
 
 bat is used for viewing file contents with syntax highlighting. Common commands:
+
 - `bat file.py` - Display file with syntax highlighting
 - `bat file1.py file2.py` - View multiple files
 - `bat --style=numbers,changes file.py` - Show line numbers and git changes

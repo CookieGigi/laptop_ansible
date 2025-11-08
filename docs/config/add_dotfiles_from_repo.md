@@ -2,7 +2,8 @@
 
 ## Overview
 
-This role clones or updates a dotfiles repository and uses GNU Stow to manage the symlinks for the dotfiles. It is useful for maintaining configuration files across multiple systems.
+This role clones or updates a dotfiles repository and uses GNU Stow to manage the symlinks for the dotfiles. It is
+useful for maintaining configuration files across multiple systems.
 
 ## Installation
 
@@ -17,7 +18,8 @@ This role clones or updates a dotfiles repository and uses GNU Stow to manage th
 
 ## Usage
 
-This role is used to manage dotfiles by cloning a repository and using GNU Stow to create symlinks for the dotfiles in the user's home directory.
+This role is used to manage dotfiles by cloning a repository and using GNU Stow to create symlinks for the dotfiles in
+the user's home directory.
 
 ## Variables
 

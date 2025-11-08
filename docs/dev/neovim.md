@@ -2,7 +2,8 @@
 
 ## Overview
 
-Neovim is a hyper-extensible Vim-based text editor. It aims to enable new applications without compromising Vim's traditional roles.
+Neovim is a hyper-extensible Vim-based text editor. It aims to enable new applications without compromising Vim's
+traditional roles.
 
 ## Installation
 
@@ -11,7 +12,8 @@ Neovim is a hyper-extensible Vim-based text editor. It aims to enable new applic
 
 ## Configuration
 
-Neovim is configured through its initialization file, typically located at `~/.config/nvim/init.vim` or `~/.config/nvim/init.lua`.
+Neovim is configured through its initialization file, typically located at `~/.config/nvim/init.vim` or
+`~/.config/nvim/init.lua`.
 
 ## Usage
 
