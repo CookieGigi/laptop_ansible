@@ -4,7 +4,7 @@
 > The `ansible.cfg` file is located there and uses relative paths for role resolution.
 
 ## Working Directory
-- **Ansible commands**: Must be run from `ansible/` directory (absolute path: `/home/cookiegigi/Project/system_maintain/ansible/`)
+- **Ansible commands**: Must be run from `ansible/` directory (relative to project root)
 - **Reason**: The `ansible.cfg` file with role paths is located in the ansible/ directory
 
 ## Build/Lint/Test Commands
@@ -56,7 +56,10 @@
 - **Imports**: Group similar imports (e.g., all Ansible modules together)
 - **Error Handling**: Use `ignore_errors: yes` and `failed_when` for controlled failure handling
 - **Idempotency**: Ensure all tasks are idempotent (can run multiple times safely)
-- **Documentation**: Include purpose comments for complex playbooks/roles
+- **Documentation**: 
+  - Include purpose comments for complex playbooks/roles
+  - **Never use absolute paths** (e.g., `/home/user/...`) in documentation or code
+  - Always use relative paths from project root (e.g., `./ansible/`, `docs/`)
 - **Variable Naming**: snake_case for variables, UPPER_CASE for constants
 
 ## Installed Development Tools
