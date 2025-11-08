@@ -8,4 +8,4 @@
     executable: /bin/bash
   loop: "{{ nix_packages }}"
   register: nix_install
-  changed_when: "'installing' in nix_install.stdout or 'building' in nix_install.stdout"
+  changed_when: "'already added' not in nix_install.stderr"
