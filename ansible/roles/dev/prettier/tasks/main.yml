@@ -1,0 +1,7 @@
+---
+- name: Install prettier
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_packages:
+      - nixpkgs#nodePackages.prettier
