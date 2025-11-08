@@ -1,0 +1,42 @@
+---
+- name: Install development tools
+  hosts: localhost
+
+  handlers:
+    - name: Source shell_config
+      shell: . "{{ shell_config }}"
+      args:
+        executable: /bin/bash
+      changed_when: false     
+
+  roles:
+    # Editors and Git
+    - neovim
+    - lazygit
+    - opencode
+    
+    # CLI Tools
+    - ripgrep
+    - fd
+    - fzf
+    - bat
+    - eza
+    - gh
+    - jq
+    - yq
+    - shellcheck
+    - tree
+    
+    # Linters
+    - ansible-lint
+    - markdownlint-cli
+    - hadolint
+    
+    # Language Servers
+    - yaml-language-server
+    - marksman
+    - lua-language-server
+    - bash-language-server
+    
+    # Formatters
+    - prettier
