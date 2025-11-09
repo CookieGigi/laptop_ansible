@@ -1,1 +1,33 @@
+# Ansible inventory file (contains host-specific configuration)
 ansible/inventory.ini
+
+# Ansible temporary files
+ansible/.ansible/
+ansible/*.retry
+ansible/.cache/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.tmp/

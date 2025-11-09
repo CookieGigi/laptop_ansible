@@ -1,23 +1,35 @@
 ---
 - name: Install development tools
   hosts: localhost
+  tags: [dev, development]
 
   roles:
     # Editors and Git
-    - neovim
-    - lazygit
-    - opencode
+    - role: neovim
+      tags: [editor, dev]
+    - role: lazygit
+      tags: [git, dev]
+    - role: opencode
+      tags: [editor, dev]
 
     # Linters
-    - ansible-lint
-    - markdownlint-cli
-    - hadolint
+    - role: ansible-lint
+      tags: [linter, dev]
+    - role: markdownlint-cli
+      tags: [linter, dev]
+    - role: hadolint
+      tags: [linter, dev, docker]
 
     # Language Servers
-    - yaml-language-server
-    - marksman
-    - lua-language-server
-    - bash-language-server
+    - role: yaml-language-server
+      tags: [lsp, dev]
+    - role: marksman
+      tags: [lsp, dev]
+    - role: lua-language-server
+      tags: [lsp, dev]
+    - role: bash-language-server
+      tags: [lsp, dev]
 
     # Formatters
-    - prettier
+    - role: prettier
+      tags: [formatter, dev]

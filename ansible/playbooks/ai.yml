@@ -1,6 +1,8 @@
 ---
-- name: Install ai
+- name: Install AI tools
   hosts: localhost
+  tags: [ai, development]
 
   roles:
-    - opencode
+    - role: opencode
+      tags: [ai, editor, dev]

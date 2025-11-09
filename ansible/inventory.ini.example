@@ -1,0 +1,19 @@
+# Ansible Inventory Example
+# Copy this file to inventory.ini and customize for your environment
+# Usage: cp inventory.ini.example inventory.ini
+
+# Localhost configuration (most common for this project)
+localhost ansible_connection=local ansible_user=your_username
+
+# Alternative: Remote host configuration
+# myserver ansible_host=192.168.1.100 ansible_user=your_username ansible_become=yes
+
+# Group definitions (optional)
+# [workstations]
+# localhost
+
+# [servers]
+# myserver
+
+# Group variables can also be defined in group_vars/
+# See: group_vars/all.yml for global variables

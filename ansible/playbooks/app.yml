@@ -1,11 +1,18 @@
 ---
-- name: Install all basics
+- name: Install applications
   hosts: localhost
+  tags: [app, applications]
 
   roles:
-    - kde-connect
-    - obsidian
-    - heroic-launcher
-    - librewolf
-    - proton-pass
-    - firefox
+    - role: kde-connect
+      tags: [app, connectivity]
+    - role: obsidian
+      tags: [app, productivity, notes]
+    - role: heroic-launcher
+      tags: [app, gaming]
+    - role: librewolf
+      tags: [app, browser, privacy]
+    - role: proton-pass
+      tags: [app, security, password-manager]
+    - role: firefox
+      tags: [app, browser]

@@ -1,6 +1,8 @@
 ---
-- name: Install all basics
+- name: Install NVIDIA drivers
   hosts: localhost
+  tags: [nvidia, driver, gpu]
 
   roles:
-    - nvidia
+    - role: nvidia
+      tags: [nvidia, driver, gpu]

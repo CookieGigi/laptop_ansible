@@ -1,31 +1,53 @@
 ---
 - name: Install all basics
   hosts: localhost
+  tags: [basic, setup]
 
   roles:
-    - add_main_user
-    - zsh
-    - lazygit
-    - neovim
+    - role: add_main_user
+      tags: [user, setup]
+    - role: zsh
+      tags: [shell, terminal]
+    - role: lazygit
+      tags: [git, dev]
+    - role: neovim
+      tags: [editor, dev]
     # CLI Tools
-    - ripgrep
-    - fd
-    - fzf
-    - zoxide
-    - bat
-    - eza
-    - gh
-    - jq
-    - yq
-    - shellcheck
-    - tree
+    - role: ripgrep
+      tags: [cli-tools, search]
+    - role: fd
+      tags: [cli-tools, search]
+    - role: fzf
+      tags: [cli-tools, search]
+    - role: zoxide
+      tags: [cli-tools, navigation]
+    - role: bat
+      tags: [cli-tools, viewer]
+    - role: eza
+      tags: [cli-tools, navigation]
+    - role: gh
+      tags: [cli-tools, git]
+    - role: jq
+      tags: [cli-tools, json]
+    - role: yq
+      tags: [cli-tools, yaml]
+    - role: shellcheck
+      tags: [cli-tools, linter]
+    - role: tree
+      tags: [cli-tools, navigation]
 
     - role: add_alias
       vars:
         add_alias_alias_name: "vi"
         add_alias_alias_cmd: "nvim"
-    - netstat
-    - jetbrains_nerd_font
-    - alacritty
+      tags: [config, alias]
+    - role: netstat
+      tags: [cli-tools, network]
+    - role: jetbrains_nerd_font
+      tags: [fonts, terminal]
+    - role: alacritty
+      tags: [terminal, app]
     - role: tmux
+      tags: [terminal, multiplexer]
     - role: tmux_catppuccin
+      tags: [terminal, theme]

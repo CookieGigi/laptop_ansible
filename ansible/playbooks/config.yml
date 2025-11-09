@@ -1,7 +1,10 @@
 ---
 - name: Install all config
   hosts: localhost
+  tags: [config, configuration]
 
   roles:
-    - kde_config
-    - alacritty_config
+    - role: kde_config
+      tags: [config, kde, desktop]
+    - role: alacritty_config
+      tags: [config, terminal]

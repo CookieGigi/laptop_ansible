@@ -1,0 +1,33 @@
+---
+# Ansible-lint configuration file for system_maintain project
+# See https://ansible-lint.readthedocs.io/en/latest/rules/
+
+# Exclude paths from linting
+exclude_paths:
+  - .cache/
+  - .git/
+  - molecule/
+  - test/
+
+# Enable offline mode (no external network calls)
+offline: false
+
+# Set the default rules to use
+profile: production
+
+# Skip specific rules that don't apply to this project
+skip_list:
+  - yaml[line-length]  # Allow longer lines in YAML (handled by prettier)
+  - role-name[path]    # We use custom role naming with categories
+
+# Warn only for these rules instead of failing
+warn_list:
+  - experimental  # Warn about experimental features
+  - no-changed-when  # Warn when changed_when is not set
+  - command-instead-of-module  # Sometimes command is necessary
+  - risky-shell-pipe  # Shell pipes are sometimes needed
+
+# Enable specific rules
+enable_list:
+  - no-same-owner  # Ensure owner is not same as become_user
+  - yaml  # Enable all YAML linting rules
