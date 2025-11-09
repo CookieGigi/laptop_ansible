@@ -3,6 +3,126 @@
 > **CRITICAL**: All Ansible commands must be executed from the `ansible/` directory!
 > The `ansible.cfg` file is located there and uses relative paths for role resolution.
 
+## Project Structure
+
+```
+system_maintain/
+├── ansible/                    # Main Ansible directory (run all ansible commands from here!)
+│   ├── group_vars/            # Group variables
+│   │   └── all.yml           # Variables for all hosts
+│   ├── playbooks/             # Ansible playbooks
+│   │   ├── ai.yml            # AI/ML setup playbook
+│   │   ├── app.yml           # Application installation playbook
+│   │   ├── basic.yml         # Basic system setup playbook
+│   │   ├── config.yml        # Configuration management playbook
+│   │   ├── dev.yml           # Development tools playbook
+│   │   └── nvidia.yml        # NVIDIA driver playbook
+│   ├── roles/                 # Ansible roles organized by category
+│   │   ├── app/              # Desktop applications
+│   │   │   ├── firefox/
+│   │   │   ├── heroic-launcher/
+│   │   │   ├── kde-connect/
+│   │   │   ├── librewolf/
+│   │   │   ├── obsidian/
+│   │   │   └── proton-pass/
+│   │   ├── config/           # System configuration
+│   │   │   ├── add_dotfiles_from_repo/
+│   │   │   ├── alacritty_config/
+│   │   │   ├── kde_config/
+│   │   │   └── tmux_config/
+│   │   ├── dev/              # Development tools (20+ tools)
+│   │   │   ├── ansible-lint/
+│   │   │   ├── bash-language-server/
+│   │   │   ├── bat/
+│   │   │   ├── eza/
+│   │   │   ├── fd/
+│   │   │   ├── fzf/
+│   │   │   ├── gh/
+│   │   │   ├── hadolint/
+│   │   │   ├── jq/
+│   │   │   ├── lazygit/
+│   │   │   ├── lua-language-server/
+│   │   │   ├── markdownlint-cli/
+│   │   │   ├── marksman/
+│   │   │   ├── neovim/
+│   │   │   ├── opencode/
+│   │   │   ├── prettier/
+│   │   │   ├── ripgrep/
+│   │   │   ├── shellcheck/
+│   │   │   ├── tree/
+│   │   │   ├── yaml-language-server/
+│   │   │   └── yq/
+│   │   ├── driver/           # Hardware drivers
+│   │   │   └── nvidia/
+│   │   ├── package_manager/  # Package manager setup
+│   │   │   ├── flatpak/
+│   │   │   ├── flatpak_override/
+│   │   │   ├── flatpak_user_install/
+│   │   │   ├── nix/
+│   │   │   ├── nix_install/
+│   │   │   ├── npm/
+│   │   │   └── npm_install/
+│   │   ├── terminal/         # Terminal environment
+│   │   │   ├── add_alias/
+│   │   │   ├── add_source_to_config/
+│   │   │   ├── add_to_path/
+│   │   │   ├── alacritty/
+│   │   │   ├── netstat/
+│   │   │   ├── source/
+│   │   │   ├── stow/
+│   │   │   ├── tmux/
+│   │   │   ├── tmux_tpm/
+│   │   │   └── zsh/
+│   │   └── user/             # User management
+│   │       ├── add_main_user/
+│   │       ├── add_ssh_key/
+│   │       └── add_user/
+│   ├── ansible.cfg           # Ansible configuration (defines role paths)
+│   └── .gitignore
+├── docs/                      # Documentation for each role
+│   ├── apps/                 # Application documentation
+│   ├── config/               # Configuration documentation
+│   ├── dev/                  # Development tools documentation
+│   ├── driver/               # Driver documentation
+│   ├── monitoring/           # Monitoring documentation
+│   ├── package_manager/      # Package manager documentation
+│   ├── terminal/             # Terminal documentation
+│   └── user/                 # User management documentation
+├── dotfiles/                  # Git submodules for configuration files
+│   ├── alacritty/            # Alacritty config submodule
+│   ├── kdeconfig/            # KDE config submodule
+│   └── tmux/                 # Tmux config submodule
+├── .gitignore
+├── .markdownlint.json        # Markdownlint configuration
+├── AGENTS.md                 # This file - agent guidelines
+├── opencode.json             # OpenCode configuration
+└── README.md                 # Project README
+```
+
+### Directory Purposes
+
+- **ansible/**: Core Ansible directory containing all playbooks, roles, and configuration
+  - **CRITICAL**: All ansible commands must be run from this directory!
+- **docs/**: Markdown documentation for each role, organized by category
+- **dotfiles/**: Git submodules containing actual configuration files managed by roles
+- **Role Categories**:
+  - `app/`: Desktop applications and GUI tools
+  - `config/`: System and application configuration management
+  - `dev/`: Development tools, LSP servers, linters, and CLI utilities
+  - `driver/`: Hardware drivers and kernel modules
+  - `package_manager/`: Package manager installation and configuration
+  - `terminal/`: Terminal emulator and shell environment setup
+  - `user/`: User account creation and management
+
+### Playbook Descriptions
+
+- **ai.yml**: AI/ML tools and framework setup
+- **app.yml**: Desktop application installation
+- **basic.yml**: Basic system setup and essential packages
+- **config.yml**: System configuration and dotfiles deployment
+- **dev.yml**: Development environment setup
+- **nvidia.yml**: NVIDIA GPU driver installation
+
 ## Working Directory
 
 - **Ansible commands**: Must be run from `ansible/` directory (relative to project root)
