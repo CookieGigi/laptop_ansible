@@ -1,0 +1,18 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "formatter": {
+    "prettier": {
+      "command": ["prettier", "--write", "$FILE"],
+      "extensions": [
+        ".yml",
+        ".yaml",
+        ".md",
+        ".json",
+        ".js",
+        ".ts",
+        ".jsx",
+        ".tsx"
+      ]
+    }
+  }
+}
