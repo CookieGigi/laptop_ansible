@@ -1,0 +1,18 @@
+---
+- name: Install zoxide
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - nixpkgs#zoxide
+
+- name: Initialize zoxide in shell config
+  ansible.builtin.blockinfile:
+    path: "{{ shell_config }}"
+    block: |
+      # Initialize zoxide
+      eval "$(zoxide init zsh)"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - zoxide init"
+    insertafter: EOF
+    mode: "0644"
+  notify: Source shell_config
