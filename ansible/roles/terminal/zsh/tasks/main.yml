@@ -17,6 +17,19 @@
     nix_install_nix_packages:
       - nixpkgs#zsh
 
+- name: Add zsh to /etc/shells if not present
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: "{{ ansible_env.HOME }}/.nix-profile/bin/zsh"
+    state: present
+  become: true
+
+- name: Set zsh as default shell
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: "{{ ansible_env.HOME }}/.nix-profile/bin/zsh"
+  become: true
+
 - name: Install ohMyZsh without modifying .zshrc
   ansible.builtin.shell: |
     if [ -d "{{ ansible_env.HOME }}/.oh-my-zsh" ]; then
