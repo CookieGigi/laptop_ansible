@@ -7,4 +7,3 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK - Source {{ add_source_to_config_path }}"
     insertafter: EOF
     mode: "0644"
-  notify: Source shell_config

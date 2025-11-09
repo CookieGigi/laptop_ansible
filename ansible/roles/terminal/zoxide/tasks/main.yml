@@ -15,4 +15,3 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK - zoxide init"
     insertafter: EOF
     mode: "0644"
-  notify: Source shell_config

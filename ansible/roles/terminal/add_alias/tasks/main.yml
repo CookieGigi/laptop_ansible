@@ -21,4 +21,3 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK - ALIASES {{ add_alias_alias_name }}"
     insertafter: EOF
     mode: "0644"
-  notify: Source shell_config

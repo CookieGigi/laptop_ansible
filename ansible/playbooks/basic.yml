@@ -2,14 +2,6 @@
 - name: Install all basics
   hosts: localhost
 
-  handlers:
-    - name: Source shell_config
-      ansible.builtin.shell: source "{{ shell_config }}"
-      args:
-        executable: /bin/bash
-      changed_when: false
-      failed_when: true
-
   roles:
     - add_main_user
     - zsh

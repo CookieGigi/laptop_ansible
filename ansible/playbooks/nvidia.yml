@@ -2,12 +2,5 @@
 - name: Install all basics
   hosts: localhost
 
-  handlers:
-    - name: Source shell_config
-      ansible.builtin.shell: . "{{ shell_config }}"
-      args:
-        executable: /bin/bash
-      changed_when: false
-
   roles:
     - nvidia

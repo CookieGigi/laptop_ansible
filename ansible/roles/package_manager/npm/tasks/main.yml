@@ -53,4 +53,3 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK - NVM"
     insertafter: EOF
     mode: "0644"
-  notify: Source shell_config
