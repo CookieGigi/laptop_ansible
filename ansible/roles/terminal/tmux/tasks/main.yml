@@ -25,3 +25,11 @@
     insertbefore: "# BEGIN ANSIBLE MANAGED BLOCK - OHMYZSH"
     mode: "0644"
   notify: Source shell_config
+
+- name: Add tmux config
+  ansible.builtin.include_role:
+    name: tmux_config
+
+- name: Install TPM (Tmux Plugin Manager)
+  ansible.builtin.include_role:
+    name: tmux_tpm

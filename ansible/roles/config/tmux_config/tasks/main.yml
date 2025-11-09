@@ -1,0 +1,7 @@
+- name: Add tmux config
+  ansible.builtin.include_role:
+    name: add_dotfiles_from_repo
+  vars:
+    add_dotfiles_from_repo_dotfile_repo: https://github.com/CookieGigi/tmux_config.git
+    add_dotfiles_from_repo_dotfile_name: tmux
+    add_dotfiles_from_repo_dotfile_repo_dir: dotfiles

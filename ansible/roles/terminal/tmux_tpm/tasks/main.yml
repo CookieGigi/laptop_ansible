@@ -1,0 +1,17 @@
+---
+- name: Ensure .tmux/plugins directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.tmux/plugins"
+    state: directory
+    mode: "0755"
+
+- name: Clone TPM (Tmux Plugin Manager) repository
+  ansible.builtin.git:
+    repo: "{{ tmux_tpm_repo_url }}"
+    dest: "{{ tmux_tpm_install_path }}"
+    version: master
+    update: true
+
+- name: Display TPM installation status
+  ansible.builtin.debug:
+    msg: "TPM installed at {{ tmux_tpm_install_path }}"
