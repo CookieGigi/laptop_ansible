@@ -15,22 +15,23 @@
     - zsh
     - lazygit
     - neovim
+    # CLI Tools
+    - ripgrep
+    - fd
+    - fzf
+    - zoxide
+    - bat
+    - eza
+    - gh
+    - jq
+    - yq
+    - shellcheck
+    - tree
+
     - role: add_alias
       vars:
         add_alias_alias_name: "vi"
         add_alias_alias_cmd: "nvim"
-    - role: add_alias
-      vars:
-        add_alias_alias_name: "ls"
-        add_alias_alias_cmd: "eza --icons --group-directories-first"
-    - role: add_alias
-      vars:
-        add_alias_alias_name: "ll"
-        add_alias_alias_cmd: "eza -la --icons --group-directories-first --git"
-    - role: add_alias
-      vars:
-        add_alias_alias_name: "lt"
-        add_alias_alias_cmd: "eza --tree --icons --group-directories-first"
     - netstat
     - jetbrains_nerd_font
     - alacritty

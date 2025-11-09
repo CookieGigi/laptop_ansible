@@ -15,18 +15,6 @@
     - lazygit
     - opencode
 
-    # CLI Tools
-    - ripgrep
-    - fd
-    - fzf
-    - bat
-    - eza
-    - gh
-    - jq
-    - yq
-    - shellcheck
-    - tree
-
     # Linters
     - ansible-lint
     - markdownlint-cli
