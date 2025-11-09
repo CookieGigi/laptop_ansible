@@ -12,7 +12,15 @@ features and better performance.
 
 ## Configuration
 
-eza is configured through command-line flags or shell aliases in your `.zshrc` or `.bashrc`.
+eza is configured through shell aliases that are automatically added to your `.zshrc` by the `add_alias` role.
+
+### Configured Aliases
+
+The following aliases are set up in `ansible/playbooks/basic.yml`:
+
+- `ls` → `eza --icons --group-directories-first`
+- `ll` → `eza -la --icons --group-directories-first --git`
+- `lt` → `eza --tree --icons --group-directories-first`
 
 ## Usage
 
@@ -25,8 +33,8 @@ eza is used for listing directory contents with enhanced visualization. Common c
 
 ## Variables
 
-| Variable | Description |
-|----------|-------------|
+| Variable       | Description                                     |
+| -------------- | ----------------------------------------------- |
 | `nix_packages` | List of Nix packages to install (`nixpkgs#eza`) |
 
 ## Dependencies
