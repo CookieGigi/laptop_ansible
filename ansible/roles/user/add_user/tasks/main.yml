@@ -1,4 +1,11 @@
 ---
+- name: Check if user exists
+  ansible.builtin.getent:
+    database: passwd
+    key: "{{ add_user_username }}"
+    fail_key: false
+  register: user_exists
+
 - name: Create user
   become: true
   ansible.builtin.user:
@@ -7,3 +14,4 @@
     shell: /bin/bash
     groups: "{{ add_user_usergroups }}"
     append: true
+  when: user_exists.ansible_facts.getent_passwd[add_user_username] is not defined
