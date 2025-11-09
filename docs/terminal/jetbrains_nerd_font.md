@@ -2,7 +2,8 @@
 
 ## Overview
 
-This role installs the JetBrainsMono Nerd Font, which includes programming ligatures and icon glyphs for enhanced terminal and editor experience.
+This role installs the JetBrainsMono Nerd Font, which includes programming ligatures and icon glyphs for
+enhanced terminal and editor experience.
 
 ## Features
 

@@ -2,7 +2,8 @@
 
 ## Overview
 
-TPM (Tmux Plugin Manager) is a plugin manager for tmux that allows you to easily install, update, and manage tmux plugins. It simplifies the process of extending tmux functionality through plugins.
+TPM (Tmux Plugin Manager) is a plugin manager for tmux that allows you to easily install, update, and
+manage tmux plugins. It simplifies the process of extending tmux functionality through plugins.
 
 ## Installation
 
