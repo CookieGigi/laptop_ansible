@@ -20,5 +20,7 @@
         add_alias_alias_name: "vi"
         add_alias_alias_cmd: "nvim"
     - netstat
+    - jetbrains_nerd_font
     - alacritty
     - role: tmux
+    - role: tmux_catppuccin

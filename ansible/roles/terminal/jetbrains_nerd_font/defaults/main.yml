@@ -1,0 +1,4 @@
+---
+jetbrains_nerd_font_version: "v3.1.1"
+jetbrains_nerd_font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ jetbrains_nerd_font_version }}/JetBrainsMono.zip"
+jetbrains_nerd_font_install_dir: "{{ ansible_env.HOME }}/.local/share/fonts"
