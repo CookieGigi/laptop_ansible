@@ -1,0 +1,21 @@
+---
+- name: Ensure tmux plugins directory exists
+  ansible.builtin.file:
+    path: "{{ tmux_catppuccin_install_path | dirname }}"
+    state: directory
+    mode: "0755"
+
+- name: Clone Catppuccin tmux repository
+  ansible.builtin.git:
+    repo: "{{ tmux_catppuccin_repo_url }}"
+    dest: "{{ tmux_catppuccin_install_path }}"
+    version: "{{ tmux_catppuccin_version }}"
+    update: true
+
+- name: Display Catppuccin installation status
+  ansible.builtin.debug:
+    msg: "Catppuccin for tmux installed at {{ tmux_catppuccin_install_path }}"
+
+- name: Remind user to reload tmux configuration
+  ansible.builtin.debug:
+    msg: "To apply Catppuccin theme, reload tmux with: tmux source ~/.tmux.conf"
