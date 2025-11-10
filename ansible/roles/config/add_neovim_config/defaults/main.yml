@@ -1,0 +1,14 @@
+---
+# Path to Neovim configuration directory (actual location)
+add_neovim_config_path: ~/.config/nvim
+
+# NVIM_APPNAME value (relative to ~/.config/)
+# Leave empty to use default nvim config
+add_neovim_config_appname: ""
+
+# Neovim configuration repository URL (optional)
+# Leave empty to skip cloning, or set to your actual repo URL
+add_neovim_config_repo: ""
+
+# Alias for launching Neovim
+add_neovim_config_alias: vim

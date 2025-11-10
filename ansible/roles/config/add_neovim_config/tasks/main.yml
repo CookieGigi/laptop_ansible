@@ -1,0 +1,41 @@
+---
+- name: Ensure Neovim config directory exists
+  ansible.builtin.file:
+    path: "{{ add_neovim_config_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Clone or update Neovim configuration repository
+  ansible.builtin.git:
+    repo: "{{ add_neovim_config_repo }}"
+    dest: "{{ add_neovim_config_path }}"
+    update: true
+    version: main
+    force: true
+  when:
+    - add_neovim_config_repo is defined
+    - add_neovim_config_repo != ""
+    - not add_neovim_config_repo is match(".*yourusername.*")
+
+- name: Create symlink in ~/.config/ if appname is different from path
+  ansible.builtin.file:
+    src: "{{ add_neovim_config_path }}"
+    dest: "~/.config/{{ add_neovim_config_appname }}"
+    state: link
+    force: true
+  when:
+    - add_neovim_config_appname is defined
+    - add_neovim_config_appname != ""
+    - add_neovim_config_path != "~/.config/" ~ add_neovim_config_appname
+
+- name: Add Neovim alias to shell configuration
+  ansible.builtin.include_role:
+    name: add_alias
+  vars:
+    add_alias_alias_name: "{{ add_neovim_config_alias }}"
+    add_alias_alias_cmd: "NVIM_APPNAME={{ add_neovim_config_appname }} nvim"
+  when:
+    - add_neovim_config_alias is defined
+    - add_neovim_config_alias != ""
+    - add_neovim_config_appname is defined
+    - add_neovim_config_appname != ""
