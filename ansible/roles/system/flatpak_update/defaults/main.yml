@@ -1,0 +1,5 @@
+---
+system_flatpak_update_packages: []
+system_flatpak_update_scope: user
+system_flatpak_update_scope_flag: "{{ '--user' if system_flatpak_update_scope == 'user' else '' }}"
+system_flatpak_update_verbose: true

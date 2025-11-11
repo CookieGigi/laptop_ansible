@@ -1,0 +1,4 @@
+---
+system_health_check_disk_threshold: 85
+system_health_check_services: []
+system_health_check_generate_report: false

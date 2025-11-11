@@ -1,3 +1,12 @@
 shell_config: "{{ ansible_env.HOME }}/.zshrc"
 nix_profil_path: "{{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh"
 dotfiles_path: "{{ ansible_env.HOME }}/dotfiles"
+
+# Daily update configuration
+daily_flatpak_packages:
+  - org.mozilla.firefox
+  - io.gitlab.librewolf-community
+
+daily_flatpak_scope: user
+daily_apt_enabled: true
+daily_nvidia_enabled: true

@@ -1,0 +1,60 @@
+---
+- name: Check if Flatpak is installed
+  ansible.builtin.command: which flatpak
+  register: flatpak_check
+  changed_when: false
+  failed_when: false
+
+- name: Skip Flatpak updates if not installed
+  ansible.builtin.debug:
+    msg: "Flatpak not installed, skipping Flatpak updates"
+  when: flatpak_check.rc != 0
+
+- name: Update specified Flatpak packages
+  when:
+    - flatpak_check.rc == 0
+    - system_flatpak_update_packages | length > 0
+  block:
+    - name: Update each Flatpak package
+      ansible.builtin.command: >
+        flatpak update {{ system_flatpak_update_scope_flag }} {{ item }} -y
+      loop: "{{ system_flatpak_update_packages }}"
+      register: flatpak_update_results
+      changed_when: "'Nothing to do' not in flatpak_update_results.stdout"
+      failed_when: false
+
+    - name: Collect update results
+      ansible.builtin.set_fact:
+        flatpak_updated: "{{ flatpak_update_results.results | selectattr('changed', 'equalto', true) | map(attribute='item') | list }}"
+        flatpak_skipped: "{{ flatpak_update_results.results | rejectattr('changed', 'equalto', true) | map(attribute='item') | list }}"
+
+    - name: Display updated packages
+      ansible.builtin.debug:
+        msg:
+          - "=== Flatpak Update Summary ==="
+          - "Updated ({{ flatpak_updated | length }}): {{ flatpak_updated | join(', ') if flatpak_updated | length > 0 else 'None' }}"
+          - "Already up-to-date ({{ flatpak_skipped | length }}): {{ flatpak_skipped | join(', ') if flatpak_skipped | length > 0 else 'None' }}"
+      when: system_flatpak_update_verbose
+
+    - name: Get current versions of updated packages
+      ansible.builtin.shell:
+        cmd: |
+          set -o pipefail
+          flatpak list --app --columns=application,version | grep -F "{{ item }}"
+        executable: /bin/bash
+      loop: "{{ system_flatpak_update_packages }}"
+      register: package_versions
+      changed_when: false
+      failed_when: false
+
+    - name: Display package versions
+      ansible.builtin.debug:
+        msg: "{{ package_versions.results | map(attribute='stdout') | select | list }}"
+      when:
+        - system_flatpak_update_verbose
+        - package_versions.results | length > 0
+
+- name: Warn if no packages configured
+  ansible.builtin.debug:
+    msg: "No Flatpak packages configured for daily updates. Add packages to 'system_flatpak_update_packages' variable."
+  when: system_flatpak_update_packages | length == 0

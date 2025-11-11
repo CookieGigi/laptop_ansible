@@ -1,0 +1,9 @@
+---
+# Use playbook_dir to get the playbook directory, then go up one level to ansible root
+daily_update_setup_ansible_path: "{{ playbook_dir | dirname }}"
+daily_update_setup_inventory: inventory.ini
+daily_update_setup_playbook: playbooks/update-daily.yml
+daily_update_setup_service_name: ansible-daily-update
+daily_update_setup_time: "03:00:00"
+daily_update_setup_randomize_delay: "30min"
+daily_update_setup_timeout: "30min"

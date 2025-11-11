@@ -1,0 +1,33 @@
+---
+- name: Update APT package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 0
+
+- name: Perform APT dist-upgrade
+  ansible.builtin.apt:
+    upgrade: dist
+    autoremove: "{{ system_apt_update_autoremove }}"
+    autoclean: "{{ system_apt_update_autoclean }}"
+  register: apt_upgrade
+
+- name: Remove unused packages
+  ansible.builtin.apt:
+    autoremove: true
+    purge: true
+  when: system_apt_update_purge_unused
+
+- name: Check for reboot requirement
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_check
+
+- name: Set reboot fact
+  ansible.builtin.set_fact:
+    system_needs_reboot: "{{ reboot_check.stat.exists }}"
+
+- name: Display update summary
+  ansible.builtin.debug:
+    msg:
+      - "APT packages: {{ 'Updated' if apt_upgrade.changed else 'Already up-to-date' }}"
+      - "Reboot required: {{ 'YES' if system_needs_reboot else 'No' }}"

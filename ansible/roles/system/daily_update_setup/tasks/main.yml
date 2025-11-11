@@ -1,0 +1,97 @@
+---
+- name: Display configuration
+  ansible.builtin.debug:
+    msg:
+      - "Ansible directory: {{ daily_update_setup_ansible_path }}"
+      - "Update playbook: {{ daily_update_setup_playbook }}"
+      - "Inventory: {{ daily_update_setup_inventory }}"
+      - "Service name: {{ daily_update_setup_service_name }}"
+      - "Schedule: Daily at {{ daily_update_setup_time }}"
+
+- name: Verify update playbook exists
+  ansible.builtin.stat:
+    path: "{{ daily_update_setup_ansible_path }}/{{ daily_update_setup_playbook }}"
+  register: playbook_check
+
+- name: Fail if update playbook does not exist
+  ansible.builtin.fail:
+    msg: |
+      Update playbook not found: {{ daily_update_setup_ansible_path }}/{{ daily_update_setup_playbook }}
+      Make sure you're running this from the ansible directory.
+  when: not playbook_check.stat.exists
+
+- name: Verify inventory file exists
+  ansible.builtin.stat:
+    path: "{{ daily_update_setup_ansible_path }}/{{ daily_update_setup_inventory }}"
+  register: inventory_check
+
+- name: Fail if inventory does not exist
+  ansible.builtin.fail:
+    msg: |
+      Inventory file not found: {{ daily_update_setup_ansible_path }}/{{ daily_update_setup_inventory }}
+      Create it by copying inventory.ini.example
+  when: not inventory_check.stat.exists
+
+- name: Deploy systemd service file
+  ansible.builtin.template:
+    src: ansible-daily-update.service.j2
+    dest: /etc/systemd/system/{{ daily_update_setup_service_name }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload systemd daemon
+    - Restart daily update timer
+
+- name: Deploy systemd timer file
+  ansible.builtin.template:
+    src: ansible-daily-update.timer.j2
+    dest: /etc/systemd/system/{{ daily_update_setup_service_name }}.timer
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload systemd daemon
+    - Restart daily update timer
+
+- name: Flush handlers to reload systemd
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable and start systemd timer
+  ansible.builtin.systemd:
+    name: "{{ daily_update_setup_service_name }}.timer"
+    enabled: true
+    state: started
+    daemon_reload: true
+
+- name: Get timer status
+  ansible.builtin.command: systemctl status {{ daily_update_setup_service_name }}.timer
+  register: timer_status
+  changed_when: false
+  failed_when: false
+
+- name: Display timer status
+  ansible.builtin.debug:
+    msg: "{{ timer_status.stdout_lines }}"
+
+- name: Get next scheduled run
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      systemctl list-timers {{ daily_update_setup_service_name }}.timer --no-pager | grep {{ daily_update_setup_service_name }}
+    executable: /bin/bash
+  register: next_run
+  changed_when: false
+  failed_when: false
+
+- name: Display next scheduled run
+  ansible.builtin.debug:
+    msg:
+      - "=== Daily Update Timer Setup Complete ==="
+      - "Service: {{ daily_update_setup_service_name }}"
+      - "Schedule: Daily at {{ daily_update_setup_time }}"
+      - ""
+      - "{{ next_run.stdout_lines }}"
+      - ""
+      - "View logs: sudo journalctl -u {{ daily_update_setup_service_name }}.service"
+      - "Timer status: systemctl status {{ daily_update_setup_service_name }}.timer"

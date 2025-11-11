@@ -1,0 +1,39 @@
+---
+- name: Setup Daily Automated Updates with Systemd
+  hosts: localhost
+  become: true
+  tags: [setup, systemd]
+
+  tasks:
+    - name: Display setup information
+      ansible.builtin.debug:
+        msg:
+          - "=== Setting Up Daily Automated Updates ==="
+          - "This will configure systemd to run daily updates automatically"
+          - ""
+          - "What will be updated:"
+          - "  - System packages (APT)"
+          - "  - NVIDIA drivers"
+          - "  - Flatpak apps: {{ daily_flatpak_packages | default(['org.mozilla.firefox', 'io.gitlab.librewolf-community']) }}"
+          - ""
+          - "Schedule: Daily at 03:00 AM (with 30min randomization)"
+
+    - name: Include daily_update_setup role
+      ansible.builtin.include_role:
+        name: daily_update_setup
+
+    - name: Final instructions
+      ansible.builtin.debug:
+        msg:
+          - "=== Setup Complete! ==="
+          - ""
+          - "Daily updates are now configured and enabled."
+          - ""
+          - "Useful commands:"
+          - "  View timer status:    systemctl status ansible-daily-update.timer"
+          - "  View next runs:       systemctl list-timers ansible-daily-update.timer"
+          - "  View service logs:    sudo journalctl -u ansible-daily-update.service"
+          - "  Trigger manual run:   sudo systemctl start ansible-daily-update.service"
+          - "  Disable auto-updates: sudo systemctl disable ansible-daily-update.timer"
+          - ""
+          - "To modify what gets updated, edit: ansible/group_vars/all.yml"

@@ -1,0 +1,100 @@
+---
+- name: Daily Automated Updates
+  hosts: localhost
+  tags: [daily-update]
+
+  vars:
+    flatpak_packages_to_update: "{{ daily_flatpak_packages | default([]) }}"
+    flatpak_scope: "{{ daily_flatpak_scope | default('user') }}"
+
+  tasks:
+    # ============================================
+    # SYSTEM-LEVEL UPDATES (APT)
+    # ============================================
+    - name: System package updates
+      when: daily_apt_enabled | default(true)
+      become: true
+      tags: [system, apt]
+      block:
+        - name: Include apt_update role
+          ansible.builtin.include_role:
+            name: apt_update
+
+    # ============================================
+    # NVIDIA DRIVER UPDATES
+    # ============================================
+    - name: Update NVIDIA drivers
+      when: daily_nvidia_enabled | default(true)
+      become: true
+      tags: [system, nvidia, drivers]
+      block:
+        - name: Update NVIDIA packages
+          ansible.builtin.apt:
+            name:
+              - nvidia-driver
+              - nvidia-kernel-dkms
+            state: latest # noqa package-latest
+          register: nvidia_update
+          ignore_errors: true
+
+        - name: Log NVIDIA update status
+          ansible.builtin.debug:
+            msg: "NVIDIA drivers: {{ 'Updated' if nvidia_update.changed else 'Already up-to-date' }}"
+
+    # ============================================
+    # REBOOT CHECK
+    # ============================================
+    - name: Check for reboot requirement
+      become: true
+      tags: [system, reboot-check]
+      block:
+        - name: Check if reboot required
+          ansible.builtin.stat:
+            path: /var/run/reboot-required
+          register: reboot_required
+
+        - name: Display reboot warning
+          ansible.builtin.debug:
+            msg: "SYSTEM REBOOT REQUIRED to complete updates"
+          when: reboot_required.stat.exists
+
+        - name: Log reboot requirement to file
+          ansible.builtin.copy:
+            content: |
+              Reboot required after updates on {{ ansible_date_time.iso8601 }}
+              Run: sudo reboot
+            dest: /tmp/ansible-reboot-required.txt
+            mode: "0644"
+          when: reboot_required.stat.exists
+
+    # ============================================
+    # FLATPAK UPDATES (CONFIGURABLE)
+    # ============================================
+    - name: Update configured Flatpak packages
+      tags: [flatpak, browsers]
+      block:
+        - name: Include flatpak_update role
+          ansible.builtin.include_role:
+            name: flatpak_update
+          vars:
+            system_flatpak_update_packages: "{{ flatpak_packages_to_update }}" # noqa var-naming[no-role-prefix]
+            system_flatpak_update_scope: "{{ flatpak_scope }}" # noqa var-naming[no-role-prefix]
+            system_flatpak_update_verbose: true # noqa var-naming[no-role-prefix]
+
+    # ============================================
+    # HEALTH CHECK
+    # ============================================
+    - name: Post-update health check
+      tags: [health-check]
+      block:
+        - name: Include system_health_check role
+          ansible.builtin.include_role:
+            name: system_health_check
+
+        - name: Generate final update summary
+          ansible.builtin.debug:
+            msg:
+              - "=== Daily Update Complete ==="
+              - "Date: {{ ansible_date_time.iso8601 }}"
+              - "Flatpak packages configured: {{ flatpak_packages_to_update | length }}"
+              - "Reboot required: {{ 'YES' if reboot_required.stat.exists else 'No' }}"

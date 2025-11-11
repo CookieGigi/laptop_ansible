@@ -1,0 +1,5 @@
+---
+system_apt_update_autoremove: true
+system_apt_update_autoclean: true
+system_apt_update_purge_unused: false
+system_apt_update_upgrade_type: dist

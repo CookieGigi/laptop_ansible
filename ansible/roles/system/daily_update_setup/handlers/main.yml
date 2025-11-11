@@ -1,0 +1,10 @@
+---
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart daily update timer
+  ansible.builtin.systemd:
+    name: "{{ daily_update_setup_service_name }}.timer"
+    state: restarted
+  when: ansible_service_mgr == "systemd"

@@ -1,0 +1,16 @@
+[Unit]
+Description=Daily Update Timer
+Requires={{ daily_update_setup_service_name }}.service
+
+[Timer]
+# Run daily at configured time
+OnCalendar=*-*-* {{ daily_update_setup_time }}
+# Randomize start time
+RandomizedDelaySec={{ daily_update_setup_randomize_delay }}
+# If missed, run at next opportunity
+Persistent=true
+# Wait 5 minutes after boot before first run
+OnBootSec=5min
+
+[Install]
+WantedBy=timers.target

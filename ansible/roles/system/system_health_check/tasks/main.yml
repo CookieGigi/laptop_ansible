@@ -1,0 +1,33 @@
+---
+- name: Check disk space after updates
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      df -h / | tail -1 | awk '{print $5}' | sed 's/%//'
+    executable: /bin/bash
+  register: disk_usage
+  changed_when: false
+
+- name: Warn if disk space low
+  ansible.builtin.debug:
+    msg: "WARNING: Disk usage at {{ disk_usage.stdout }}%"
+  when: disk_usage.stdout | int > 85
+
+- name: Check for broken packages
+  ansible.builtin.command: dpkg --audit
+  register: dpkg_audit
+  changed_when: false
+  failed_when: false
+  become: true
+
+- name: Warn if broken packages found
+  ansible.builtin.debug:
+    msg: "WARNING: Broken packages detected. Run 'sudo dpkg --configure -a' to fix."
+  when: dpkg_audit.stdout != ""
+
+- name: Display health check summary
+  ansible.builtin.debug:
+    msg:
+      - "=== System Health Check ==="
+      - "Disk usage: {{ disk_usage.stdout }}%"
+      - "Broken packages: {{ 'Yes - needs attention' if dpkg_audit.stdout != '' else 'None' }}"

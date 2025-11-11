@@ -1,0 +1,17 @@
+[Unit]
+Description=Daily System and Browser Updates via Ansible
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory={{ daily_update_setup_ansible_path }}
+ExecStart=/usr/bin/ansible-playbook -i {{ daily_update_setup_inventory }} {{ daily_update_setup_playbook }}
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec={{ daily_update_setup_timeout }}
+
+# Security hardening
+PrivateTmp=yes
+NoNewPrivileges=yes
