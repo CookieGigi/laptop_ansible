@@ -33,3 +33,5 @@
     # Formatters
     - role: prettier
       tags: [formatter, dev]
+    - role: stylua
+      tags: [formatter, dev, lua]
