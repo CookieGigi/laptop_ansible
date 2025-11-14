@@ -40,3 +40,6 @@
     - role: luarocks
       tags: [package-manager, dev, lua]
 
+    # CLI Tools
+    - role: treesitter_cli
+      tags: [cli, dev, parser]
