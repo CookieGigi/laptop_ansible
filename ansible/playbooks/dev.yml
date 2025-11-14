@@ -31,10 +31,10 @@
       tags: [lsp, dev]
 
     # Formatters
-    - role: prettier
-      tags: [formatter, dev]
     - role: stylua
       tags: [formatter, dev, lua]
+    - role: biome
+      tags: [formatter, linter, dev]
 
     # Languages
     - role: lua

@@ -111,10 +111,11 @@ system_maintain/
 
 ### Code Formatting
 
-- **Prettier** (JavaScript, JSON, YAML, Markdown):
-  - Format file: `prettier --write <file>`
-  - Check formatting: `prettier --check <file>`
-  - Format all: `prettier --write "**/*.{js,json,yml,yaml,md}"`
+- **Biome** (JavaScript, TypeScript, JSON, JSX, CSS):
+  - Format file: `biome format --write <file>`
+  - Check formatting: `biome format <file>`
+  - Format all: `biome format --write .`
+  - Lint and format: `biome check --apply .`
 
 ### All Linters at Once
 
@@ -122,7 +123,8 @@ system_maintain/
   ```bash
   cd ansible && ansible-lint && cd .. && \
   markdownlint docs/**/*.md && \
-  find . -name "*.sh" -exec shellcheck {} +
+  find . -name "*.sh" -exec shellcheck {} + && \
+  biome check .
   ```
 
 ## Code Style Guidelines
@@ -159,7 +161,7 @@ These are automatically used by editors (Neovim, OpenCode) for code intelligence
 - **shellcheck**: Shell script static analysis
 - **hadolint**: Dockerfile linter
 - **markdownlint-cli**: Markdown style checking
-- **prettier**: Multi-language code formatter
+- **biome**: Fast formatter and linter for JavaScript, TypeScript, JSON, JSX, CSS
 
 ### CLI Tools
 

@@ -152,8 +152,8 @@ sudo journalctl -u ansible-daily-update.service --since today
 ### NOT Updated Daily
 
 - Other Flatpak apps (unless added to `daily_flatpak_packages`)
-- Nix packages (neovim, lazygit, ripgrep, etc.)
-- npm packages (prettier, markdownlint, etc.)
+- Nix packages (neovim, lazygit, ripgrep, biome, etc.)
+- npm packages (markdownlint, etc.)
 - Git submodules (oh-my-zsh, tmux plugins)
 
 ## Roles
