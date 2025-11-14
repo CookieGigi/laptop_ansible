@@ -35,3 +35,8 @@
       tags: [formatter, dev]
     - role: stylua
       tags: [formatter, dev, lua]
+
+    # Package Managers
+    - role: luarocks
+      tags: [package-manager, dev, lua]
+
