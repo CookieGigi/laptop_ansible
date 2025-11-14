@@ -1,0 +1,5 @@
+---
+- name: Install lua5.1
+  become: true
+  ansible.builtin.apt:
+    name: lua5.1

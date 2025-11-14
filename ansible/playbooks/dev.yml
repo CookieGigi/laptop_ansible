@@ -36,6 +36,10 @@
     - role: stylua
       tags: [formatter, dev, lua]
 
+    # Languages
+    - role: lua
+      tags: [language, dev, lua]
+
     # Package Managers
     - role: luarocks
       tags: [package-manager, dev, lua]
