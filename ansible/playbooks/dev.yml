@@ -15,7 +15,7 @@
     # Linters
     - role: ansible-lint
       tags: [linter, dev]
-    - role: markdownlint-cli
+    - role: vale
       tags: [linter, dev]
     - role: hadolint
       tags: [linter, dev, docker]
