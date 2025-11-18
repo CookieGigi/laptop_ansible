@@ -1,0 +1,6 @@
+---
+- name: Install prettier
+  ansible.builtin.include_role:
+    name: npm_install
+  vars:
+    npm_install_package: prettier

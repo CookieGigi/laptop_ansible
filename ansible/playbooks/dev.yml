@@ -35,6 +35,8 @@
       tags: [formatter, dev, lua]
     - role: biome
       tags: [formatter, linter, dev]
+    - role: prettier
+      tags: [formatter, dev]
 
     # Languages
     - role: lua
