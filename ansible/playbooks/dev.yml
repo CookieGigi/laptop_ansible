@@ -51,3 +51,5 @@
       tags: [cli, dev, parser]
     - role: glow
       tags: [cli, dev, markdown]
+    - role: mermaid_cli
+      tags: [cli, dev, diagram]

@@ -1,0 +1,6 @@
+---
+- name: Install @mermaid-js/mermaid-cli
+  ansible.builtin.include_role:
+    name: npm_install
+  vars:
+    npm_install_package: "@mermaid-js/mermaid-cli"
