@@ -49,3 +49,5 @@
     # CLI Tools
     - role: treesitter_cli
       tags: [cli, dev, parser]
+    - role: glow
+      tags: [cli, dev, markdown]
