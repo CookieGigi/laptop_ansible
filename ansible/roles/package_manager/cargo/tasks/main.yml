@@ -1,0 +1,57 @@
+---
+- name: Check if standalone cargo package is installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    nix profile list | grep -q "cargo"
+  args:
+    executable: /bin/bash
+  register: cargo_check
+  changed_when: false
+  failed_when: false
+
+- name: Remove standalone cargo package if present
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    nix profile remove cargo
+  args:
+    executable: /bin/bash
+  when: cargo_check.rc == 0
+  register: cargo_remove
+  changed_when: cargo_remove.rc == 0
+
+- name: Install rustup via Nix
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - nixpkgs#rustup
+
+- name: Check if Rust nightly is already installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    rustup toolchain list | grep -q nightly
+  args:
+    executable: /bin/bash
+  register: nightly_check
+  changed_when: false
+  failed_when: false
+
+- name: Install Rust nightly toolchain
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup toolchain install nightly
+  args:
+    executable: /bin/bash
+  when: nightly_check.rc != 0
+  register: nightly_install
+  changed_when: nightly_install.rc == 0
+
+- name: Set Rust nightly as default toolchain
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup default nightly
+  args:
+    executable: /bin/bash
+  changed_when: true

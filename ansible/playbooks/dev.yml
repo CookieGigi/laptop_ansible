@@ -45,6 +45,8 @@
     # Package Managers
     - role: luarocks
       tags: [package-manager, dev, lua]
+    - role: cargo
+      tags: [package-manager, dev, rust]
 
     # CLI Tools
     - role: treesitter_cli
