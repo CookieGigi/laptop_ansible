@@ -53,3 +53,5 @@
       tags: [cli, dev, markdown]
     - role: mermaid_cli
       tags: [cli, dev, diagram]
+    - role: sqlite3
+      tags: [cli, dev, database]
