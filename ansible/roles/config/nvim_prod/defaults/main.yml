@@ -1,0 +1,14 @@
+---
+# Neovim production configuration settings
+# Actual path where config files are stored
+nvim_prod_config_path: ~/.config/nvim
+
+# NVIM_APPNAME value (relative to ~/.config/)
+# Leave empty to use default nvim config
+nvim_prod_appname: ""
+
+# Alias for launching this Neovim config
+nvim_prod_alias: vi
+
+# Repository URL
+nvim_prod_repo: https://github.com/CookieGigi/neovim_config_base.git

@@ -6,3 +6,11 @@
   roles:
     - role: nvim_dev
       tags: [neovim, config, dev]
+
+- name: Install Neovim production configuration
+  hosts: localhost
+  tags: [neovim, config, prod]
+
+  roles:
+    - role: nvim_prod
+      tags: [neovim, config, prod]
