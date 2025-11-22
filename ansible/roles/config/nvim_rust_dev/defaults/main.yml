@@ -1,0 +1,13 @@
+---
+# Neovim Rust dev configuration settings
+# Actual path where config files are stored
+nvim_rust_dev_config_path: ~/Project/neovim/rust
+
+# NVIM_APPNAME value (relative to ~/.config/)
+nvim_rust_dev_appname: nvim_rust_dev
+
+# Alias for launching this Neovim config
+nvim_rust_dev_alias: nvim_rust_dev
+
+# Repository URL (leave empty to skip cloning)
+nvim_rust_dev_repo: ""

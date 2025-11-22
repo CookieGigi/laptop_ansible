@@ -1,0 +1,14 @@
+---
+- name: Install codelldb
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - nixpkgs#vscode-extensions.vadimcn.vscode-lldb
+
+- name: Add codelldb alias
+  ansible.builtin.include_role:
+    name: add_alias
+  vars:
+    add_alias_alias_name: "codelldb"
+    add_alias_alias_cmd: "{{ ansible_env.HOME }}/.nix-profile/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"

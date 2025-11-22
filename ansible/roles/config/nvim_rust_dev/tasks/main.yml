@@ -1,0 +1,9 @@
+---
+- name: Setup nvim_rust_dev configuration
+  ansible.builtin.include_role:
+    name: add_neovim_config
+  vars:
+    add_neovim_config_path: "{{ nvim_rust_dev_config_path }}"
+    add_neovim_config_appname: "{{ nvim_rust_dev_appname }}"
+    add_neovim_config_alias: "{{ nvim_rust_dev_alias }}"
+    add_neovim_config_repo: "{{ nvim_rust_dev_repo }}"

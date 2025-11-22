@@ -1,0 +1,21 @@
+---
+- name: Check if clippy component is installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    rustup component list | grep -q "clippy.*installed"
+  args:
+    executable: /bin/bash
+  register: clippy_check
+  changed_when: false
+  failed_when: false
+
+- name: Install clippy component via rustup
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup component add clippy
+  args:
+    executable: /bin/bash
+  when: clippy_check.rc != 0
+  register: clippy_install
+  changed_when: clippy_install.rc == 0
