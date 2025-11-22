@@ -1,0 +1,49 @@
+---
+- name: Ensure sqlite-dev is installed
+  ansible.builtin.include_role:
+    name: sqlite-dev
+
+- name: Ensure luarocks is installed
+  ansible.builtin.include_role:
+    name: luarocks
+
+- name: Find sqlite3.h location
+  ansible.builtin.shell: |
+    set -o pipefail
+    source "{{ nix_profil_path }}"
+    find ~/.nix-profile -name "sqlite3.h" | head -1 | xargs dirname
+  args:
+    executable: /bin/bash
+  register: sqlite_incdir_result
+  changed_when: false
+  failed_when: sqlite_incdir_result.stdout == ""
+
+- name: Find libsqlite3.so location
+  ansible.builtin.shell: |
+    set -o pipefail
+    source "{{ nix_profil_path }}"
+    find /nix/store -name "libsqlite3.so" 2>/dev/null | grep -v "connector" | head -1 | xargs dirname
+  args:
+    executable: /bin/bash
+  register: sqlite_libdir_result
+  changed_when: false
+  failed_when: sqlite_libdir_result.stdout == ""
+
+- name: Set SQLite paths
+  ansible.builtin.set_fact:
+    sqlite_include_dir: "{{ sqlite_incdir_result.stdout }}"
+    sqlite_lib_dir: "{{ sqlite_libdir_result.stdout }}"
+
+- name: Install luasql-sqlite3 via luarocks
+  ansible.builtin.shell: |
+    source "{{ nix_profil_path }}"
+    luarocks install --local luasql-sqlite3 \
+      SQLITE_INCDIR="{{ sqlite_include_dir }}" \
+      SQLITE_LIBDIR="{{ sqlite_lib_dir }}"
+  args:
+    executable: /bin/bash
+  register: luarocks_install_result
+  changed_when: "'is now installed' in luarocks_install_result.stdout"
+  failed_when:
+    - luarocks_install_result.rc != 0
+    - "'already installed' not in luarocks_install_result.stderr"
