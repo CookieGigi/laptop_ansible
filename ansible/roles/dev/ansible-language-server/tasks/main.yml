@@ -1,0 +1,6 @@
+---
+- name: Install @ansible/ansible-language-server
+  ansible.builtin.include_role:
+    name: npm_install
+  vars:
+    npm_install_package: "@ansible/ansible-language-server"

@@ -1,0 +1,9 @@
+---
+- name: Install self-hosting tools
+  hosts: localhost
+  tags: [selfhosting, self-hosting]
+
+  roles:
+    # Development tools for self-hosting
+    - role: ansible-language-server
+      tags: [lsp, dev, ansible]

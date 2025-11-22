@@ -5,5 +5,11 @@
 			"command": ["biome", "format", "--write", "$FILE"],
 			"extensions": [".json", ".js", ".ts", ".jsx", ".tsx"]
 		}
+	},
+	"lsp": {
+		"ansible": {
+			"command": ["/home/cookiegigi/.nvm/versions/node/v22.21.0/bin/ansible-language-server", "--stdio"],
+			"extensions": [".yml", ".yaml"]
+		}
 	}
 }

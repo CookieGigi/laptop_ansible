@@ -19,6 +19,7 @@ profile: production
 skip_list:
   - yaml[line-length]  # Allow longer lines in YAML (handled by prettier)
   - role-name[path]    # We use custom role naming with categories
+  - role-name          # Allow hyphens in role names (project convention)
 
 # Warn only for these rules instead of failing
 warn_list:
