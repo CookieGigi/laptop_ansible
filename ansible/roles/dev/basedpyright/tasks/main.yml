@@ -1,0 +1,6 @@
+---
+- name: Install basedpyright via npm
+  ansible.builtin.include_role:
+    name: npm_install
+  vars:
+    npm_install_package: "basedpyright"

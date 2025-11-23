@@ -23,6 +23,10 @@
       tags: [linter, dev, docker]
     - role: clippy
       tags: [linter, dev, rust]
+    - role: ruff
+      tags: [linter, formatter, dev, python]
+    - role: mypy
+      tags: [linter, type-checker, dev, python]
 
     # Language Servers
     - role: yaml-language-server
@@ -35,6 +39,8 @@
       tags: [lsp, dev]
     - role: rust-analyzer
       tags: [lsp, dev, rust]
+    - role: basedpyright
+      tags: [lsp, dev, python]
 
     # Formatters
     - role: stylua
@@ -73,3 +79,5 @@
     # Debuggers
     - role: codelldb
       tags: [debugger, dev, rust]
+    - role: debugpy
+      tags: [debugger, dev, python]
