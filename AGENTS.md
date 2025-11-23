@@ -78,15 +78,35 @@ system_maintain/
 ## Build/Lint/Test Commands
 
 > **IMPORTANT**: After creating or modifying Ansible roles, ALWAYS run linting to ensure code quality!
-> **CRITICAL**: NEVER run playbooks automatically! Only perform syntax checks and linting.
+> 
+> **🚨 CRITICAL - PLAYBOOK EXECUTION POLICY 🚨**
+> 
+> **ABSOLUTELY NEVER RUN ANSIBLE PLAYBOOKS AUTOMATICALLY!**
+> 
+> This means:
+> - ❌ NEVER use `ansible-playbook` command to execute playbooks
+> - ❌ NEVER run playbooks with ANY tags (--tags)
+> - ❌ NEVER run playbooks in "test" mode or "check" mode to "verify" they work
+> - ❌ NEVER execute roles directly
+> - ❌ DO NOT run playbooks even if the user says "install" or "setup" - CREATE THE ROLE ONLY
+> 
+> What you CAN and SHOULD do:
+> - ✅ Create roles and playbook entries
+> - ✅ Run `ansible-lint` to verify code quality
+> - ✅ Run `ansible-playbook --syntax-check` to verify YAML syntax
+> - ✅ Run `ansible-playbook --list-tasks` to show what would run
+> - ✅ Provide the user with the EXACT command they need to run manually
+> 
+> The user will execute playbooks themselves when they are ready.
 
 ### Ansible
 
 - **Ansible Lint**: `cd ansible && ansible-lint` (ALWAYS run after creating/modifying roles)
 - **Lint Specific Role**: `cd ansible && ansible-lint roles/<category>/<role_name>/`
 - **Syntax Check**: `cd ansible && ansible-playbook --syntax-check playbooks/<playbook>.yml`
-- **Run Playbook**: NEVER run automatically - user must execute manually
-- **Test Role**: NEVER run automatically - user must execute manually
+- **List Tasks**: `cd ansible && ansible-playbook --list-tasks playbooks/<playbook>.yml --tags <tag>`
+- **Run Playbook**: ❌ FORBIDDEN - User must execute manually
+- **Test Role**: ❌ FORBIDDEN - User must execute manually
 
 ### Shell Scripts
 

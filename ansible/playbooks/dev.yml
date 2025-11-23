@@ -11,6 +11,8 @@
       tags: [git, dev]
     - role: opencode
       tags: [editor, dev]
+    - role: claude-code
+      tags: [editor, dev, ai]
 
     # Linters
     - role: ansible-lint
@@ -19,6 +21,8 @@
       tags: [linter, dev]
     - role: hadolint
       tags: [linter, dev, docker]
+    - role: clippy
+      tags: [linter, dev, rust]
 
     # Language Servers
     - role: yaml-language-server
@@ -29,6 +33,8 @@
       tags: [lsp, dev]
     - role: bash-language-server
       tags: [lsp, dev]
+    - role: rust-analyzer
+      tags: [lsp, dev, rust]
 
     # Formatters
     - role: stylua
@@ -37,10 +43,14 @@
       tags: [formatter, linter, dev]
     - role: prettier
       tags: [formatter, dev]
+    - role: rustfmt
+      tags: [formatter, dev, rust]
 
     # Languages
     - role: lua
       tags: [language, dev, lua]
+    - role: rustc
+      tags: [language, dev, rust]
 
     # Package Managers
     - role: luarocks
@@ -57,3 +67,7 @@
       tags: [cli, dev, diagram]
     - role: sqlite3
       tags: [cli, dev, database]
+
+    # Debuggers
+    - role: codelldb
+      tags: [debugger, dev, rust]
