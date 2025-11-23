@@ -57,6 +57,8 @@
       tags: [package-manager, dev, lua]
     - role: cargo
       tags: [package-manager, dev, rust]
+    - role: uv
+      tags: [package-manager, dev, python]
 
     # CLI Tools
     - role: treesitter_cli
