@@ -1,0 +1,21 @@
+---
+- name: Check if wasm32-wasip1 target is installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    rustup target list | grep -q "wasm32-wasip1.*installed"
+  args:
+    executable: /bin/bash
+  register: wasm32_wasip1_check
+  changed_when: false
+  failed_when: false
+
+- name: Install wasm32-wasip1 target via rustup
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup target add wasm32-wasip1
+  args:
+    executable: /bin/bash
+  when: wasm32_wasip1_check.rc != 0
+  register: wasm32_wasip1_install
+  changed_when: wasm32_wasip1_install.rc == 0

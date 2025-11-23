@@ -1,0 +1,21 @@
+---
+- name: Check if rustc is installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    rustup component list | grep -q "rustc.*installed"
+  args:
+    executable: /bin/bash
+  register: rustc_check
+  changed_when: false
+  failed_when: false
+
+- name: Install rustc component via rustup
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup component add rustc
+  args:
+    executable: /bin/bash
+  when: rustc_check.rc != 0
+  register: rustc_install
+  changed_when: rustc_install.rc == 0

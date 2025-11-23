@@ -1,0 +1,21 @@
+---
+- name: Check if rustfmt component is installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    source {{ nix_profil_path }}
+    rustup component list | grep -q "rustfmt.*installed"
+  args:
+    executable: /bin/bash
+  register: rustfmt_check
+  changed_when: false
+  failed_when: false
+
+- name: Install rustfmt component via rustup
+  ansible.builtin.shell: |
+    source {{ nix_profil_path }}
+    rustup component add rustfmt
+  args:
+    executable: /bin/bash
+  when: rustfmt_check.rc != 0
+  register: rustfmt_install
+  changed_when: rustfmt_install.rc == 0
