@@ -35,6 +35,8 @@
       tags: [cli-tools, linter]
     - role: tree
       tags: [cli-tools, navigation]
+    - role: mkpasswd
+      tags: [cli-tools, password, security]
 
     - role: add_alias
       vars:
