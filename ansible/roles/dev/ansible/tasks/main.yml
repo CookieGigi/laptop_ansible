@@ -1,0 +1,10 @@
+---
+- name: Install Ansible with Kubernetes and OpenShift support via pipx
+  ansible.builtin.include_role:
+    name: pipx_install
+  vars:
+    pipx_install_package: "ansible"
+    pipx_install_package_spec: "ansible{{ ansible_package_version }}"
+    pipx_install_inject_packages:
+      - "kubernetes{{ ansible_kubernetes_version }}"
+      - "openshift{{ ansible_openshift_version }}"

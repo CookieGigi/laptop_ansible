@@ -1,0 +1,4 @@
+---
+pipx_install_package: ""
+pipx_install_package_spec: ""
+pipx_install_inject_packages: []

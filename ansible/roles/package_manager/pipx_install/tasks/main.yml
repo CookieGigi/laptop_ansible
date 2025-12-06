@@ -1,0 +1,52 @@
+---
+- name: Check if pipx package is already installed
+  ansible.builtin.shell: |
+    source "{{ nix_profil_path }}"
+    pipx list --short
+  args:
+    executable: /bin/bash
+  register: pipx_list_result
+  changed_when: false
+  failed_when: false
+
+- name: Install package via pipx
+  ansible.builtin.shell: |
+    source "{{ nix_profil_path }}"
+    pipx install "{{ pipx_install_package_spec | default(pipx_install_package) }}"
+  args:
+    executable: /bin/bash
+  when: pipx_install_package not in pipx_list_result.stdout
+  register: pipx_install_result
+  changed_when: pipx_install_result.rc == 0
+
+- name: Check currently injected packages
+  ansible.builtin.shell: |
+    set -o pipefail
+    source "{{ nix_profil_path }}"
+    pipx list --json | python3 -c "
+    import sys, json
+    data = json.load(sys.stdin)
+    venvs = data.get('venvs', {})
+    if '{{ pipx_install_package }}' in venvs:
+        injected = venvs['{{ pipx_install_package }}'].get('metadata', {}).get('injected_packages', {})
+        print('\n'.join(injected.keys()))
+    "
+  args:
+    executable: /bin/bash
+  register: pipx_injected_packages
+  changed_when: false
+  failed_when: false
+  when: pipx_install_inject_packages | length > 0
+
+- name: Inject additional packages into pipx environment
+  ansible.builtin.shell: |
+    source "{{ nix_profil_path }}"
+    pipx inject "{{ pipx_install_package }}" "{{ item }}"
+  args:
+    executable: /bin/bash
+  loop: "{{ pipx_install_inject_packages }}"
+  when:
+    - pipx_install_inject_packages | length > 0
+    - item.split('>=')[0].split('==')[0] not in pipx_injected_packages.stdout
+  register: pipx_inject_result
+  changed_when: pipx_inject_result.rc == 0

@@ -1,0 +1,14 @@
+---
+- name: Install pipx via Nix
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - nixpkgs#pipx
+
+- name: Ensure pipx is initialized
+  ansible.builtin.command: pipx ensurepath
+  changed_when: false
+  failed_when: false
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.nix-profile/bin:{{ ansible_env.PATH }}"

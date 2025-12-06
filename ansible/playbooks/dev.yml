@@ -57,6 +57,10 @@
       tags: [language, dev, lua]
     - role: rustc
       tags: [language, dev, rust]
+    - role: wasm32-wasi
+      tags: [language, dev, rust, wasm, webassembly]
+    - role: wasmtime
+      tags: [language, dev, wasm]
 
     # Package Managers
     - role: luarocks
@@ -65,6 +69,8 @@
       tags: [package-manager, dev, rust]
     - role: uv
       tags: [package-manager, dev, python]
+    - role: ansible
+      tags: [package-manager, dev, automation, kubernetes, k8s, openshift]
 
     # CLI Tools
     - role: treesitter_cli
@@ -75,6 +81,12 @@
       tags: [cli, dev, diagram]
     - role: sqlite3
       tags: [cli, dev, database]
+    - role: spin
+      tags: [cli, dev, wasm, webassembly, fermyon]
+    - role: kubectl
+      tags: [cli, dev, kubernetes, k8s]
+    - role: helm
+      tags: [cli, dev, kubernetes, k8s]
 
     # Debuggers
     - role: codelldb
