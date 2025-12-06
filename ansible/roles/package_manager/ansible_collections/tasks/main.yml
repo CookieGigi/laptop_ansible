@@ -1,0 +1,8 @@
+---
+- name: Install community.general collection
+  ansible.builtin.command: ansible-galaxy collection install community.general
+  register: collection_install_result
+  changed_when: "'was installed successfully' in collection_install_result.stdout"
+  failed_when:
+    - collection_install_result.rc != 0
+    - "'is already installed' not in collection_install_result.stderr"
