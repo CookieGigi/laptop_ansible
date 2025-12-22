@@ -6,3 +6,6 @@
   roles:
     - role: opencode
       tags: [ai, editor, dev]
+
+    - role: mcp-server
+      tags: [ai, mcp]

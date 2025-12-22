@@ -1,0 +1,6 @@
+---
+- name: Install @context7/mcp-server via npm
+  ansible.builtin.include_role:
+    name: npm_install
+  vars:
+    npm_install_package: "@context7/mcp-server"
