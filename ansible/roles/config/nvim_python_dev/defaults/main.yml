@@ -1,0 +1,13 @@
+---
+# Neovim Python dev configuration settings
+# Actual path where config files are stored
+nvim_python_dev_config_path: ~/Project/neovim/python
+
+# NVIM_APPNAME value (relative to ~/.config/)
+nvim_python_dev_appname: nvim_python_dev
+
+# Alias for launching this Neovim config
+nvim_python_dev_alias: nvim_python_dev
+
+# Repository URL (leave empty to skip cloning)
+nvim_python_dev_repo: ""

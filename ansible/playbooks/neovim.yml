@@ -10,6 +10,8 @@
       tags: [neovim, config, dev, sh]
     - role: nvim_rust_dev
       tags: [neovim, config, dev, rust]
+    - role: nvim_python_dev
+      tags: [neovim, config, dev, python]
 
 - name: Install Neovim production configuration
   hosts: localhost

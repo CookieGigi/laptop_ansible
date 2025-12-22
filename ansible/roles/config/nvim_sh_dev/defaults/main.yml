@@ -1,0 +1,13 @@
+---
+# Neovim dev configuration settings
+# Actual path where config files are stored
+nvim_dev_config_path: ~/Project/neovim/selfhosting/  
+
+# NVIM_APPNAME value (relative to ~/.config/)
+nvim_dev_appname: nvim_sh_dev
+
+# Alias for launching this Neovim config
+nvim_dev_alias: nvim_sh_dev
+
+# Repository URL (leave empty to skip cloning)
+nvim_dev_repo: ""
