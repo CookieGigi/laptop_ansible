@@ -16,3 +16,9 @@
       tags: [app, security, password-manager]
     - role: firefox
       tags: [app, browser]
+    - role: darktable
+      tags: [app, photography, image-editing]
+    - role: exiftool
+      tags: [app, photography, image-metadata]
+    - role: inkscape
+      tags: [app, graphics, vector-editing]

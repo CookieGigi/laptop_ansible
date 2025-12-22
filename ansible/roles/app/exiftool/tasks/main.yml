@@ -1,0 +1,6 @@
+---
+- name: Install libimage-exiftool-perl
+  become: true
+  ansible.builtin.apt:
+    name: libimage-exiftool-perl
+    state: present
