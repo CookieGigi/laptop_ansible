@@ -31,3 +31,5 @@ env/
 # Temporary files
 *.tmp
 .tmp/
+ansible/playbooks/spin.sig
+ansible/playbooks/crt.pem
