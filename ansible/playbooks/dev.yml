@@ -88,6 +88,8 @@
       tags: [cli, dev, kubernetes, k8s]
     - role: helm
       tags: [cli, dev, kubernetes, k8s]
+    - role: minikube
+      tags: [cli, dev, kubernetes, k8s, local, minikube]
 
     # Debuggers
     - role: codelldb

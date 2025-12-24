@@ -4,7 +4,6 @@
   ansible.builtin.apt:
     name: curl
     state: present
-  when: ansible_os_family == "Debian"
 
 - name: Ensure /nix directory exists
   become: true
@@ -12,8 +11,8 @@
     path: /nix
     state: directory
     mode: '0755'
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
 
 - name: Install Nix (user-space, no daemon)
   ansible.builtin.shell: "sh <(curl -L {{ nix_install_url }}) --no-daemon"

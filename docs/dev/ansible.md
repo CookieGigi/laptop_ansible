@@ -143,5 +143,6 @@ This will install Nix → pipx → Ansible in one go, allowing you to then run A
 ## Related tools
 
 - ansible-lint: Linting tool for Ansible playbooks
-- kubectl: Kubernetes command-line tool
-- helm: Kubernetes package manager
+- kubectl: Kubernetes command-line tool (see `docs/dev/kubectl.md`)
+- helm: Kubernetes package manager (see `docs/dev/helm.md`)
+- minikube: Local Kubernetes cluster for development (see `docs/dev/minikube.md`)
