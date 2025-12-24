@@ -2,6 +2,7 @@
 - name: Install all basics
   hosts: localhost
   tags: [basic, setup]
+  gather_facts: yes
 
   roles:
     - role: add_main_user

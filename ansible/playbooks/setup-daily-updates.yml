@@ -3,6 +3,7 @@
   hosts: localhost
   become: true
   tags: [setup, systemd]
+  gather_facts: yes
 
   tasks:
     - name: Display setup information

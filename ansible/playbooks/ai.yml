@@ -2,6 +2,7 @@
 - name: Install AI tools
   hosts: localhost
   tags: [ai, development]
+  gather_facts: yes
 
   roles:
     - role: opencode

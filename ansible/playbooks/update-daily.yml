@@ -2,6 +2,7 @@
 - name: Daily Automated Updates
   hosts: localhost
   tags: [daily-update]
+  gather_facts: yes
 
   vars:
     flatpak_packages_to_update: "{{ daily_flatpak_packages | default([]) }}"

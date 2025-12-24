@@ -2,6 +2,7 @@
 - name: Install self-hosting tools
   hosts: localhost
   tags: [selfhosting, self-hosting]
+  gather_facts: yes
 
   roles:
     # Development tools for self-hosting

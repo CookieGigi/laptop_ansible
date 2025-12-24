@@ -2,6 +2,7 @@
 - name: Install all config
   hosts: localhost
   tags: [config, configuration]
+  gather_facts: yes
 
   roles:
     - role: kde_config

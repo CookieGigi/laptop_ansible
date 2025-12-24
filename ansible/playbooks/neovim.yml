@@ -2,6 +2,7 @@
 - name: Install Neovim development configuration
   hosts: localhost
   tags: [neovim, config, dev]
+  gather_facts: yes
 
   roles:
     - role: nvim_dev

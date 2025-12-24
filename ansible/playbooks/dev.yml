@@ -2,6 +2,7 @@
 - name: Install development tools
   hosts: localhost
   tags: [dev, development]
+  gather_facts: yes
 
   roles:
     # Editors and Git

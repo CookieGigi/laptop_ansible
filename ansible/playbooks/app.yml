@@ -2,6 +2,7 @@
 - name: Install applications
   hosts: localhost
   tags: [app, applications]
+  gather_facts: yes
 
   roles:
     - role: kde-connect

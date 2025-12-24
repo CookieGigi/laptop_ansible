@@ -1,6 +1,6 @@
-shell_config: "{{ ansible_env.HOME }}/.zshrc"
-nix_profil_path: "{{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh"
-dotfiles_path: "{{ ansible_env.HOME }}/dotfiles"
+shell_config: "{{ lookup('env', 'HOME') }}/.zshrc"
+nix_profil_path: "{{ lookup('env', 'HOME') }}/.nix-profile/etc/profile.d/nix.sh"
+dotfiles_path: "{{ lookup('env', 'HOME') }}/dotfiles"
 
 # Daily update configuration
 daily_flatpak_packages:
