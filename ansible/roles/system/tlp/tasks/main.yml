@@ -1,0 +1,7 @@
+- name: Install tlp required packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - tlp
+      - tlp-rdw
+    state: present

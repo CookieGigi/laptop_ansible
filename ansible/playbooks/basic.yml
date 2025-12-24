@@ -54,3 +54,5 @@
       tags: [terminal, multiplexer]
     - role: tmux_catppuccin
       tags: [terminal, theme]
+    - role: tlp
+      tags: [system]
