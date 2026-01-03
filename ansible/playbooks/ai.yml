@@ -10,3 +10,6 @@
 
     - role: mcp-server
       tags: [ai, mcp]
+
+    - role: gemini_cli
+      tags: [ai, cli, gemini]
