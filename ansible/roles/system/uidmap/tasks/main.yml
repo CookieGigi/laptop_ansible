@@ -1,0 +1,6 @@
+---
+- name: Install uidmap (required for rootless podman)
+  ansible.builtin.package:
+    name: uidmap
+    state: present
+  become: true

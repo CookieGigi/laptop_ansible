@@ -92,6 +92,8 @@
       tags: [cli, dev, kubernetes, k8s, local, minikube]
     - role: podman
       tags: [cli, dev, docker, container, podman]
+    - role: podman-compose
+      tags: [cli, dev, docker, compose, podman, podman-compose]
 
     # Debuggers
     - role: codelldb
