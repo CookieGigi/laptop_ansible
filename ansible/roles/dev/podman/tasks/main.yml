@@ -1,0 +1,7 @@
+---
+- name: Install Podman via Nix
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - "nixpkgs#podman"

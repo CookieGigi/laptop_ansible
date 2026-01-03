@@ -90,6 +90,8 @@
       tags: [cli, dev, kubernetes, k8s]
     - role: minikube
       tags: [cli, dev, kubernetes, k8s, local, minikube]
+    - role: podman
+      tags: [cli, dev, docker, container, podman]
 
     # Debuggers
     - role: codelldb
