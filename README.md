@@ -42,7 +42,8 @@ ansible/
 │   │   ├── kde-connect/  # KDE Connect
 │   │   ├── librewolf/    # Privacy-focused browser
 │   │   ├── obsidian/     # Note-taking app
-│   │   └── proton-pass/  # Password manager
+│   │   ├── proton-pass/  # Password manager
+│   │   └── steam/        # Steam platform
 │   ├── config/         # Configuration roles
 │   ├── dev/            # Development tool roles
 │   ├── driver/         # Driver roles

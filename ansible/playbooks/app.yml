@@ -11,6 +11,8 @@
       tags: [app, productivity, notes]
     - role: heroic-launcher
       tags: [app, gaming]
+    - role: steam
+      tags: [app, gaming]
     - role: librewolf
       tags: [app, browser, privacy]
     - role: proton-pass
