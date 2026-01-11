@@ -3,6 +3,7 @@
   ansible.builtin.include_role:
     name: nix_install
   vars:
+    nix_install_allow_unfree: true
     nix_install_nix_packages:
       - "nixpkgs#terraform"
       - "nixpkgs#terragrunt"

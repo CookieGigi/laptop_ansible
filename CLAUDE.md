@@ -142,11 +142,13 @@ Installs packages via Nix with idempotency.
 
 **Variables:**
 - `nix_install_nix_packages`: List of nixpkgs packages
+- `nix_install_allow_unfree`: (Optional) Boolean to allow unfree packages (default: `false`)
 
 **Implementation:**
 - Checks `nix profile list` before installing
 - Only installs if package not already present
 - Sources `nix_profil_path` before commands
+- Uses `NIXPKGS_ALLOW_UNFREE=1` and `--impure` if `nix_install_allow_unfree` is true
 
 #### `flatpak_user_install`
 Installs Flatpak apps in user space.

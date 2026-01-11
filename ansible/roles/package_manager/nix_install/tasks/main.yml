@@ -16,7 +16,12 @@
     - item not in nix_existing_packages.stdout
   ansible.builtin.shell: |
     source "{{ nix_profil_path }}"
+    {% if nix_install_allow_unfree %}
+    export NIXPKGS_ALLOW_UNFREE=1
+    nix profile add --impure {{ item }}
+    {% else %}
     nix profile add {{ item }}
+    {% endif %}
   args:
     executable: /bin/bash
   loop: "{{ nix_install_nix_packages }}"
