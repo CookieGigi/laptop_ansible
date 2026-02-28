@@ -6,17 +6,14 @@
 # Installed groups
 installed_groups:
   - core
-  - productivity
-  - web
-  - dev-rust
 
 # Conditional flags detected during bootstrap
 system_detected:
-  has_nvidia_gpu: false
-  is_laptop: false
-  detected_package_manager: 
+  has_nvidia_gpu: true
+  is_laptop: true
+  detected_package_manager: Debian
 
 # Bootstrap state
 bootstrap:
-  system_completed: false
-  user_completed: false
+  system_completed: true
+  user_completed: true
