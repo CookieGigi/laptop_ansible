@@ -2,9 +2,6 @@
 
 Atomic notes for project understanding.
 
-## Files
-Mirror of project structure in `files/` with one-sentence descriptions.
-
 ## Groups
 Individual group definitions in `groups/`.
 
@@ -16,7 +13,7 @@ Migration phases tracked in `progress/`.
 
 ## Other
 - `MIGRATION_PLAN.md` - Full migration details
-- `MIGRATION_TODO.md` - Current todo list
+- `../MIGRATION_TODO.md` - Current todo list (project root)
 
 ## Index
 - 23 groups defined
