@@ -8,7 +8,7 @@
 #   make list                 # List available groups
 #   make status               # Show current state
 
-.PHONY: help bootstrap setup install remove preset list status
+.PHONY: help bootstrap setup install remove preset list status lint syntax-check diff
 
 # Default target
 help:
@@ -20,8 +20,11 @@ help:
 	@echo "  make install GROUP=<name> - Install a package group"
 	@echo "  make remove GROUP=<name>  - Remove a package group"
 	@echo "  make preset NAME=<name>   - Apply a preset configuration"
-	@echo "  make list                 - List available groups"
-	@echo "  make status               - Show current system state"
+  @echo "  make list                 - List available groups"
+  @echo "  make status               - Show current system state"
+  @echo "  make lint                 - Run ansible-lint on all playbooks"
+  @echo "  make syntax-check         - Check syntax of all playbooks"
+  @echo "  make diff GROUP=<name>    - Show changes for a group (dry-run)"
 
 # System bootstrap (asks for sudo password when needed)
 bootstrap:
@@ -66,3 +69,21 @@ list:
 status:
 	@echo "Current system state:"
 	@cat ansible/inventory/state.yml
+
+# Run ansible-lint on all playbooks
+lint:
+	@echo "Running ansible-lint..."
+	@cd ansible && ansible-lint
+
+# Check syntax of all playbooks
+syntax-check:
+	@echo "Checking syntax..."
+	@cd ansible && ansible-playbook --syntax-check playbooks/*.yml
+
+# Show changes for a group (dry-run)
+diff:
+ifndef GROUP
+	$(error GROUP is not set. Usage: make diff GROUP=<name>)
+endif
+	@echo "Showing changes for group: $(GROUP)"
+	@cd ansible && ansible-playbook playbooks/02-groups.yml -e "group_action=install group=$(GROUP)" --check --diff
