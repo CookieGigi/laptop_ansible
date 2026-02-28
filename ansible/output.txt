@@ -1,0 +1,174 @@
+
+PLAY [Manage Package Groups] ***************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Validate group_action parameter] *****************************************
+skipping: [localhost]
+
+TASK [Validate group parameter] ************************************************
+skipping: [localhost]
+
+TASK [Check if group definition exists] ****************************************
+ok: [localhost]
+
+TASK [Fail if group definition not found] **************************************
+skipping: [localhost]
+
+TASK [Include group definition] ************************************************
+ok: [localhost]
+
+TASK [Install or remove group packages] ****************************************
+included: unified for localhost
+
+TASK [unified : Validate unified action] ***************************************
+skipping: [localhost]
+
+TASK [unified : Validate unified packages] *************************************
+skipping: [localhost]
+
+TASK [unified : Detect system conditionals] ************************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/conditionals.yml for localhost
+
+TASK [unified : Detect NVIDIA GPU] *********************************************
+ok: [localhost]
+
+TASK [unified : Set NVIDIA detected fact] **************************************
+ok: [localhost]
+
+TASK [unified : Detect laptop (battery present)] *******************************
+ok: [localhost]
+
+TASK [unified : Set laptop detected fact] **************************************
+ok: [localhost]
+
+TASK [unified : Detect VM] *****************************************************
+ok: [localhost]
+
+TASK [unified : Set VM detected fact] ******************************************
+ok: [localhost]
+
+TASK [unified : Process conditional packages] **********************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': True, 'packages': {'nix': ['cudaPackages.cudatoolkit', 'python3Packages.torchWithCuda', 'python3Packages.tensorflowWithCuda']}})
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': False, 'packages': {'nix': ['python3Packages.torch', 'python3Packages.tensorflow']}})
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': True, 'packages': {'apt': ['powertop', 'tlp']}})
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+ok: [localhost]
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+skipping: [localhost]
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+ok: [localhost]
+
+TASK [unified : Apply conditional packages] ************************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': True, 'packages': {'nix': ['cudaPackages.cudatoolkit', 'python3Packages.torchWithCuda', 'python3Packages.tensorflowWithCuda']}})
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': False, 'packages': {'nix': ['python3Packages.torch', 'python3Packages.tensorflow']}})
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/process_conditionals.yml for localhost => (item={'condition': True, 'packages': {'apt': ['powertop', 'tlp']}})
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+ok: [localhost]
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+skipping: [localhost]
+
+TASK [unified : Evaluate condition] ********************************************
+ok: [localhost]
+
+TASK [unified : Merge conditional packages on match] ***************************
+ok: [localhost]
+
+TASK [unified : Include install tasks] *****************************************
+skipping: [localhost]
+
+TASK [unified : Include remove tasks] ******************************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/remove.yml for localhost
+
+TASK [unified : Remove Nix packages] *******************************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/remove_nix.yml for localhost
+
+TASK [unified : Check if nix is available] *************************************
+ok: [localhost]
+
+TASK [unified : Remove packages via nix] ***************************************
+changed: [localhost] => (item=python3Packages.jupyter)
+changed: [localhost] => (item=python3Packages.matplotlib)
+changed: [localhost] => (item=python3Packages.scikit-learn)
+changed: [localhost] => (item=python3Packages.pandas)
+
+TASK [unified : Remove Flatpak packages] ***************************************
+skipping: [localhost]
+
+TASK [unified : Remove Cargo packages] *****************************************
+skipping: [localhost]
+
+TASK [unified : Remove NPM packages] *******************************************
+skipping: [localhost]
+
+TASK [unified : Remove Pipx packages] ******************************************
+skipping: [localhost]
+
+TASK [unified : Remove APT packages] *******************************************
+skipping: [localhost]
+
+TASK [unified : Update state tracking] *****************************************
+included: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/unified/tasks/state.yml for localhost
+
+TASK [unified : Read current state] ********************************************
+ok: [localhost]
+
+TASK [unified : Parse current state] *******************************************
+ok: [localhost]
+
+TASK [unified : Initialize empty state if not exists] **************************
+skipping: [localhost]
+
+TASK [unified : Update state with action results] ******************************
+ok: [localhost]
+
+TASK [unified : Remove duplicate groups] ***************************************
+ok: [localhost]
+
+TASK [Run post-install script] *************************************************
+skipping: [localhost]
+
+TASK [Run post-remove script] **************************************************
+skipping: [localhost]
+
+TASK [Update installed_groups list] ********************************************
+skipping: [localhost]
+
+TASK [Remove from installed_groups list] ***************************************
+ok: [localhost]
+
+TASK [Update state file] *******************************************************
+ok: [localhost]
+
+TASK [Display completion message] **********************************************
+ok: [localhost] => {
+    "msg": "Successfully removeed group 'dev-ml'"
+}
+
+TASK [Display post-install message] ********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=39   changed=1    unreachable=0    failed=0    skipped=18   rescued=0    ignored=0   
+
