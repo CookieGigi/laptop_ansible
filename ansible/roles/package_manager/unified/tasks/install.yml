@@ -1,0 +1,26 @@
+---
+# Install tasks for unified package manager
+
+- name: Install Nix packages
+  ansible.builtin.include_tasks: install_nix.yml
+  when: unified_packages.nix is defined and unified_packages.nix | length > 0
+
+- name: Install Flatpak packages
+  ansible.builtin.include_tasks: install_flatpak.yml
+  when: unified_packages.flatpak is defined and unified_packages.flatpak | length > 0
+
+- name: Install Cargo packages
+  ansible.builtin.include_tasks: install_cargo.yml
+  when: unified_packages.cargo is defined and unified_packages.cargo | length > 0
+
+- name: Install NPM packages
+  ansible.builtin.include_tasks: install_npm.yml
+  when: unified_packages.npm is defined and unified_packages.npm | length > 0
+
+- name: Install Pipx packages
+  ansible.builtin.include_tasks: install_pipx.yml
+  when: unified_packages.pipx is defined and unified_packages.pipx | length > 0
+
+- name: Install APT packages
+  ansible.builtin.include_tasks: install_apt.yml
+  when: unified_packages.apt is defined and unified_packages.apt | length > 0

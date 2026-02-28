@@ -1,10 +1,17 @@
 ---
+- name: Check if flatpak is installed
+  ansible.builtin.command: which flatpak
+  changed_when: false
+  failed_when: false
+  register: flatpak_check
+
 - name: Install Flatpak
   become: true
   ansible.builtin.apt:
     name: "flatpak"
     state: present
     update_cache: true
+  when: flatpak_check.rc != 0
 
 - name: Check if Flathub remote exists
   ansible.builtin.command: flatpak --user remote-list --columns=name

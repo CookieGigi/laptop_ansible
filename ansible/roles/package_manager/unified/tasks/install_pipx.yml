@@ -1,0 +1,12 @@
+---
+# Install packages via Pipx
+
+- name: Ensure pipx is installed
+  ansible.builtin.include_role:
+    name: pipx
+
+- name: Install packages via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ unified_packages.pipx }}"

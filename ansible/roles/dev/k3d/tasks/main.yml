@@ -1,0 +1,14 @@
+---
+- name: Install k3d via Nix
+  ansible.builtin.include_role:
+    name: nix_install
+  vars:
+    nix_install_nix_packages:
+      - "nixpkgs#k3d"
+
+- name: Add k3d alias for Podman
+  ansible.builtin.include_role:
+    name: add_alias
+  vars:
+    add_alias_alias_name: "k3d"
+    add_alias_alias_cmd: "DOCKER_HOST=unix://${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/podman/podman.sock DOCKER_SOCK=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/podman/podman.sock k3d"

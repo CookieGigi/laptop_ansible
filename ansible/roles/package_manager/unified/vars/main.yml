@@ -1,0 +1,14 @@
+---
+# Internal variables for unified package manager
+
+# Package manager availability flags
+unified_pm_available:
+  nix: false
+  flatpak: false
+  cargo: false
+  npm: false
+  pipx: false
+
+# State tracking
+unified_installed_packages: []
+unified_removed_packages: []

@@ -1,0 +1,59 @@
+---
+# 01-user-bootstrap.yml
+# Purpose: User-level bootstrap for shell, terminal, and font configuration
+# This playbook should be run as the regular user (not root)
+
+- name: User Bootstrap
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: false
+
+  vars_files:
+    - ../inventory/state.yml
+
+  tasks:
+    - name: Check if system bootstrap has been run
+      ansible.builtin.fail:
+        msg: "System bootstrap must be run first. Execute: make bootstrap"
+      when: not bootstrap.system_completed | default(false)
+
+    - name: Ensure dotfiles directory exists
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.config"
+        state: directory
+        mode: '0755'
+
+    - name: Placeholder - Configure shell
+      ansible.builtin.debug:
+        msg: "Shell configuration would be applied here"
+      tags:
+        - shell
+
+    - name: Placeholder - Configure terminal
+      ansible.builtin.debug:
+        msg: "Terminal configuration would be applied here"
+      tags:
+        - terminal
+
+    - name: Placeholder - Install fonts
+      ansible.builtin.debug:
+        msg: "Font installation would be applied here"
+      tags:
+        - fonts
+
+    - name: Update state file with user bootstrap status
+      ansible.builtin.template:
+        src: state.yml.j2
+        dest: "{{ playbook_dir }}/../inventory/state.yml"
+        mode: '0644'
+      vars:
+        installed_groups: "{{ installed_groups | default([]) }}"
+        system_detected: "{{ system_detected | default({}) }}"
+        bootstrap:
+          system_completed: true
+          user_completed: true
+
+    - name: Mark user bootstrap as complete
+      ansible.builtin.debug:
+        msg: "User bootstrap completed successfully!"

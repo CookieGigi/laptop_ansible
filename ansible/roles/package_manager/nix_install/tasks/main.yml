@@ -3,7 +3,7 @@
   when: nix_install_nix_packages | length > 0
   ansible.builtin.shell: |
     source "{{ nix_profil_path }}"
-    nix profile list
+    nix profile list | grep -E '^(Name|Flake attribute):' | awk '{print $NF}' | sed 's/.*\.//'
   args:
     executable: /bin/bash
   register: nix_existing_packages
@@ -13,7 +13,7 @@
 - name: Install user packages via Nix
   when:
     - nix_install_nix_packages | length > 0
-    - item not in nix_existing_packages.stdout
+    - (item | split('#') | last) not in nix_existing_packages.stdout_lines
   ansible.builtin.shell: |
     source "{{ nix_profil_path }}"
     {% if nix_install_allow_unfree %}

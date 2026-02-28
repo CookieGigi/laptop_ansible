@@ -1,0 +1,25 @@
+---
+# darktable.yml
+# Group definition for Darktable photo editor
+# Install with: make install GROUP=darktable
+
+group_name: "Darktable"
+description: "Darktable - An open source photography workflow application and raw developer"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - org.darktable.DarkTable
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Darktable installed.
+  Launch with: flatpak run org.darktable.DarkTable
+  Or from your application menu.

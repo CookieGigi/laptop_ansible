@@ -1,0 +1,20 @@
+---
+# Install packages via Cargo
+
+- name: Ensure cargo is installed
+  ansible.builtin.command: which cargo
+  changed_when: false
+  failed_when: false
+  register: cargo_check
+
+- name: Warn if cargo not available
+  ansible.builtin.debug:
+    msg: "Cargo not found. Install Rust toolchain first (dev-rust group)"
+  when: cargo_check.rc != 0
+
+- name: Install packages via cargo
+  community.general.cargo:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ unified_packages.cargo }}"
+  when: cargo_check.rc == 0

@@ -1,0 +1,12 @@
+---
+# Process individual conditional item
+# Expects: conditional_item with 'condition' and 'packages' keys
+
+- name: Evaluate condition
+  ansible.builtin.set_fact:
+    condition_result: "{{ conditional_item.condition | default('') }}"
+
+- name: Merge conditional packages on match
+  ansible.builtin.set_fact:
+    unified_packages: "{{ unified_packages | combine(conditional_item.packages, recursive=true, list_merge='append') }}"
+  when: condition_result | bool

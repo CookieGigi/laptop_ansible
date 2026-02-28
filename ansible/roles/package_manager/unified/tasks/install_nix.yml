@@ -1,0 +1,32 @@
+---
+# Install packages via Nix
+
+- name: Ensure nix command is available
+  ansible.builtin.command: which nix
+  changed_when: false
+  failed_when: false
+  register: nix_check
+
+- name: Install Nix package manager
+  ansible.builtin.include_role:
+    name: nix
+  when: nix_check.rc != 0
+
+- name: Check if nix package is installed
+  ansible.builtin.shell: |
+    nix profile list 2>/dev/null | sed $'s/\x1b\[[0-9;]*m//g' | grep -q "{{ item }}"
+  # noqa: risky-shell-pipe - pipefail disabled intentionally to avoid SIGPIPE from grep -q
+  environment:
+    PATH: "{{ ansible_facts['env']['HOME'] }}/.nix-profile/bin:{{ ansible_facts['env']['PATH'] }}"
+  loop: "{{ unified_packages.nix }}"
+  changed_when: false
+  failed_when: false
+  register: nix_pkg_check
+
+- name: Install packages via nix
+  ansible.builtin.command: nix profile add nixpkgs#{{ item.item }}
+  loop: "{{ nix_pkg_check.results }}"
+  when: item.rc != 0
+  changed_when: true
+  environment:
+    PATH: "{{ ansible_facts['env']['HOME'] }}/.nix-profile/bin:{{ ansible_facts['env']['PATH'] }}"

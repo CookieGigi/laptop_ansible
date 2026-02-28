@@ -1,0 +1,25 @@
+---
+# System state tracking for installed groups
+# This file tracks which package groups have been installed
+# It is automatically updated by the group management system
+
+# Installed groups
+installed_groups:
+  - core
+  - core
+  - core
+  - productivity
+  - web
+  - core
+  - core
+
+# Conditional flags detected during bootstrap
+system_detected:
+  has_nvidia_gpu: false
+  is_laptop: false
+  detected_package_manager: 
+
+# Bootstrap state
+bootstrap:
+  system_completed: false
+  user_completed: false

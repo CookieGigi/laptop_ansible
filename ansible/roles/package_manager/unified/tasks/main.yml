@@ -1,0 +1,36 @@
+---
+# Unified Package Manager Role
+# Handles installation/removal across all package managers
+# Usage: Include with unified_packages and unified_action variables
+
+- name: Validate unified action
+  ansible.builtin.fail:
+    msg: "unified_action must be 'install' or 'remove', got: {{ unified_action | default('undefined') }}"
+  when: unified_action not in ['install', 'remove']
+
+- name: Validate unified packages
+  ansible.builtin.fail:
+    msg: "unified_packages must be defined as a dictionary"
+  when: unified_packages is not defined or unified_packages is not mapping
+
+- name: Detect system conditionals
+  ansible.builtin.include_tasks: conditionals.yml
+
+- name: Apply conditional packages
+  ansible.builtin.include_tasks: process_conditionals.yml
+  loop: "{{ unified_conditional_packages | default([]) }}"
+  loop_control:
+    loop_var: conditional_item
+  when: unified_conditional_packages is defined and unified_conditional_packages | length > 0
+
+- name: Include install tasks
+  ansible.builtin.include_tasks: install.yml
+  when: unified_action == 'install'
+
+- name: Include remove tasks
+  ansible.builtin.include_tasks: remove.yml
+  when: unified_action == 'remove'
+
+- name: Update state tracking
+  ansible.builtin.include_tasks: state.yml
+  when: group is defined

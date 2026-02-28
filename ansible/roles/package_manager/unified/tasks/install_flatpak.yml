@@ -1,0 +1,13 @@
+---
+# Install packages via Flatpak
+
+- name: Ensure Flatpak is installed
+  ansible.builtin.include_role:
+    name: flatpak
+
+- name: Install packages via flatpak
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  loop: "{{ unified_packages.flatpak }}"

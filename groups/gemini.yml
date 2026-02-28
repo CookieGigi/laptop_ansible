@@ -1,0 +1,26 @@
+---
+# gemini.yml
+# Group definition for Google Gemini CLI
+# Install with: make install GROUP=gemini
+
+group_name: "Gemini"
+description: "Google Gemini CLI - AI assistant in your terminal"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix: []
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm:
+    - "gemini-cli"
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Gemini CLI installed.
+  Run: gemini
+  Or: gemini --help for usage information.

@@ -1,0 +1,73 @@
+---
+# 00-system-bootstrap.yml
+# Purpose: One-time system bootstrap to detect hardware and install package managers
+# This playbook should be run as root or with sudo
+
+- name: System Bootstrap
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: true
+
+  vars_files:
+    - ../inventory/state.yml
+
+  tasks:
+    - name: Detect NVIDIA GPU
+      ansible.builtin.command: lspci -k | grep -A 2 -E "(VGA|3D)"
+      register: gpu_info
+      changed_when: false
+      failed_when: false
+
+    - name: Check for NVIDIA GPU
+      ansible.builtin.set_fact:
+        system_detected:
+          has_nvidia_gpu: "{{ 'NVIDIA' in gpu_info.stdout }}"
+
+    - name: Detect laptop
+      ansible.builtin.stat:
+        path: /sys/class/power_supply/
+      register: power_supply_check
+
+    - name: Check if system is a laptop
+      ansible.builtin.find:
+        paths: /sys/class/power_supply/
+        file_type: directory
+        patterns: "BAT*"
+      register: battery_check
+
+    - name: Set laptop detection fact
+      ansible.builtin.set_fact:
+        system_detected:
+          has_nvidia_gpu: "{{ system_detected.has_nvidia_gpu }}"
+          is_laptop: "{{ battery_check.matched >= 1 }}"
+
+    - name: Detect package manager
+      ansible.builtin.set_fact:
+        system_detected:
+          has_nvidia_gpu: "{{ system_detected.has_nvidia_gpu }}"
+          is_laptop: "{{ system_detected.is_laptop }}"
+          detected_package_manager: "{{ ansible_facts['os_family'] }}"
+
+    - name: Display detected system info
+      ansible.builtin.debug:
+        msg:
+          - "NVIDIA GPU detected: {{ system_detected.has_nvidia_gpu }}"
+          - "Laptop detected: {{ system_detected.is_laptop }}"
+          - "Package manager: {{ system_detected.detected_package_manager }}"
+
+    - name: Update state file with detected system info
+      ansible.builtin.template:
+        src: state.yml.j2
+        dest: "{{ playbook_dir }}/../inventory/state.yml"
+        mode: '0644'
+      vars:
+        installed_groups: "{{ installed_groups | default([]) }}"
+        system_detected: "{{ system_detected }}"
+        bootstrap:
+          system_completed: true
+          user_completed: "{{ bootstrap.user_completed | default(false) }}"
+
+    - name: Mark system bootstrap as complete
+      ansible.builtin.debug:
+        msg: "System bootstrap completed successfully!"

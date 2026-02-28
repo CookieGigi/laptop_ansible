@@ -1,0 +1,9 @@
+---
+# Remove packages via Flatpak
+
+- name: Remove packages via flatpak
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: absent
+    method: user
+  loop: "{{ unified_packages.flatpak }}"

@@ -1,0 +1,22 @@
+---
+# web.yml
+# Group definition for web browsers
+# Install with: make install GROUP=web
+
+group_name: "Web Browsers"
+description: "Web browsers for different use cases"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - org.mozilla.firefox
+    - io.gitlab.librewolf-community
+    - org.chromium.Chromium
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []

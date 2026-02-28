@@ -1,0 +1,25 @@
+---
+# gaming.yml
+# Group definition for gaming applications
+# Install with: make install GROUP=gaming
+
+group_name: "Gaming"
+description: "Gaming platforms and game launchers"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - com.valvesoftware.Steam
+    - com.heroicgameslauncher.hgl
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional:
+  - when: has_nvidia
+    packages:
+      nix:
+        - mangohud  # Performance overlay for NVIDIA

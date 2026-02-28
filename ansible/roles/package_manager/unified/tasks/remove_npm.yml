@@ -1,0 +1,9 @@
+---
+# Remove packages via NPM
+
+- name: Remove packages via npm globally
+  community.general.npm:
+    name: "{{ item }}"
+    state: absent
+    global: true
+  loop: "{{ unified_packages.npm }}"

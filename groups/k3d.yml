@@ -1,0 +1,27 @@
+---
+# k3d.yml
+# Group definition for k3d local Kubernetes
+# Install with: make install GROUP=k3d
+
+group_name: "k3d"
+description: "k3d - Lightweight Kubernetes in Docker"
+requires:
+  - core
+  - dev-base
+  - docker
+
+packages:
+  nix:
+    - k3d
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  k3d installed.
+  Create a cluster: k3d cluster create mycluster
+  Requires Docker to be installed.

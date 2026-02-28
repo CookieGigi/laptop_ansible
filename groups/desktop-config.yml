@@ -1,0 +1,31 @@
+---
+# desktop-config.yml
+# Group definition for desktop environment configuration
+# Install with: make install GROUP=desktop-config
+
+group_name: "Desktop Configuration"
+description: "Desktop environment dotfiles, KDE Connect, and configurations"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt:
+    - kdeconnect
+
+# This group uses special configuration roles instead of packages
+# These roles handle dotfiles and configuration management
+config_roles:
+  - kde_config
+
+conditional: []
+
+post_install_message: |
+  Desktop configuration applied.
+  KDE Connect installed for Android device integration.
+  Dotfiles are managed via git submodules and stow.
+  See dotfiles/ directory for available configurations.

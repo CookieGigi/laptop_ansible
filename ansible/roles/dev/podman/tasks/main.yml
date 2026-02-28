@@ -5,3 +5,29 @@
   vars:
     nix_install_nix_packages:
       - "nixpkgs#podman"
+
+- name: Ensure systemd user directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    state: directory
+    mode: '0755'
+
+- name: Link Podman socket unit
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.nix-profile/share/systemd/user/podman.socket"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/podman.socket"
+    state: link
+
+- name: Link Podman service unit
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.nix-profile/share/systemd/user/podman.service"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/podman.service"
+    state: link
+
+- name: Activate Podman socket (rootless)
+  ansible.builtin.systemd:
+    name: podman.socket
+    scope: user
+    state: started
+    enabled: true
+    daemon_reload: true

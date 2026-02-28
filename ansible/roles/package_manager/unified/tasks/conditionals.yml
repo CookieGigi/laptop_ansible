@@ -1,0 +1,41 @@
+---
+# Conditional package installation based on system detection
+
+- name: Detect NVIDIA GPU
+  ansible.builtin.shell: |
+    set -o pipefail
+    lspci | grep -i nvidia || true
+  args:
+    executable: /bin/bash
+  changed_when: false
+  failed_when: false
+  register: nvidia_detection
+
+- name: Set NVIDIA detected fact
+  ansible.builtin.set_fact:
+    unified_nvidia_detected: "{{ nvidia_detection.stdout | length > 0 }}"
+
+- name: Detect laptop (battery present)
+  ansible.builtin.stat:
+    path: /sys/class/power_supply/BAT0
+  register: laptop_battery_check
+
+- name: Set laptop detected fact
+  ansible.builtin.set_fact:
+    unified_laptop_detected: "{{ laptop_battery_check.stat.exists }}"
+
+- name: Detect VM
+  ansible.builtin.shell: systemd-detect-virt --vm || true
+  changed_when: false
+  failed_when: false
+  register: vm_detection
+
+- name: Set VM detected fact
+  ansible.builtin.set_fact:
+    unified_vm_detected: "{{ vm_detection.stdout | default('none') != 'none' }}"
+
+- name: Process conditional packages
+  ansible.builtin.include_tasks: process_conditionals.yml
+  loop: "{{ unified_conditional_packages | default([]) }}"
+  loop_control:
+    loop_var: conditional_item

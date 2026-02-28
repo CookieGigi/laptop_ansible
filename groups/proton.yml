@@ -1,0 +1,25 @@
+---
+# proton.yml
+# Group definition for Proton Pass password manager
+# Install with: make install GROUP=proton
+
+group_name: "Proton"
+description: "Proton Pass - Secure password manager by Proton"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - me.proton.pass
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Proton Pass installed.
+  Launch with: flatpak run me.proton.pass
+  Or from your application menu.

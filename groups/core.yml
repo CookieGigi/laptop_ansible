@@ -1,0 +1,45 @@
+---
+# core.yml
+# Group definition for core system tools and CLI utilities
+# This group is the foundation for all other groups
+# Install with: make install GROUP=core
+
+group_name: "Core"
+description: "Essential CLI tools, terminal utilities, and base development environment"
+requires: []
+
+packages:
+  nix:
+    # Terminal tools
+    - ripgrep
+    - fd
+    - fzf
+    - zoxide
+    - bat
+    - eza
+    - jq
+    - yq-go
+    - shellcheck
+    - tree
+    - mkpasswd
+    - stow
+    - tmux
+    - zsh
+    - glow
+    - nettools  # for netstat
+    # Power management (laptops)
+    - tlp
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt:
+    - alacritty
+    - flatpak
+    - libssl-dev
+    - pkg-config
+
+config_roles:
+  - tmux_config
+
+post_install_message: "Core tools installed. Run 'make setup' to configure shell and terminal."

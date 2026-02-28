@@ -1,0 +1,7 @@
+---
+- name: Install chromium
+  ansible.builtin.include_role:
+    name: flatpak_user_install
+  vars:
+    flatpak_user_install_flatpak_app_id: org.chromium.Chromium
+    flatpak_user_install_flatpak_app_alias: chromium

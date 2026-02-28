@@ -1,0 +1,25 @@
+---
+# Default variables for unified package manager
+
+# Action to perform: 'install' or 'remove'
+unified_action: "install"
+
+# Package dictionary structure:
+# unified_packages:
+#   nix: []
+#   flatpak: []
+#   cargo: []
+#   npm: []
+#   pipx: []
+#   apt: []
+unified_packages: {}
+
+# Conditional rules for package installation
+# Format:
+#   - condition: "ansible_facts['distribution'] == 'Ubuntu'"
+#     packages:
+#       nix: [package1]
+unified_conditional_packages: []
+
+# Skip package managers that are not available
+unified_skip_missing_package_managers: true

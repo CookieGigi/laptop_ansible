@@ -1,0 +1,25 @@
+---
+# inkscape.yml
+# Group definition for Inkscape vector graphics editor
+# Install with: make install GROUP=inkscape
+
+group_name: "Inkscape"
+description: "Inkscape - Professional vector graphics editor"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - org.inkscape.InkScape
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Inkscape installed.
+  Launch with: flatpak run org.inkscape.InkScape
+  Or from your application menu.

@@ -1,0 +1,13 @@
+---
+# Install packages via NPM
+
+- name: Ensure npm is installed
+  ansible.builtin.include_role:
+    name: npm
+
+- name: Install packages via npm globally
+  community.general.npm:
+    name: "{{ item }}"
+    state: present
+    global: true
+  loop: "{{ unified_packages.npm }}"

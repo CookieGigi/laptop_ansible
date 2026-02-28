@@ -281,4 +281,4 @@ Works seamlessly with other Kubernetes tools in this project:
 - **helm**: Kubernetes package manager (see `docs/dev/helm.md`)
 - **k9s**: Terminal UI for Kubernetes clusters
 - **kind**: Kubernetes IN Docker (alternative to minikube)
-- **k3d**: Lightweight Kubernetes (k3s in Docker)
+- **k3d**: Lightweight Kubernetes (k3s in Docker) (see `docs/dev/k3d.md`)

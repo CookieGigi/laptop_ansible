@@ -1,0 +1,85 @@
+---
+# 02-groups.yml
+# Purpose: Install or remove package groups using unified package manager
+# Usage:
+#   ansible-playbook 02-groups.yml -e "group_action=install group=dev-rust"
+#   ansible-playbook 02-groups.yml -e "group_action=remove group=gaming"
+
+- name: Manage Package Groups
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: false
+
+  vars_files:
+    - ../inventory/state.yml
+
+  pre_tasks:
+    - name: Validate group_action parameter
+      ansible.builtin.fail:
+        msg: "group_action must be either 'install' or 'remove'"
+      when: group_action not in ['install', 'remove']
+
+    - name: Validate group parameter
+      ansible.builtin.fail:
+        msg: "group parameter is required"
+      when: group is not defined
+
+    - name: Check if group definition exists
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/../../groups/{{ group }}.yml"
+      register: group_file
+      delegate_to: localhost
+
+    - name: Fail if group definition not found
+      ansible.builtin.fail:
+        msg: "Group '{{ group }}' not found. Create a definition at groups/{{ group }}.yml"
+      when: not group_file.stat.exists
+
+    - name: Include group definition
+      ansible.builtin.include_vars:
+        file: "{{ playbook_dir }}/../../groups/{{ group }}.yml"
+      register: group_vars
+
+  tasks:
+    - name: Install or remove group packages
+      ansible.builtin.include_role:
+        name: unified
+      vars:
+        unified_action: "{{ group_action }}"
+        unified_packages: "{{ packages | default({}) }}"
+        unified_conditional_packages: "{{ conditional | default([]) }}"
+
+    - name: Run post-install script
+      ansible.builtin.script: "{{ post_install_script }}"
+      when: group_action == 'install' and post_install_script is defined
+
+    - name: Run post-remove script
+      ansible.builtin.script: "{{ post_remove_script }}"
+      when: group_action == 'remove' and post_remove_script is defined
+
+    - name: Update installed_groups list
+      ansible.builtin.set_fact:
+        installed_groups: "{{ (installed_groups | default([])) + [group | default('')] | unique }}"
+      when: group_action == 'install'
+
+    - name: Remove from installed_groups list
+      ansible.builtin.set_fact:
+        installed_groups: "{{ installed_groups | default([]) | reject('equalto', group | default('')) | list }}"
+      when: group_action == 'remove'
+
+  post_tasks:
+    - name: Update state file
+      ansible.builtin.template:
+        src: state.yml.j2
+        dest: "{{ playbook_dir }}/../inventory/state.yml"
+        mode: '0644'
+
+    - name: Display completion message
+      ansible.builtin.debug:
+        msg: "Successfully {{ group_action }}ed group '{{ group }}'"
+
+    - name: Display post-install message
+      ansible.builtin.debug:
+        msg: "{{ post_install_message }}"
+      when: group_action == 'install' and post_install_message is defined

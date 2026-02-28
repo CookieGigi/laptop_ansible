@@ -21,11 +21,20 @@ if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
 else
     echo "Installing Nix (single-user, no daemon)..."
 
+    # Ensure nix storage directory exists in home
+    mkdir -p "$HOME/.local/share/nix"
+
     # Ensure /nix directory exists with correct permissions
     if [ ! -d /nix ]; then
         echo "Creating /nix directory (requires sudo)..."
         sudo mkdir -p /nix
         sudo chown -R "$(whoami)" /nix
+    fi
+
+    # Bind mount home nix directory to /nix if not already mounted
+    if ! mountpoint -q /nix; then
+        echo "Mounting /nix to $HOME/.local/share/nix (requires sudo)..."
+        sudo mount --bind "$HOME/.local/share/nix" /nix
     fi
 
     # Install Nix

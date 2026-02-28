@@ -1,0 +1,26 @@
+---
+# podman.yml
+# Group definition for Podman container platform
+# Install with: make install GROUP=podman
+
+group_name: "Podman"
+description: "Podman container platform and Podman Compose"
+requires:
+  - core
+
+packages:
+  nix:
+    - podman
+    - podman-compose
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt:
+    - uidmap  # Required for rootless containers
+
+conditional: []
+
+post_install_message: |
+  Podman installed with rootless support.
+  No daemon required - containers run as user.

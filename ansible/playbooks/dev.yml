@@ -92,13 +92,17 @@
       tags: [cli, dev, terraform, iac]
     - role: minikube
       tags: [cli, dev, kubernetes, k8s, local, minikube]
+    - role: k3d
+      tags: [cli, dev, kubernetes, k8s, local, k3d]
     - role: podman
       tags: [cli, dev, docker, container, podman]
     - role: podman-compose
       tags: [cli, dev, docker, compose, podman, podman-compose]
+    - role: docker
+      tags: [cli, dev, docker, container]
+    - role: mkcert
+      tags: [cli, dev, ssl, certificate, tls]
 
     # Debuggers
     - role: codelldb
       tags: [debugger, dev, rust]
-    - role: debugpy
-      tags: [debugger, dev, python]

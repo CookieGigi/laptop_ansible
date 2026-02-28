@@ -106,7 +106,8 @@ If you encounter issues with permissions or network in rootless mode:
 ## Integration with Project Tools
 
 - **minikube**: Can be used as a driver for minikube (see `docs/dev/minikube.md`).
-- **hadolint**: Used to lint Dockerfiles that Podman can build (see `docs/dev/hadolint.md`).
+- **k3d**: Lightweight Kubernetes in Docker (see `docs/dev/k3d.md`).
+- **podman-compose**: Run docker-compose.yml files using Podman (see `docs/dev/podman-compose.md`).
 
 ## Documentation
 

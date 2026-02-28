@@ -1,0 +1,39 @@
+---
+# dev-rust.yml
+# Group definition for Rust development tools
+# Install with: make install GROUP=dev-rust
+
+group_name: "Rust Development"
+description: "Rust toolchain, LSP, debugger, and WebAssembly tools"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix:
+    # Rust toolchain via rustup (includes rust-analyzer)
+    - rustup
+    # Debugger
+    - vscode-extensions.vadimcn.vscode-lldb  # codelldb
+    # WebAssembly
+    - wasmtime
+  flatpak: []
+  pipx: []
+  cargo:
+    # Cargo plugins (installed via cargo after rustup)
+    - cargo-watch
+    - cargo-edit
+    - cargo-expand
+    - cargo-tree
+    - cargo-outdated
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Rust toolchain installed.
+  Run 'rustup default stable' to set default toolchain.
+  Run 'rustup component add rustfmt clippy' for formatting and linting.
+  Run 'rustup target add wasm32-wasip1' for WebAssembly support.
+  Note: rust-analyzer is included with rustup.

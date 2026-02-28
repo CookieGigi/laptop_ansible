@@ -1,0 +1,8 @@
+---
+# Remove packages via Pipx
+
+- name: Remove packages via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ unified_packages.pipx }}"

@@ -1,0 +1,31 @@
+---
+# terraform.yml
+# Group definition for Terraform infrastructure tools
+# Install with: make install GROUP=terraform
+
+group_name: "Terraform"
+description: "Terraform, Terragrunt, and related infrastructure tools"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix:
+    - terraform
+    - terragrunt
+    - tflint
+    - tfsec
+    - terraform-ls
+    # SSL/TLS
+    - mkcert
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Terraform toolchain installed.
+  Includes: terraform, terragrunt, tflint, tfsec, terraform-ls

@@ -72,6 +72,7 @@ kubectl uses `~/.kube/config` for cluster configuration. You can:
 
 ## Related Tools
 
-- **helm**: Kubernetes package manager (see `docs/dev/helm.md`)
 - **minikube**: Local Kubernetes cluster for development (see `docs/dev/minikube.md`)
+- **k3d**: Lightweight Kubernetes in Docker (see `docs/dev/k3d.md`)
+- **helm**: Kubernetes package manager (see `docs/dev/helm.md`)
 - **k9s**: Terminal UI for Kubernetes clusters

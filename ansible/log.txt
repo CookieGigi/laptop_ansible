@@ -1,0 +1,51 @@
+
+PLAY [Install development tools] ***********************************************
+
+TASK [Validating arguments against arg spec None] ******************************
+ok: [localhost]
+
+TASK [Install terraform tools via Nix] *****************************************
+included: nix_install for localhost
+
+TASK [nix : Ensure curl is installed (for installer)] **************************
+ok: [localhost]
+
+TASK [nix : Ensure /nix directory exists] **************************************
+ok: [localhost]
+
+TASK [nix : Install Nix (user-space, no daemon)] *******************************
+ok: [localhost]
+
+TASK [Include add_source_to_config role] ***************************************
+included: add_source_to_config for localhost
+
+TASK [add_source_to_config : Ensure path is sourced in bashrc] *****************
+ok: [localhost]
+
+TASK [Include source role] *****************************************************
+included: source for localhost
+
+TASK [source : Source environment for this session] ****************************
+ok: [localhost]
+
+TASK [nix_install : Check existing Nix packages] *******************************
+ok: [localhost]
+
+TASK [nix_install : Install user packages via Nix] *****************************
+[ERROR]: Task failed: Module failed: non-zero return code
+Origin: /home/cookiegigi/Project/system_maintain/ansible/roles/package_manager/nix_install/tasks/main.yml:13:3
+
+11   failed_when: false
+12
+13 - name: Install user packages via Nix
+     ^ column 3
+
+failed: [localhost] (item=nixpkgs#terraform) => {"ansible_loop_var": "item", "changed": false, "cmd": "source \"/home/cookiegigi/.nix-profile/etc/profile.d/nix.sh\"\nexport NIXPKGS_ALLOW_UNFREE=1\nnix profile add --impure nixpkgs#terraform\n", "delta": "0:00:20.371329", "end": "2026-01-11 06:44:39.708191", "failed_when_result": true, "item": "nixpkgs#terraform", "msg": "non-zero return code", "rc": 1, "start": "2026-01-11 06:44:19.336862", "stderr": "these 2 derivations will be built:\n  /nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv\n  /nix/store/swswyz32kk9abbw27v6k1p3c997ykn8a-terraform-1.14.3.drv\nbuilding '/nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv'...\nerror: Cannot build '/nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv'.\n       Reason: builder failed with exit code 1.\n       Output paths:\n         /nix/store/5wbkpb4b51gfk4bl9f7y8q1kmq8v0wn4-terraform-1.14.3-go-modules\n       Last 25 log lines:\n       >  cloud.google.com/go/storage imports\n       >     google.golang.org/api/option/internaloption: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device\n       > go: github.com/hashicorp/terraform/internal/backend/init imports\n       >        github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports\n       >        cloud.google.com/go/storage imports\n       >     google.golang.org/api/storage/v1: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device\n       > go: github.com/hashicorp/terraform/internal/backend/init imports\n       >   github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports\n       >        cloud.google.com/go/storage imports\n       >     google.golang.org/api/transport: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device\n       > go: github.com/hashicorp/terraform/internal/backend/init imports\n       >    github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports\n       >        cloud.google.com/go/storage imports\n       >     google.golang.org/api/transport/http: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device\n       > go: github.com/hashicorp/terraform/internal/backend/init imports\n       >       github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports\n       >        cloud.google.com/go/storage imports\n       >     cloud.google.com/go/storage/internal/apiv2 imports\n       >      google.golang.org/api/transport/grpc: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device\n       > go: github.com/hashicorp/terraform/internal/backend/init imports\n       >       github.com/hashicorp/terraform/internal/backend/remote-state/kubernetes imports\n       >         k8s.io/api/coordination/v1 imports\n       >      k8s.io/apimachinery/pkg/runtime imports\n       >         sigs.k8s.io/structured-merge-diff/v4/value imports\n       >      github.com/json-iterator/go: unzip /build/go/pkg/mod/cache/download/github.com/json-iterator/go/@v/v1.1.12.zip: open /build/go/pkg/mod/github.com/json-iterator/go@v1.1.12/stream_test.go: no space left on device\n       For full logs, run:\n         nix log /nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv\nerror: Cannot build '/nix/store/swswyz32kk9abbw27v6k1p3c997ykn8a-terraform-1.14.3.drv'.\n       Reason: 1 dependency failed.\n       Output paths:\n         /nix/store/mia42z7kyc6rkzdkidl32nqc4cr9hl52-terraform-1.14.3", "stderr_lines": ["these 2 derivations will be built:", "  /nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv", "  /nix/store/swswyz32kk9abbw27v6k1p3c997ykn8a-terraform-1.14.3.drv", "building '/nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv'...", "error: Cannot build '/nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv'.", "       Reason: builder failed with exit code 1.", "       Output paths:", "         /nix/store/5wbkpb4b51gfk4bl9f7y8q1kmq8v0wn4-terraform-1.14.3-go-modules", "       Last 25 log lines:", "       >  cloud.google.com/go/storage imports", "       >     google.golang.org/api/option/internaloption: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device", "       > go: github.com/hashicorp/terraform/internal/backend/init imports", "       >        github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports", "       >        cloud.google.com/go/storage imports", "       >     google.golang.org/api/storage/v1: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device", "       > go: github.com/hashicorp/terraform/internal/backend/init imports", "       >   github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports", "       >        cloud.google.com/go/storage imports", "       >     google.golang.org/api/transport: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device", "       > go: github.com/hashicorp/terraform/internal/backend/init imports", "       >    github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports", "       >        cloud.google.com/go/storage imports", "       >     google.golang.org/api/transport/http: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device", "       > go: github.com/hashicorp/terraform/internal/backend/init imports", "       >       github.com/hashicorp/terraform/internal/backend/remote-state/gcs imports", "       >        cloud.google.com/go/storage imports", "       >     cloud.google.com/go/storage/internal/apiv2 imports", "       >      google.golang.org/api/transport/grpc: unzip /build/go/pkg/mod/cache/download/google.golang.org/api/@v/v0.155.0.zip: open /build/go/pkg/mod/google.golang.org/api@v0.155.0/classroom/v1/classroom-gen.go: no space left on device", "       > go: github.com/hashicorp/terraform/internal/backend/init imports", "       >       github.com/hashicorp/terraform/internal/backend/remote-state/kubernetes imports", "       >         k8s.io/api/coordination/v1 imports", "       >      k8s.io/apimachinery/pkg/runtime imports", "       >         sigs.k8s.io/structured-merge-diff/v4/value imports", "       >      github.com/json-iterator/go: unzip /build/go/pkg/mod/cache/download/github.com/json-iterator/go/@v/v1.1.12.zip: open /build/go/pkg/mod/github.com/json-iterator/go@v1.1.12/stream_test.go: no space left on device", "       For full logs, run:", "         nix log /nix/store/lwn7fjf5r17cl5fb367g4ws3zh7dihw9-terraform-1.14.3-go-modules.drv", "error: Cannot build '/nix/store/swswyz32kk9abbw27v6k1p3c997ykn8a-terraform-1.14.3.drv'.", "       Reason: 1 dependency failed.", "       Output paths:", "         /nix/store/mia42z7kyc6rkzdkidl32nqc4cr9hl52-terraform-1.14.3"], "stdout": "", "stdout_lines": []}
+changed: [localhost] => (item=nixpkgs#terragrunt)
+changed: [localhost] => (item=nixpkgs#tflint)
+changed: [localhost] => (item=nixpkgs#tfsec)
+changed: [localhost] => (item=nixpkgs#terraform-ls)
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=10   changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+

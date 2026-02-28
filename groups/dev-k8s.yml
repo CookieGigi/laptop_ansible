@@ -1,0 +1,27 @@
+---
+# dev-k8s.yml
+# Group definition for Kubernetes CLI tools
+# Install with: make install GROUP=dev-k8s
+
+group_name: "Kubernetes CLI"
+description: "Kubernetes kubectl and Helm CLI tools"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix:
+    - kubectl
+    - helm
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Kubernetes CLI tools installed.
+  For local clusters, also install: minikube, k3d
+  For containers, also install: docker or podman

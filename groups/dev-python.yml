@@ -1,0 +1,30 @@
+---
+# dev-python.yml
+# Group definition for Python development tools
+# Install with: make install GROUP=dev-python
+
+group_name: "Python Development"
+description: "Python tools including linters, formatters, type checkers, and LSP"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix:
+    # Linters and formatters
+    - ruff
+    - mypy
+    # LSP
+    - basedpyright
+    # Debuggers
+    - python312Packages.debugpy
+    # Package manager
+    - uv
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm:
+    - basedpyright  # Python LSP
+  apt: []
+
+conditional: []

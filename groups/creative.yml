@@ -1,0 +1,25 @@
+---
+# creative.yml
+# Group definition for creative applications
+# Install with: make install GROUP=creative
+
+group_name: "Creative"
+description: "Creative tools collection (installs darktable and inkscape groups)"
+requires:
+  - core
+  - darktable
+  - inkscape
+
+packages:
+  nix: []
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Creative suite installed.
+  Includes: Darktable (photo editing), Inkscape (vector graphics)

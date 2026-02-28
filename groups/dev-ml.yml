@@ -1,0 +1,47 @@
+---
+# dev-ml.yml
+# Group definition for Machine Learning development
+# Install with: make install GROUP=dev-ml
+
+group_name: "Machine Learning Development"
+description: "ML tools, frameworks, and NVIDIA support when available"
+requires:
+  - core
+  - dev-base
+  - dev-python
+
+packages:
+  nix:
+    # Core ML tools
+    - python3Packages.jupyter
+    - python3Packages.matplotlib
+    - python3Packages.scikit-learn
+    - python3Packages.pandas
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional:
+  - condition: "{{ unified_nvidia_detected | default(false) }}"
+    packages:
+      nix:
+        - cudaPackages.cudatoolkit
+        - python3Packages.torchWithCuda
+        - python3Packages.tensorflowWithCuda
+  - condition: "{{ not unified_nvidia_detected | default(false) }}"
+    packages:
+      nix:
+        - python3Packages.torch
+        - python3Packages.tensorflow
+  - condition: "{{ unified_laptop_detected | default(false) }}"
+    packages:
+      apt:
+        - powertop
+        - tlp
+
+post_install_message: |
+  ML Development tools installed.
+  For NVIDIA GPUs, CUDA support has been automatically included.
+  Run 'jupyter notebook' to start Jupyter.

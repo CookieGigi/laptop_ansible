@@ -123,6 +123,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 
 ## Related Tools
 
-- **kubectl**: Kubernetes CLI (see `docs/dev/kubectl.md`)
 - **minikube**: Local Kubernetes cluster for development (see `docs/dev/minikube.md`)
+- **k3d**: Lightweight Kubernetes in Docker (see `docs/dev/k3d.md`)
+- **kubectl**: Kubernetes command-line tool (see `docs/dev/kubectl.md`)
 - **helmfile**: Declarative Helm chart management

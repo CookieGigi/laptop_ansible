@@ -1,0 +1,8 @@
+---
+# Remove packages via APT
+
+- name: Remove packages via apt
+  ansible.builtin.apt:
+    name: "{{ unified_packages.apt }}"
+    state: absent
+  become: true

@@ -1,0 +1,41 @@
+---
+# State tracking integration for unified package manager
+
+- name: Read current state
+  ansible.builtin.slurp:
+    src: "{{ playbook_dir }}/../inventory/state.yml"
+  register: state_file
+  ignore_errors: true
+
+- name: Parse current state
+  ansible.builtin.set_fact:
+    current_state: "{{ state_file.content | b64decode | from_yaml | default({}) }}"
+  when: state_file is defined and state_file.content is defined
+
+- name: Initialize empty state if not exists
+  ansible.builtin.set_fact:
+    current_state: {}
+  when: state_file is not defined or state_file.content is not defined
+
+- name: Update state with action results
+  ansible.builtin.set_fact:
+    updated_state: >
+      {{ current_state | combine({
+        'installed_groups': (current_state.installed_groups | default([])) +
+          ([group] if unified_action == 'install' else []),
+        'removed_groups': (current_state.removed_groups | default([])) +
+          ([group] if unified_action == 'remove' else []),
+        'last_action': unified_action,
+        'last_group': group | default('unknown'),
+        'timestamp': ansible_facts['date_time']['iso8601']
+      }) }}
+
+- name: Remove duplicate groups
+  ansible.builtin.set_fact:
+    final_state: >
+      {{ updated_state | combine({
+        'installed_groups': updated_state.installed_groups | unique |
+          reject('equalto', '') | list,
+        'removed_groups': updated_state.removed_groups | unique |
+          reject('equalto', '') | list
+      }) }}

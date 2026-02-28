@@ -1,0 +1,26 @@
+---
+# minikube.yml
+# Group definition for Minikube local Kubernetes
+# Install with: make install GROUP=minikube
+
+group_name: "Minikube"
+description: "Minikube local Kubernetes cluster"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix:
+    - minikube
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Minikube installed.
+  Start a cluster: minikube start
+  Use kubectl: minikube kubectl -- <command>

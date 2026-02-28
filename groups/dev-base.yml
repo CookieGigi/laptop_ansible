@@ -1,0 +1,51 @@
+---
+# dev-base.yml
+# Group definition for base development tools
+# Install with: make install GROUP=dev-base
+
+group_name: "Development Base"
+description: "Base development tools including editors, linters, and formatters"
+requires:
+  - core
+
+packages:
+  nix:
+    # Editors
+    - neovim
+    # Git
+    - lazygit
+    - gh
+    # Linters
+    - ansible-lint
+    - vale
+    - hadolint
+    - markdownlint-cli
+    # LSP Servers
+    - yaml-language-server
+    - marksman
+    - lua-language-server
+    - bash-language-server
+    # Formatters
+    - stylua
+    - biome
+    # Languages (Lua included here)
+    - lua5_1
+    - luarocks
+    # Databases
+    - sqlite
+    # CLI Tools
+    - tree-sitter
+  flatpak: []
+  pipx:
+    - ansible  # with kubernetes, openshift collections
+  cargo: []
+  npm:
+    - ansible-language-server
+    - biome
+    - prettier
+  apt: []
+
+conditional: []
+post_install_message: |
+  Development base tools installed.
+  Includes: neovim, lazygit, gh, linters, LSP servers, and Lua development tools.

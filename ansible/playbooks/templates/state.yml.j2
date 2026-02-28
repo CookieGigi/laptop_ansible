@@ -1,0 +1,21 @@
+---
+# System state tracking for installed groups
+# This file tracks which package groups have been installed
+# It is automatically updated by the group management system
+
+# Installed groups
+installed_groups:
+{% for g in installed_groups | default([]) %}
+  - {{ g }}
+{% endfor %}
+
+# Conditional flags detected during bootstrap
+system_detected:
+  has_nvidia_gpu: {{ system_detected.has_nvidia_gpu | default(false) | lower }}
+  is_laptop: {{ system_detected.is_laptop | default(false) | lower }}
+  detected_package_manager: {{ system_detected.detected_package_manager | default('null') }}
+
+# Bootstrap state
+bootstrap:
+  system_completed: {{ bootstrap.system_completed | default(false) | lower }}
+  user_completed: {{ bootstrap.user_completed | default(false) | lower }}

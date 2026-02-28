@@ -1,0 +1,25 @@
+---
+# obsidian.yml
+# Group definition for Obsidian note-taking app
+# Install with: make install GROUP=obsidian
+
+group_name: "Obsidian"
+description: "Obsidian - A powerful knowledge base that works on local Markdown files"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak:
+    - md.obsidian.obsidian
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  Obsidian installed.
+  Launch with: flatpak run md.obsidian.obsidian
+  Or from your application menu.

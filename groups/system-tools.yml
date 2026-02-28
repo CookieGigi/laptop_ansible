@@ -1,0 +1,28 @@
+---
+# system-tools.yml
+# Group definition for system administration tools
+# Install with: make install GROUP=system-tools
+
+group_name: "System Tools"
+description: "System administration, monitoring, and maintenance tools"
+requires:
+  - core
+
+packages:
+  nix: []
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm: []
+  apt: []
+
+conditional:
+  - when: is_laptop
+    packages:
+      apt:
+        - powertop
+        - laptop-mode-tools
+
+post_install_message: |
+  System tools installed.
+  TLP is already installed with core group for power management.

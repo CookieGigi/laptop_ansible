@@ -1,0 +1,17 @@
+---
+# Remove packages via Nix
+
+- name: Check if nix is available
+  ansible.builtin.command: which nix
+  changed_when: false
+  failed_when: false
+  register: nix_check
+
+- name: Remove packages via nix
+  ansible.builtin.command: nix profile remove nixpkgs#{{ item }}
+  loop: "{{ unified_packages.nix }}"
+  register: nix_remove_result
+  changed_when: "'removed' in nix_remove_result.stdout"
+  when: nix_check.rc == 0
+  environment:
+    PATH: "{{ ansible_facts['env']['HOME'] }}/.nix-profile/bin:{{ ansible_facts['env']['PATH'] }}"

@@ -1,0 +1,26 @@
+---
+# ai-tools.yml
+# Group definition for AI/ML development tools
+# Install with: make install GROUP=ai-tools
+
+group_name: "AI Tools"
+description: "AI assistants and CLI tools"
+requires:
+  - core
+  - dev-base
+
+packages:
+  nix: []
+  flatpak: []
+  pipx: []
+  cargo: []
+  npm:
+    - "opencode-ai"
+  apt: []
+
+conditional: []
+
+post_install_message: |
+  AI tools installed via npm.
+  Includes: opencode-ai
+  Note: claude-code requires manual installation via: curl -fsSL https://claude.ai/install.sh | bash

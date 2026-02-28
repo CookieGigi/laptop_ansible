@@ -1,0 +1,15 @@
+---
+# Remove packages via Cargo
+
+- name: Check if cargo is available
+  ansible.builtin.command: which cargo
+  changed_when: false
+  failed_when: false
+  register: cargo_check
+
+- name: Remove packages via cargo
+  community.general.cargo:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ unified_packages.cargo }}"
+  when: cargo_check.rc == 0
