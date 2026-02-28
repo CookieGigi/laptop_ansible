@@ -3,7 +3,7 @@
 ## Completed ✅
 - [x] Analyze existing Ansible project (123 roles)
 - [x] Design new userspace-oriented architecture
-- [x] Write migration plan to `docs/migration-plan.md`
+- [x] Write migration plan to `docs/ai/MIGRATION_PLAN.md`
 - [x] Move old docs to `legacy_docs/`
 
 ## Phase 1: Foundation ✅
@@ -35,7 +35,7 @@
   - [x] VM detection
 - [x] State tracking integration
 
-## Phase 4: Presets (Next)
+## Phase 4: Presets (In Progress)
 - [ ] Define preset configurations
 - [ ] Create preset resolver/engine
 
