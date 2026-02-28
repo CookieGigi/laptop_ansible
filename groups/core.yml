@@ -35,7 +35,9 @@ packages:
   npm: []
   apt:
     - alacritty
+    - curl
     - flatpak
+    - git
     - libssl-dev
     - pkg-config
 

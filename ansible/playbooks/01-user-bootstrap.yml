@@ -42,13 +42,19 @@
       tags:
         - fonts
 
+    - name: Install Node.js and npm via NVM
+      ansible.builtin.include_role:
+        name: npm
+      tags:
+        - npm
+        - node
+
     - name: Update state file with user bootstrap status
       ansible.builtin.template:
         src: state.yml.j2
         dest: "{{ playbook_dir }}/../inventory/state.yml"
         mode: '0644'
       vars:
-        installed_groups: "{{ installed_groups | default([]) }}"
         system_detected: "{{ system_detected | default({}) }}"
         bootstrap:
           system_completed: true

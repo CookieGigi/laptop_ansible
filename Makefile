@@ -15,7 +15,7 @@ help:
 	@echo "System Maintain - Package Management Made Easy"
 	@echo ""
 	@echo "Available commands:"
-	@echo "  make bootstrap           - ROOT: Install package managers (run once)"
+	@echo "  make bootstrap           - System bootstrap, asks for sudo password (run once)"
 	@echo "  make setup               - USER: Setup shell, terminal, fonts (run once)"
 	@echo "  make install GROUP=<name> - Install a package group"
 	@echo "  make remove GROUP=<name>  - Remove a package group"
@@ -23,10 +23,10 @@ help:
 	@echo "  make list                 - List available groups"
 	@echo "  make status               - Show current system state"
 
-# System bootstrap (requires root)
+# System bootstrap (asks for sudo password when needed)
 bootstrap:
 	@echo "Running system bootstrap..."
-	@cd ansible && ansible-playbook playbooks/00-system-bootstrap.yml
+	@cd ansible && ansible-playbook playbooks/00-system-bootstrap.yml --ask-become-pass
 
 # User bootstrap (user-level setup)
 setup:

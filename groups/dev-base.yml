@@ -43,6 +43,7 @@ packages:
     - ansible-language-server
     - biome
     - prettier
+    - playwright
   apt: []
 
 conditional: []

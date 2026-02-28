@@ -56,17 +56,20 @@
           - "Laptop detected: {{ system_detected.is_laptop }}"
           - "Package manager: {{ system_detected.detected_package_manager }}"
 
+    - name: Save current bootstrap state
+      ansible.builtin.set_fact:
+        _saved_user_completed: "{{ bootstrap.user_completed | default(false) }}"
+
     - name: Update state file with detected system info
       ansible.builtin.template:
         src: state.yml.j2
         dest: "{{ playbook_dir }}/../inventory/state.yml"
         mode: '0644'
       vars:
-        installed_groups: "{{ installed_groups | default([]) }}"
         system_detected: "{{ system_detected }}"
         bootstrap:
           system_completed: true
-          user_completed: "{{ bootstrap.user_completed | default(false) }}"
+          user_completed: "{{ _saved_user_completed }}"
 
     - name: Mark system bootstrap as complete
       ansible.builtin.debug:

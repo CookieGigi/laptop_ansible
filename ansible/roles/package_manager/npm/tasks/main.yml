@@ -1,9 +1,4 @@
-- name: Install dependencies for NVM
-  become: true
-  ansible.builtin.apt:
-    name: ["curl", "git"]
-    state: present
-
+---
 - name: Download and install NVM
   ansible.builtin.shell:
     cmd: |
