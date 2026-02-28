@@ -7,11 +7,23 @@
   failed_when: false
   register: nix_check
 
-- name: Remove packages via nix
-  ansible.builtin.command: nix profile remove nixpkgs#{{ item }}
-  loop: "{{ unified_packages.nix }}"
-  register: nix_remove_result
-  changed_when: "'removed' in nix_remove_result.stdout"
+- name: Get installed nix package names
+  ansible.builtin.shell: |
+    nix profile list 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | grep "^Name:" | sed 's/^Name:[[:space:]]*//'
+  changed_when: false
+  register: nix_installed_names
   when: nix_check.rc == 0
   environment:
     PATH: "{{ ansible_facts['env']['HOME'] }}/.nix-profile/bin:{{ ansible_facts['env']['PATH'] }}"
+
+- name: Remove packages via nix
+  ansible.builtin.command: "nix profile remove {{ item | regex_replace('^.*\\.', '') }}"
+  loop: "{{ unified_packages.nix }}"
+  register: nix_remove_result
+  changed_when: "'removed' in nix_remove_result.stdout"
+  when:
+    - nix_check.rc == 0
+    - item | regex_replace('^.*\\.', '') in nix_installed_names.stdout_lines
+  environment:
+    PATH: "{{ ansible_facts['env']['HOME'] }}/.nix-profile/bin:{{ ansible_facts['env']['PATH'] }}"
+  ignore_errors: true
