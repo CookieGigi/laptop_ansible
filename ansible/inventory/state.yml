@@ -6,12 +6,9 @@
 # Installed groups
 installed_groups:
   - core
-  - core
-  - core
   - productivity
   - web
-  - core
-  - core
+  - dev-rust
 
 # Conditional flags detected during bootstrap
 system_detected:

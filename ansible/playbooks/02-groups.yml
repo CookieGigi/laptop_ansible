@@ -60,7 +60,7 @@
 
     - name: Update installed_groups list
       ansible.builtin.set_fact:
-        installed_groups: "{{ (installed_groups | default([])) + [group | default('')] | unique }}"
+        installed_groups: "{{ ((installed_groups | default([])) + [group | default('')]) | unique }}"
       when: group_action == 'install'
 
     - name: Remove from installed_groups list

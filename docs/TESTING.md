@@ -59,7 +59,7 @@ cd ansible && ansible-playbook playbooks/02-groups.yml -e "group_action=install 
 cd ansible && ansible-playbook playbooks/02-groups.yml -e "group_action=remove group=dev-rust"
 ```
 - [x] Packages are removed from nix profile
-- [ ] Verify: `nix profile list` shows packages removed
+- [x] Verify: `nix profile list` shows packages removed
 
 ### 7. Remove Flatpak Packages
 ```bash
