@@ -20,7 +20,7 @@
 
     - name: Ensure dotfiles directory exists
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.config"
+        path: "{{ ansible_facts['env']['HOME'] }}/.config"
         state: directory
         mode: '0755'
 
@@ -55,7 +55,6 @@
         dest: "{{ playbook_dir }}/../inventory/state.yml"
         mode: '0644'
       vars:
-        system_detected: "{{ system_detected | default({}) }}"
         bootstrap:
           system_completed: true
           user_completed: true
