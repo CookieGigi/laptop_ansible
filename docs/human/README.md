@@ -6,11 +6,15 @@ This is a userspace package management system using Ansible.
 
 - [Quick Start](QUICKSTART.md) - Get running in 5 minutes
 - [Command Reference](COMMANDS.md) - All available commands
+- [Troubleshooting](TROUBLESHOOTING.md) - Common issues and solutions
+- [Contributing](CONTRIBUTING.md) - How to contribute
+
+## For Developers
+
+- [Changelog](../CHANGELOG.md) - Project changes and migration phases
 
 ## For AI Assistants
 
-- [Architecture](ai/ARCHITECTURE.md) - System design and structure
-- [Reference](ai/REFERENCE.md) - Complete group/preset reference
 - [Migration Plan](ai/MIGRATION_PLAN.md) - Full migration details
 
 ## What is This?
