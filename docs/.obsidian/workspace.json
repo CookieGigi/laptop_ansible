@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "TESTING"
             }
+          },
+          {
+            "id": "7d46f52e6aebe376",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.4"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,7 +196,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "4798b7005719bc03",
+  "active": "7d46f52e6aebe376",
   "lastOpenFiles": [
     "migration-plan.md",
     "TESTING.md"
