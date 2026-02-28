@@ -17,42 +17,39 @@ This ensures most installations stay within `/home` directory, maintaining syste
 - **User-Space Focus**: Prioritizes installations in `/home` directory
 - **Flatpak Integration**: Primary method for GUI application installation
 - **Nix Environment**: Manages CLI tools and development dependencies
-- **Modular Design**: Organized roles for different system aspects
-- **Dotfiles Management**: Version-controlled configuration files
+- **Group-Based Management**: Organized package groups for different use cases
+- **State Tracking**: YAML-based state management for installed packages
 - **Idempotent Setup**: Safe to re-run multiple times
-- **Selective Application**: Apply only needed configurations
+- **Selective Application**: Install/remove specific package groups
 
 ## Project Structure
 
 ```
-ansible/
-├── group_vars/
-│   └── all.yml          # Global variables
-├── playbooks/          # Main playbooks
-│   ├── ai.yml          # AI-related configurations
-│   ├── app.yml          # Application installations
-│   ├── basic.yml        # Basic system setup
-│   ├── config.yml       # System configurations
-│   ├── logwatch.yml     # Log monitoring setup
-│   └── nvidia.yml       # NVIDIA driver setup
-├── roles/              # Ansible roles
-│   ├── app/            # Application roles
-│   │   ├── firefox/      # Firefox browser
-│   │   ├── heroic-launcher/# Game launcher
-│   │   ├── kde-connect/  # KDE Connect
-│   │   ├── librewolf/    # Privacy-focused browser
-│   │   ├── obsidian/     # Note-taking app
-│   │   ├── proton-pass/  # Password manager
-│   │   └── steam/        # Steam platform
-│   ├── config/         # Configuration roles
-│   ├── dev/            # Development tool roles
-│   ├── driver/         # Driver roles
-│   ├── monitoring/     # Monitoring roles
-│   ├── package_manager/# Package manager roles
-│   ├── terminal/        # Terminal-related roles
-│   └── user/           # User management roles
-└── docs/               # Documentation
-    └── apps/           # Individual app documentation
+.
+├── ansible/              # Ansible configuration
+│   ├── inventory/        # Ansible inventory (state.yml)
+│   └── playbooks/        # Main playbooks
+│       ├── 00-system-bootstrap.yml
+│       ├── 01-user-bootstrap.yml
+│       └── 02-groups.yml
+├── ARCHIVE/              # Archived legacy content
+│   ├── legacy_docs/      # Old documentation
+│   └── old/              # Previous Ansible implementation
+├── config/               # Configuration files (.vale/)
+├── docs/                 # Documentation
+│   ├── migration-plan.md
+│   ├── MIGRATION_TODO.md
+│   └── TESTING.md
+├── groups/               # Package group definitions (24 YAML files)
+│   ├── core.yml
+│   ├── dev-base.yml
+│   ├── dev-rust.yml
+│   ├── gaming.yml
+│   └── ...
+├── presets/              # Preset configurations (future)
+├── Makefile              # CLI wrapper for common operations
+├── LICENSE
+└── README.md
 ```
 
 ## Requirements
@@ -61,11 +58,11 @@ ansible/
 - Ansible 2.9+ (tested with 2.15)
 - Linux system (primarily tested on Debian/Ubuntu)
 - Python 3.8+
+- Make
 
 ### Package Managers
 - Flatpak (for GUI applications)
 - Nix (for CLI tools and development environments)
-- Optional: npm (for JavaScript-based tools)
 
 ## Installation
 
@@ -75,56 +72,53 @@ ansible/
    cd system_maintain
    ```
 
-2. Install Ansible if not already installed:
+2. Run the bootstrap process:
    ```bash
-   sudo apt update
-   sudo apt install ansible
-   ```
-
-3. Review and customize the inventory file:
-   ```bash
-   cp inventory.ini.example inventory.ini
-   # Edit inventory.ini to match your environment
+   # Install package managers (requires root once)
+   make bootstrap
+   
+   # Setup shell, terminal, and fonts (user space)
+   make setup
    ```
 
 ## Usage
 
-### Running Playbooks
+### Using the Makefile
 
-To apply all configurations:
+The project provides a convenient Makefile interface:
+
 ```bash
-ansible-playbook -i inventory.ini playbooks/basic.yml
+# Show available commands
+make help
+
+# Install a package group
+make install GROUP=dev-rust
+
+# Remove a package group
+make remove GROUP=gaming
+
+# Apply a preset (when implemented)
+make preset NAME=workstation
 ```
 
-To apply specific configurations:
+### Running Playbooks Directly
+
 ```bash
-# For application setup
-ansible-playbook -i inventory.ini playbooks/app.yml
+# System bootstrap (package managers)
+ansible-playbook ansible/playbooks/00-system-bootstrap.yml
 
-# For development environment
-ansible-playbook -i inventory.ini playbooks/dev.yml
+# User bootstrap (shell, terminal, fonts)
+ansible-playbook ansible/playbooks/01-user-bootstrap.yml
 
-# For NVIDIA drivers
-ansible-playbook -i inventory.ini playbooks/nvidia.yml
-```
-
-### Running Specific Roles
-
-To run a specific role:
-```bash
-ansible-playbook -i inventory.ini playbooks/test.yml --tags <role_name>
-```
-
-Example:
-```bash
-ansible-playbook -i inventory.ini playbooks/test.yml --tags librewolf
+# Install package groups
+ansible-playbook ansible/playbooks/02-groups.yml
 ```
 
 ### Testing Changes
 
 To check syntax before running:
 ```bash
-ansible-playbook --syntax-check playbooks/<playbook>.yml
+ansible-playbook --syntax-check ansible/playbooks/<playbook>.yml
 ```
 
 To lint your playbooks:
@@ -132,32 +126,44 @@ To lint your playbooks:
 ansible-lint
 ```
 
+## Available Groups
+
+Run `make list` to see all available package groups:
+
+- **core** - Essential system packages
+- **dev-base** - Basic development tools
+- **dev-rust** - Rust development environment
+- **dev-python** - Python development environment
+- **dev-k8s** - Kubernetes tools
+- **gaming** - Gaming applications
+- **web** - Web browsers and tools
+- **ai-tools** - AI/ML development tools
+
 ## Customization
 
-1. **Variables**: Modify `group_vars/all.yml` for global settings
-2. **Roles**: Add or modify roles in the `roles/` directory
-3. **Playbooks**: Create new playbooks in the `playbooks/` directory
+### Adding New Groups
 
-### Adding New Applications
-
-1. Create a new role under `roles/app/`
-2. Define tasks in `tasks/main.yml`
-3. Add any required variables in `vars/main.yml`
-4. Include the role in the appropriate playbook
-
-## Dotfiles Management
-
-This project includes dotfiles for:
-- Alacritty terminal emulator
-- KDE Plasma configuration
-
-To use these dotfiles:
-1. Navigate to the `dotfiles/` directory
-2. Use GNU Stow to manage the dotfiles:
-   ```bash
-   cd dotfiles/alacritty
-   stow -t ~ .
+1. Create a new YAML file in `groups/`
+2. Define packages in the group:
+   ```yaml
+   # groups/my-group.yml
+   name: my-group
+   description: My custom package group
+   packages:
+     flatpak:
+       - com.example.App
+     nix:
+       - my-tool
    ```
+
+### Group Structure
+
+Each group file supports:
+- `name`: Group identifier
+- `description`: Human-readable description
+- `packages.flatpak`: Flatpak application IDs
+- `packages.nix`: Nix package names
+- `condition`: Optional conditional (e.g., `nvidia_gpu`, `is_laptop`)
 
 ## Contributing
 
